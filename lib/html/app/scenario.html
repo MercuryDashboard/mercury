@@ -1,0 +1,438 @@
+<link rel="stylesheet" type="text/css" href="../../lib/css/dataGrid/dx.common.css">
+<link rel="stylesheet" type="text/css" href="../../lib/css/dataGrid/dx.light.css">
+<style type="text/css">
+    .modal-header-close-icon {
+        color: #959595;
+        position: absolute;
+        top: 23px;
+        right: 20px;
+        cursor: pointer !important;
+    }
+    .modal-body div {
+        padding: 0 !important;
+    }
+
+    td[role='gridcell'] .btn {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .overflow-hidden{
+        overflow: hidden;
+    }
+    .checkbox-container {
+        position: relative;
+        top: -5px;
+    }
+
+    .checkbox-container input {
+      display:none;
+    }
+
+    .checkbox-container label {
+        width: 100%;
+        height: 25px;
+        display: block;
+        position: absolute;
+        padding: 2px 15px 2px 30px;
+        border: 2px solid #fff;
+        border-radius: 100px;
+        color: #fff;
+        background-color: #ED5565;
+        /*box-shadow: 0 0 20px rgba(0, 0, 0, .2);*/
+        white-space: nowrap;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-transition: background-color .2s, box-shadow .2s;
+        transition: background-color .2s, box-shadow .2s;
+        line-height: 18px;
+        font-size: 12px;
+    }
+
+    .checkbox-container label::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 3px;
+        bottom: 10px;
+        left: 4px;
+        width: 15px;
+        height: 15px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        -webkit-transition: background-color .2s;
+        transition: background-color .2s;
+    }
+    .checkbox-container label::after {
+        content: 'Staging';
+        display: block;
+        position: absolute;
+          
+    }
+
+    .checkbox-container label:hover, input:focus + label {
+      /*box-shadow: 0 0 20px rgba(0, 0, 0, .6);*/
+    }
+
+    .checkbox-container input:checked + label {
+      background-color: #37BC9B;
+      
+    }
+
+    .checkbox-container input:checked + label::before {
+      background-color: #fff;
+    }
+
+    .checkbox-container input:checked + label::after {
+      content: 'Production';
+    }
+
+    /*
+        panel
+     */
+    ul.udkmenu, ul.udkmenu ul, ul.udkmenu li {
+        margin: 0;
+        padding: 0;
+    }
+    ul.udkmenu {
+        width: 100%;
+        height: 41px !important;
+        float: left;
+        border-bottom: 1px solid #CCCCCC;
+        background-color: #fff;
+        text-transform: capitalize;
+        color: #767676;
+        overflow: hidden;
+    }
+    ul.udkmenu > li {
+        height: 42px;
+        color: #848484;
+        display: table-cell;
+        font-size: 15px;
+        padding-left: 12px;
+        padding-right: 12px;
+        vertical-align: middle;
+    }
+    ul.udkmenu > li > a {
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 4px;
+    }
+    ul.udkmenu li {
+        list-style-type: none;
+        float: left;
+        position: relative;
+    }
+    ul.udkmenu > li.selected > a{
+        border-bottom: 4px solid #0096d9;
+        color: #000;
+        margin-top: 1px;
+    }
+    ul.udkmenu a{
+        font-size: 14px;
+        text-decoration: none;
+        float: left;
+        color: #767676;
+    }
+    ul.udkmenu > li > a {
+        font-family: "HPSimplified_Bd","Arial",sans-serif;
+    }
+    ul.udkmenu a {
+        float: left;
+        color: #767676;
+        line-height: 22px;
+        text-transform: capitalize;
+    }
+    ul.udkmenu a:hover {
+        color: #007dba;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    ul.udkmenu li:visited > a {
+        color: #000;
+    }
+    .udkmenu ul:visited > a {
+        color: #000;
+    }
+    .udkmenu ul a:active {
+        background-color: #0096d6;
+    }
+
+
+    div.udkmenu-panel {
+        width: 100%;
+        height: 100%;
+        min-height: 30px;
+        position: fixed;
+        top: 35px;
+        z-index: 1;
+        background: #fff;
+        transition: all .2s ease-in-out;
+        border: 2px solid;
+        border-color: #ccc #ccc #0096D6;
+        border-bottom: 3px solid #0096D6;
+        display: none;
+    }
+    div.udkmenu-panel:before {
+        border-bottom: 8px solid #ccc;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: -9px;
+    }
+    div.udkmenu-panel:after {
+        border-bottom: 8px solid #fff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: -7px;
+    }
+    div.udkmenu-wrapper{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+
+
+    div.udkmenu-grid {
+        position: absolute;
+        top: 0;
+        width: calc(50% - 16px);
+        height: 100%;
+        z-index: 99999;
+        background: #fff;
+        padding: 6px 0px 3px;
+
+        -webkit-transition: -webkit-transform 0.4s ease;
+        -moz-transition: -moz-transform 0.4s ease;
+        -ms-transition: -ms-transform 0.4s ease;
+        -o-transition: -o-transform 0.4s ease;
+        transition: transform 0.4s ease;
+        -webkit-transform: translate3d(100%, 0, 0);
+        -moz-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        -o-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+
+        -moz-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    div.udkmenu-grid li {
+        width: 100%;
+        float: left;
+        list-style: none outside none;
+        padding-bottom: 3px;
+    }
+    div.udkmenu-grid li:last-child {
+        margin-bottom: 0px !important;
+    }
+    div.udkmenu-grid a{
+        width: 100%;
+        line-height: 18px;
+        padding: 4px 0px 4px 20px;
+        font-family: "HPSimplified_Rg","Arial",sans-serif;
+        color: #000;
+        text-decoration: none;
+    }
+    div.udkmenu-grid ul{
+        width: 100%;
+        float: left;
+    }
+    div.udkmenu-grid.udkmenu-suspend{
+        position: absolute;
+        top: 0px;
+    }
+    div.udkmenu-grid.highest{
+        z-index: 1 !important;
+    }
+    div.udkmenu-grid.udkmenu-opened {
+        -webkit-transition: -webkit-transform 0.4s ease;
+        -webkit-transition-property: transform;
+        -webkit-transition-duration: 0.4s;
+        -webkit-transition-timing-function: ease;
+        -webkit-transition-delay: initial;
+        -moz-transition: -moz-transform 0.4s ease;
+        -ms-transition: -ms-transform 0.4s ease;
+        -o-transition: -o-transform 0.4s ease;
+        transition: transform 0.4s ease;
+        transition-property: transform;
+        transition-duration: 0.4s;
+        transition-timing-function: ease;
+        transition-delay: initial;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -moz-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0, 0, 0);
+        position: relative;
+    }
+    div.udkmenu-grid.udkmenu-childopened{
+        -webkit-transform: translate3d(-30%, 0, 0);
+        -moz-transform: translate3d(-30%, 0, 0);
+        -ms-transform: translate3d(-30%, 0, 0);
+        -o-transform: translate3d(-30%, 0, 0);
+        transform: translate3d(-30%, 0, 0);
+        position: absolute;
+    }
+    div.udkmenu-grid.udkmenu-closed {
+        position: absolute;
+        -webkit-transition: -webkit-transform 0.4s ease;
+        -webkit-transition-property: transform;
+        -webkit-transition-duration: 0.4s;
+        -webkit-transition-timing-function: ease;
+        -webkit-transition-delay: initial;
+        -moz-transition: -moz-transform 0.4s ease;
+        -ms-transition: -ms-transform 0.4s ease;
+        -o-transition: -o-transform 0.4s ease;
+        transition: transform 0.4s ease;
+        transition-property: transform;
+        transition-duration: 0.4s;
+        transition-timing-function: ease;
+        transition-delay: initial;
+        -webkit-transform: translate3d(201%, 0, 0);
+        -moz-transform: translate3d(201%, 0, 0);
+        -ms-transform: translate3d(201%, 0, 0);
+        -o-transform: translate3d(201%, 0, 0);
+        transform: translate3d(201%, 0, 0);
+
+        
+    }
+    a.udkmenu-hasnext, a.udkmenu-hasprev{
+        cursor: pointer;
+    }
+    a.udkmenu-hasprev{
+        padding-left: 40px !important;
+        border-bottom: 1px solid #ccc;
+    }
+    a.udkmenu-hasnext:after{
+        content: '';
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        border-left: none;
+        border-top: none;
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin: auto;
+        position: absolute;
+        top: -2px;
+        left: 230px;
+        bottom: 0;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    a.udkmenu-hasnext:hover, a.udkmenu-hasprev:hover{
+        background: #006699;
+        color: #fff !important;
+    }
+    a.udkmenu-hasnext:hover:after{
+        border: 2px solid #fff;
+        border-left: none;
+        border-top: none;
+    }
+    a.udkmenu-hasprev:hover:after{
+        border: 2px solid #fff;
+        border-right: none;
+        border-bottom: none;
+    }
+    a.udkmenu-hasprev:after{
+        content: '';
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        border-right: none;
+        border-bottom: none;
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin: auto;
+        position: absolute;
+        top: -3px;
+        left: 20px;
+        bottom: 0;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+</style>
+
+
+<div class="container">
+    <div class="card overflow-hidden">
+        <div class="card-header">
+            <h2>Scenario Management <small>Default Data Grid View</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioManagement"></div>
+            <div class="udkmenu-grid udkmenu-closed">
+                <div class="modal-header">
+                  <i class="fa fa-close modal-header-close-icon"></i>
+                  <h4 class="modal-title">Add / Edit Scenario</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class='col-md-6'>
+                                <div class="form-group fg-float">
+                                    <div class="fg-line">
+                                        <input id="input_scenario_name" type="text" class="form-control fg-input">
+                                        <label class="fg-label">Scenario Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-md-6'>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Master Details View</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioDetail"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Data Summary View</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioSummary"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Scenario Cell Customization</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioCustomization"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Script -->
+
+<script type="text/javascript" src="../../lib/js/dataGrid/jszip.js"></script>
+<script type="text/javascript" src="../../lib/js/dataGrid/index.js"></script>
+<script type="text/javascript" src="../../lib/core.input.js"></script>

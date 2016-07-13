@@ -1,0 +1,52 @@
+/*
+ * Header Actions
+ */
+.dropdown-menu.pull-right{
+  padding: 15px;
+}
+.actions {
+  list-style: none !important;
+  padding: 0;
+  z-index: 3;
+  margin: 0;
+}
+
+.actions > li {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.actions > li > a {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 50%;
+}
+
+.actions > li > a > i {
+  color: #adadad;
+  font-size: 20px;
+}
+
+.actions > li > a:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.actions > li > a:hover > i {
+  color: #000;
+}
+
+.actions > li > a,
+.actions > li > a > i {
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+}
+
+.actions.a-alt > li > a > i {
+  color: #fff;
+}

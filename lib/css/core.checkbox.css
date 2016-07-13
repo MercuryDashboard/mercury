@@ -1,0 +1,91 @@
+.radio-checkbox-wrapper {
+    position: static !important;
+    box-shadow:none !important;
+}
+
+.radio-checkbox-wrapper label.btn span {
+    font-size: 14px;
+    position: relative;
+    top: -2px;
+}
+
+.radio-checkbox-wrapper label input[type="radio"] ~ i.fa.fa-circle-o {
+    color: #AAB2BD;
+    display: inline;
+    font-size: 20px;
+}
+
+.radio-checkbox-wrapper label input[type="radio"] ~ i.fa.fa-check-circle-o {
+    display: none;
+}
+
+.radio-checkbox-wrapper label input[type="radio"]:checked ~ i.fa.fa-circle-o {
+    display: none;
+}
+
+.radio-checkbox-wrapper label input[type="radio"]:checked ~ i.fa.fa-check-circle-o {
+    color: #337ab7;
+    display: inline;
+    font-size: 20px;
+}
+
+.radio-checkbox-wrapper label:hover input[type="radio"] ~ i.fa {
+    color: #337ab7;
+}
+
+.radio-checkbox-wrapper label input[type="checkbox"] ~ i.fa.fa-square-o {
+    color: #AAB2BD;
+    display: inline;
+    font-size: 20px;
+}
+
+.radio-checkbox-wrapper label input[type="checkbox"] ~ i.fa.fa-check-square-o {
+    display: none;
+}
+
+.radio-checkbox-wrapper label input[type="checkbox"]:checked ~ i.fa.fa-square-o {
+    display: none;
+}
+
+.radio-checkbox-wrapper label input[type="checkbox"]:checked ~ i.fa.fa-check-square-o {
+    color: #337ab7;
+    display: inline;
+    font-size: 20px;
+}
+
+.radio-checkbox-wrapper label:hover input[type="checkbox"] ~ i.fa {
+    color: #337ab7;
+}
+
+div.radio-checkbox-wrapper[data-toggle="buttons"] label.active {
+    color: #337ab7 !important;
+}
+
+div.radio-checkbox-wrapper[data-toggle="buttons"] label {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 2em;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: top;
+    cursor: pointer;
+    background-color: none;
+    border: 0px solid #AAB2BD;
+    border-radius: 3px;
+    color: #AAB2BD !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+div.radio-checkbox-wrapper[data-toggle="buttons"] label:hover {
+    color: #337ab7;
+}
+
+div.radio-checkbox-wrapper[data-toggle="buttons"] label:active,
+div.radio-checkbox-wrapper[data-toggle="buttons"] label.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

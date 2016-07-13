@@ -1,0 +1,50 @@
+
+header {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    padding: 15px 40px;
+    margin-bottom: -3px;
+    z-index: 10;
+}
+header:before {
+  content: " ";
+  display: table;
+}
+header.media {
+  overflow: visible;
+}
+header.media:after {
+  clear: both;
+}
+header.media:before, header.media:after{
+  content: " ";
+  display: table;
+}
+header.media:first-child {
+  margin-top: 0;
+}
+header.media > .logo-div {
+  padding-right: 15px;
+  float: left !important;
+}
+header.media > .logo-div > a {
+    color: #fff;
+    font-weight: 700;
+    font-size: 23px;
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+}
+header.media> .logo-div > a > small {
+    display: block;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    margin-top: -3px;
+    color: rgba(255, 255, 255, 0.6);
+}

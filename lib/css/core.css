@@ -1,0 +1,176 @@
+/* Top navigation CSS Styles */
+
+@import url('core.banner.css');
+@import url('core.header.css');
+@import url('core.section.css');
+@import url('core.icons.css');
+@import url('core.buttons.css');
+@import url('core.actions.css');
+@import url('core.notification.css');
+@import url('notification/sweetalert.css');
+@import url('core.input.css');
+@import url('core.color.css');
+@import url('core.viewGrid.css');
+@import url('iconic-font.min.css');
+@import url('font-awesome.min.css');
+@import url('highlight/shCore.css');
+@import url('highlight/shThemeDefault.css');
+
+/* Tag Styles */
+
+html {
+    font-family: sans-serif;
+    ms-text-size-adjust: 100%;
+    webkit-text-size-adjust: 100%;
+}
+
+body {
+    background-color: #edecec;
+    color: #5e5e5e;
+    margin: 0;
+    font-size: 13px;
+}
+
+body:before {
+    background: rgba(0, 58, 97, 1);
+    content: '';
+    height: 140px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+audio, canvas, progress, video {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden], template {
+    display: none;
+}
+
+*, button, input, i, a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    cursor: pointer;
+    background-color: transparent;
+    text-decoration: none !important;
+}
+
+a:active, a:hover {
+    outline: 0;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+dfn {
+    font-style: italic;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+small {
+    font-size: 80%;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+img {
+    border: 0;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+figure {
+    margin: 1em 40px;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+}
+
+pre {
+    overflow: auto;
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+/*
+    Grid Color Shcema
+ */
+.light-Blue.bg {
+    background-color: #03A9F4;
+}
+.light-Green.bg {
+    background-color: #00C853;
+}
+.green.bg{
+    background-color: #00b19d;
+}
+.blue-Grey.bg {
+    background-color: #607D8B;
+}
+.light-Red.bg {
+    background-color: #EF5350;
+}
+.light-Amber.bg {
+    background-color: #FFC107;
+}
+.light-Purple.bg {
+    background-color: #BA68C8;
+}
+.purple.bg {
+    background-color: #7266ba;
+}
