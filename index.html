@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mercury Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="lib/frame/bootstrap/lib/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="lib/css/core.css">
+	</head>
+	<body>
+		<header class="media">
+			<!-- Dashboard Header Logo -->
+			<div class="logo-div">
+				<a>Mercury
+					<small>Admin Dashboard</small>
+				</a>
+				<div class="menu-collapse" data-ma-action="sidebar-open" data-ma-target="main-menu">
+					<div class="mc-wrap">
+						<div class="mcw-line top palette-White bg"></div>
+						<div class="mcw-line center palette-White bg"></div>
+						<div class="mcw-line bottom palette-White bg"></div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section>
+			<aside id="s-main-menu">
+				<div class="media-body h-search">
+	                <form class="p-relative">
+	                    <input type="text" class="hs-input" placeholder="Search for Apps &amp; Reports">
+	                    <i class="zmdi zmdi-search hs-reset" data-ma-action="search-clear"></i>
+	                </form>
+	            </div>
+				<ul class="main-menu">
+					<li>
+						<a data-menu-category="lib/html/userinterface/home.html"><i class="zmdi zmdi-home"></i> Home</a>
+					</li>
+					<li>
+						<a data-menu-category=""><i class="zmdi zmdi-collection-text"></i> Forecast</a>
+					</li>
+					<li>
+						<a data-menu-category=""><i class="zmdi zmdi-storage"></i> Tip</a>
+					</li>
+					<li>
+						<a data-menu-category=""><i class="zmdi zmdi-chart"></i> ROQ</a>
+					</li>
+					<li class="sub-menu">
+						<a data-ma-action="submenu-toggle"><i class="zmdi zmdi-view-list"></i> Rule Engine</a>
+						<ul>
+							<li>
+								<a>Rule Engine Configuration</a>
+							</li>
+							<li>
+								<a>Scenario Management</a>
+							</li>
+							<li><a>Filter Management</a></li>
+							<li><a>Result</a></li>
+							<li><a>Data Auditing</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu">
+						<a data-ma-action="submenu-toggle"><i class="zmdi zmdi-apps"></i> Applications</a>
+						<ul>
+							<li><a>Recording Configuration</a></li>
+							<li><a data-menu-category="lib/html/app/scenario.html">Scenario Management</a></li>
+							<li><a>Filter Management</a></li>
+							<li><a>Result</a></li>
+							<li><a>Data Auditing</a></li>
+						</ul>
+					</li>
+					<li class="sub-menu">
+						<a data-ma-action="submenu-toggle"><i class="zmdi zmdi-library"></i>User Interface</a>
+						<ul>
+							<li>
+								<a data-menu-category="lib/html/userinterface/grid.html">Grid Layout</a>
+							</li>
+							<li class="sub-menu">
+								<a data-ma-action="submenu-toggle">UI Elements</a>
+								<ul>
+									<li>
+										<a data-menu-category="lib/html/userinterface/colors.html">
+											<i class="zmdi zmdi-code"></i>Color
+										</a>
+									</li>
+									<li>
+										<a data-menu-category="lib/html/userinterface/icons.html">
+											<i class="zmdi zmdi-code"></i>Icon
+										</a>
+									</li>
+									<li>
+										<a data-menu-category="lib/html/userinterface/input.html">
+											<i class="zmdi zmdi-code"></i>Input
+										</a>
+									</li>
+									<li>
+										<a data-menu-category="lib/html/userinterface/radiocheck.html">
+											<i class="zmdi zmdi-code"></i>Radio &amp; Checkbox
+										</a>
+									</li>
+									<li>
+										<a data-menu-category="lib/html/userinterface/buttons.html">
+											<i class="zmdi zmdi-code"></i>Button
+										</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li class="sub-menu">
+								<a data-ma-action="submenu-toggle">Form Elements</a>
+								<ul>
+									
+									<li><a>Auto Complete Input</a></li>
+									<li><a data-menu-category="lib/html/userinterface/textarea.html">Textarea</a></li>
+									<li><a>Third one</a></li>
+								</ul>
+							</li>							
+							<li>
+								<a data-menu-category="lib/html/userinterface/notification.html">Notification</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</aside>
+			<section id="s-main-container"></section>
+		</section>
+	</body>
+	<script type="text/javascript" src="lib/frame/jquery/lib/jquery-1.12.3.js"></script>
+	<script type="text/javascript" src="lib/frame/bootstrap/lib/js/bootstrap.js"></script>
+
+	<script type="text/javascript" src="lib/js/bootstrap-growl.min.js"></script>
+	<script type="text/javascript" src="lib/js/codeSnippt/shCore.js"></script>
+	<script type="text/javascript" src="lib/js/codeSnippt/shBrushJScript.js"></script>
+	<script type="text/javascript" src="lib/js/codeSnippt/shBrushXml.js"></script>
+	<script type="text/javascript" src="lib/js/sweetalert.min.js"></script>
+	<script type="text/javascript" src="lib/js/autosize.js"></script>
+	<script type="text/javascript" src="lib/js/TweenMax.min.js"></script>
+	<script type="text/javascript" src="lib/temp.js"></script>
+	<script type="text/javascript" src="lib/core.dataGrid.js"></script>
+	<script type="text/javascript" src="lib/js/dataGrid/dx.all.js"></script>
+</html>
