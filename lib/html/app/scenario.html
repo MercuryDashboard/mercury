@@ -8,87 +8,17 @@
         right: 20px;
         cursor: pointer !important;
     }
-    .modal-body div {
-        padding: 0 !important;
+    .modal-body div.col-md-12, .modal-body div.col-md-6 {
+        padding-left: 0 !important;
     }
 
-    td[role='gridcell'] .btn {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
+    
 
     .overflow-hidden{
         overflow: hidden;
     }
-    .checkbox-container {
-        position: relative;
-        top: -5px;
-    }
 
-    .checkbox-container input {
-      display:none;
-    }
 
-    .checkbox-container label {
-        width: 100%;
-        height: 25px;
-        display: block;
-        position: absolute;
-        padding: 2px 15px 2px 30px;
-        border: 2px solid #fff;
-        border-radius: 100px;
-        color: #fff;
-        background-color: #ED5565;
-        /*box-shadow: 0 0 20px rgba(0, 0, 0, .2);*/
-        white-space: nowrap;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        -webkit-transition: background-color .2s, box-shadow .2s;
-        transition: background-color .2s, box-shadow .2s;
-        line-height: 18px;
-        font-size: 12px;
-    }
-
-    .checkbox-container label::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 3px;
-        bottom: 10px;
-        left: 4px;
-        width: 15px;
-        height: 15px;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        -webkit-transition: background-color .2s;
-        transition: background-color .2s;
-    }
-    .checkbox-container label::after {
-        content: 'Staging';
-        display: block;
-        position: absolute;
-          
-    }
-
-    .checkbox-container label:hover, input:focus + label {
-      /*box-shadow: 0 0 20px rgba(0, 0, 0, .6);*/
-    }
-
-    .checkbox-container input:checked + label {
-      background-color: #37BC9B;
-      
-    }
-
-    .checkbox-container input:checked + label::before {
-      background-color: #fff;
-    }
-
-    .checkbox-container input:checked + label::after {
-      content: 'Production';
-    }
 
     /*
         panel
@@ -208,22 +138,23 @@
     div.udkmenu-grid {
         position: absolute;
         top: 0;
-        width: calc(50% - 16px);
+        width: calc(100% - 270px);
         height: 100%;
         z-index: 99999;
         background: #fff;
         padding: 6px 0px 3px;
+        overflow-y: auto;
 
-        -webkit-transition: -webkit-transform 0.4s ease;
-        -moz-transition: -moz-transform 0.4s ease;
-        -ms-transition: -ms-transform 0.4s ease;
-        -o-transition: -o-transform 0.4s ease;
-        transition: transform 0.4s ease;
-        -webkit-transform: translate3d(100%, 0, 0);
-        -moz-transform: translate3d(100%, 0, 0);
-        -ms-transform: translate3d(100%, 0, 0);
-        -o-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
+        -webkit-transition: -webkit-transform 0.8s ease;
+        -moz-transition: -moz-transform 0.8s ease;
+        -ms-transition: -ms-transform 0.8s ease;
+        -o-transition: -o-transform 0.8s ease;
+        transition: transform 0.8s ease;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -moz-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
 
         -moz-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
@@ -238,14 +169,7 @@
     div.udkmenu-grid li:last-child {
         margin-bottom: 0px !important;
     }
-    div.udkmenu-grid a{
-        width: 100%;
-        line-height: 18px;
-        padding: 4px 0px 4px 20px;
-        font-family: "HPSimplified_Rg","Arial",sans-serif;
-        color: #000;
-        text-decoration: none;
-    }
+
     div.udkmenu-grid ul{
         width: 100%;
         float: left;
@@ -288,24 +212,24 @@
     }
     div.udkmenu-grid.udkmenu-closed {
         position: absolute;
-        -webkit-transition: -webkit-transform 0.4s ease;
+        -webkit-transition: -webkit-transform 0.8s ease;
         -webkit-transition-property: transform;
-        -webkit-transition-duration: 0.4s;
+        -webkit-transition-duration: 0.8s;
         -webkit-transition-timing-function: ease;
         -webkit-transition-delay: initial;
-        -moz-transition: -moz-transform 0.4s ease;
-        -ms-transition: -ms-transform 0.4s ease;
-        -o-transition: -o-transform 0.4s ease;
-        transition: transform 0.4s ease;
+        -moz-transition: -moz-transform 0.8s ease;
+        -ms-transition: -ms-transform 0.8s ease;
+        -o-transition: -o-transform 0.8s ease;
+        transition: transform 0.8s ease;
         transition-property: transform;
-        transition-duration: 0.4s;
+        transition-duration: 0.8s;
         transition-timing-function: ease;
         transition-delay: initial;
-        -webkit-transform: translate3d(201%, 0, 0);
-        -moz-transform: translate3d(201%, 0, 0);
-        -ms-transform: translate3d(201%, 0, 0);
-        -o-transform: translate3d(201%, 0, 0);
-        transform: translate3d(201%, 0, 0);
+        -webkit-transform: translate3d(101%, 0, 0);
+        -moz-transform: translate3d(101%, 0, 0);
+        -ms-transform: translate3d(101%, 0, 0);
+        -o-transform: translate3d(101%, 0, 0);
+        transform: translate3d(101%, 0, 0);
 
         
     }
@@ -368,39 +292,125 @@
         -o-transform: rotate(-45deg);
         transform: rotate(-45deg);
     }
+
+    /* INPUT
+       ================================== */
+    .mercury-dropdown {
+      border: 0;
+      background: transparent;
+      border-bottom: 2px solid #03A9F4;
+      outline: 0;
+      display: block;
+      text-align: left;
+      font-size: 0.95em;
+      width: calc(100% - 5px);
+      cursor: pointer;
+      color: #727272;
+      text-decoration: none;
+      -webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      opacity: 1;
+      line-height: 30px;
+      -webkit-transform-origin: right top;
+              transform-origin: right top;
+    }
+    .mercury-dropdown.open {
+      opacity: 0;
+    }
+    /* DROPDOWN
+       ================================== */
+    .button-group {
+      position: relative;
+      width: 100%;
+    }
+    .button-group .marka {
+      position: absolute;
+      right: 5px;
+      top: 12px;
+      z-index: 9999;
+      cursor: pointer;
+    }
+    .button-group .marka i {
+      background: grey!important;
+    }
+    .mercury-dropdown-ul {
+      position: absolute;
+      top: -1em;
+      right: 0;
+      left: 0;
+      margin: 1em auto;
+      padding: 1em 1.35em 1em;
+      width: 100%;
+      list-style: none;
+      text-align: left;
+      border-radius: 2px;
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+      transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+      z-index: 999;
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform-origin: right top;
+              transform-origin: right top;
+    }
+    .mercury-dropdown-ul li {
+      position: relative;
+      line-height: 2.35em;
+      -webkit-transform: translate3d(0, -10px, 0);
+              transform: translate3d(0, -10px, 0);
+      opacity: 0;
+    }
+    .mercury-dropdown-ul li a {
+      color: #222222;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .mercury-dropdown-ul.open {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    .mercury-dropdown-ul.open li {
+      -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+      transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+      opacity: 1;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .mercury-dropdown-ul.open li:last-child{
+        border-bottom: none;
+    }
+    .open li:nth-child(1) {
+      -webkit-transition-delay: 0.07s !important;
+              transition-delay: 0.07s !important;
+    }
+    .open li:nth-child(2) {
+      -webkit-transition-delay: 0.14s !important;
+              transition-delay: 0.14s !important;
+    }
+    .open li:nth-child(3) {
+      -webkit-transition-delay: 0.21s !important;
+              transition-delay: 0.21s !important;
+    }
+    .open li:nth-child(4) {
+      -webkit-transition-delay: 0.28s !important;
+              transition-delay: 0.28s !important;
+    }
+    .open li:nth-child(5) {
+      -webkit-transition-delay: 0.35s !important;
+              transition-delay: 0.35s !important;
+    }
 </style>
 
 
 <div class="container">
-    <div class="card overflow-hidden">
+    <div class="card">
         <div class="card-header">
             <h2>Scenario Management <small>Default Data Grid View</small></h2>
         </div>
         <div class="card-body card-padding">
             <div class="scenarioManagement"></div>
-            <div class="udkmenu-grid udkmenu-closed">
-                <div class="modal-header">
-                  <i class="fa fa-close modal-header-close-icon"></i>
-                  <h4 class="modal-title">Add / Edit Scenario</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class='col-md-6'>
-                                <div class="form-group fg-float">
-                                    <div class="fg-line">
-                                        <input id="input_scenario_name" type="text" class="form-control fg-input">
-                                        <label class="fg-label">Scenario Name</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='col-md-6'>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="card">
@@ -428,7 +438,137 @@
         </div>
     </div>
 </div>
-
+<div class="udkmenu-grid udkmenu-closed" node="panel_scenario">
+    <div class="modal-header">
+      <i class="fa fa-close modal-header-close-icon"></i>
+      <h4 class="modal-title">Scenario Details</h4>
+    </div>
+    <div class="modal-body">
+        <!-- Line 1 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class='col-md-4'>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="input_scenario_name" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Scenario Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4'>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="input_author_name" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Author</label>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4'>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="input_last_edit" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Last Edit</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Line 2 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class='col-md-4'>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="input_last_update" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Last Update</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="input_scenario_desc" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Scenario Description</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Line 3 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="form-group button-group mercury-dropdown-group">
+                        <i class="mercury-icon"></i>
+                        <a class="mercury-dropdown" href="">Find Existing Rules</a>
+                        <ul class="mercury-dropdown-ul"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-11">
+                    <p class="m-b-25 m-t-25 c-black f-500">Scenario Rules</p>
+                    <div id="div_scenario_rules"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Line 4 -->
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveScenario">
+                    <i class="zmdi zmdi-check-all"></i> Save</button>
+                <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddRule">
+                    <i class="zmdi zmdi-collection-plus"></i> Add Rule</button>
+                <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddFilter">
+                    <i class="zmdi zmdi-collection-plus"></i> Add Filter</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Rule -->
+<div class="udkmenu-grid udkmenu-closed" node="panel_add_rule">
+    <div class="modal-header">
+      <i class="fa fa-close modal-header-close-icon"></i>
+      <h4 class="modal-title"> Add Rule </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class='col-md-4'>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Rule Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input id="" type="text" class="input-sm form-control fg-input" disabled>
+                            <label class="fg-label">Scenario Description</label>
+                        </div>
+                    </div>
+                </div>
+            </div>                      
+        </div>
+    </div>
+</div>
+<!-- Edit Rule -->
+<div class="udkmenu-grid udkmenu-closed" node="panel_edit_rule">
+    <div class="modal-header">
+      <i class="fa fa-close modal-header-close-icon"></i>
+      <h4 class="modal-title"> Edit Rule </h4>
+    </div>
+</div>
+<div class="udkmenu-grid udkmenu-closed" node="panel_add_filter">
+    <div class="modal-header">
+      <i class="fa fa-close modal-header-close-icon"></i>
+      <h4 class="modal-title"> Add Filter </h4>
+    </div>
+</div>
 
 
 <!-- Script -->
