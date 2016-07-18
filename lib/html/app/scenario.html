@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="../../lib/css/dataGrid/dx.common.css">
-<link rel="stylesheet" type="text/css" href="../../lib/css/dataGrid/dx.light.css">
+<link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.common.css">
+<link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.light.css">
 <style type="text/css">
     .modal-header-close-icon {
         color: #959595;
@@ -12,11 +12,100 @@
         padding-left: 0 !important;
     }
 
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    color: #333333 !important;
+    text-decoration: none !important;
+    outline: 0 !important;
+    background-color: rgba(0, 0, 0, 0.075) !important;
+}
+
+.bootstrap-select .dropdown-toggle:focus {
+  outline: none !important;
+}
+
+.bootstrap-select > .btn-default {
+  background: none !important;
+  border-bottom: 2px solid #2196f3 !important;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.bootstrap-select .bs-searchbox {
+  padding: 5px 5px 5px 40px;
+  position: relative;
+  background: #f7f7f7;
+  margin-top: -10px;
+}
+
+.bootstrap-select .bs-searchbox:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  content: "\f1c3";
+  font-family: 'Material-Design-Iconic-Font';
+  font-size: 25px;
+  padding: 4px 0 0 15px;
+}
+
+.bootstrap-select .bs-searchbox input {
+  border: 0;
+  background: transparent;
+}
+
+.bootstrap-select.btn-group .dropdown-menu li a.opt {
+  padding-left: 17px;
+}
+
+.bootstrap-select .check-mark {
+  margin-top: -5px !important;
+  font-size: 19px;
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  display: block !important;
+  position: absolute;
+  top: 11px;
+  right: 15px;
+}
+
+.bootstrap-select .check-mark:before {
+  content: "\f26b";
+  font-family: 'Material-Design-Iconic-Font';
+}
+
+.bootstrap-select .selected .check-mark {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+
+.bootstrap-select .notify {
+  bottom: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  border: 0 !important;
+  background: #f44336 !important;
+  color: #fff !important;
+  text-align: center;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 100%;
+}
+
     
 
-    .overflow-hidden{
-        overflow: hidden;
-    }
+
 
 
 
@@ -135,10 +224,11 @@
 
 
 
-    div.udkmenu-grid {
+    div.mercury-slide-panel {
         position: absolute;
         top: 0;
-        width: calc(100% - 270px);
+        right: 0;
+        width: calc(100% - 285px);
         height: 100%;
         z-index: 99999;
         background: #fff;
@@ -160,28 +250,20 @@
         -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
         box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3);
     }
-    div.udkmenu-grid li {
-        width: 100%;
-        float: left;
-        list-style: none outside none;
-        padding-bottom: 3px;
+    @media (max-width: 1279px) {
+        div.mercury-slide-panel {
+            width: calc(100% - 55px);
+        }
     }
-    div.udkmenu-grid li:last-child {
-        margin-bottom: 0px !important;
-    }
-
-    div.udkmenu-grid ul{
-        width: 100%;
-        float: left;
-    }
-    div.udkmenu-grid.udkmenu-suspend{
+    
+    div.mercury-slide-panel.udkmenu-suspend{
         position: absolute;
         top: 0px;
     }
-    div.udkmenu-grid.highest{
+    div.mercury-slide-panel.highest{
         z-index: 1 !important;
     }
-    div.udkmenu-grid.udkmenu-opened {
+    div.mercury-slide-panel.udkmenu-opened {
         -webkit-transition: -webkit-transform 0.4s ease;
         -webkit-transition-property: transform;
         -webkit-transition-duration: 0.4s;
@@ -202,7 +284,7 @@
         transform: translate3d(0, 0, 0);
         position: relative;
     }
-    div.udkmenu-grid.udkmenu-childopened{
+    div.mercury-slide-panel.udkmenu-childopened{
         -webkit-transform: translate3d(-30%, 0, 0);
         -moz-transform: translate3d(-30%, 0, 0);
         -ms-transform: translate3d(-30%, 0, 0);
@@ -210,8 +292,7 @@
         transform: translate3d(-30%, 0, 0);
         position: absolute;
     }
-    div.udkmenu-grid.udkmenu-closed {
-        position: absolute;
+    div.mercury-slide-panel.mercury-slide-panel-closed {
         -webkit-transition: -webkit-transform 0.8s ease;
         -webkit-transition-property: transform;
         -webkit-transition-duration: 0.8s;
@@ -293,114 +374,6 @@
         transform: rotate(-45deg);
     }
 
-    /* INPUT
-       ================================== */
-    .mercury-dropdown {
-      border: 0;
-      background: transparent;
-      border-bottom: 2px solid #03A9F4;
-      outline: 0;
-      display: block;
-      text-align: left;
-      font-size: 0.95em;
-      width: calc(100% - 5px);
-      cursor: pointer;
-      color: #727272;
-      text-decoration: none;
-      -webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
-      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
-      opacity: 1;
-      line-height: 30px;
-      -webkit-transform-origin: right top;
-              transform-origin: right top;
-    }
-    .mercury-dropdown.open {
-      opacity: 0;
-    }
-    /* DROPDOWN
-       ================================== */
-    .button-group {
-      position: relative;
-      width: 100%;
-    }
-    .button-group .marka {
-      position: absolute;
-      right: 5px;
-      top: 12px;
-      z-index: 9999;
-      cursor: pointer;
-    }
-    .button-group .marka i {
-      background: grey!important;
-    }
-    .mercury-dropdown-ul {
-      position: absolute;
-      top: -1em;
-      right: 0;
-      left: 0;
-      margin: 1em auto;
-      padding: 1em 1.35em 1em;
-      width: 100%;
-      list-style: none;
-      text-align: left;
-      border-radius: 2px;
-      background: #fafafa;
-      border: 1px solid #e5e5e5;
-      -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
-      transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
-      z-index: 999;
-      -webkit-transform: scale(0);
-              transform: scale(0);
-      -webkit-transform-origin: right top;
-              transform-origin: right top;
-    }
-    .mercury-dropdown-ul li {
-      position: relative;
-      line-height: 2.35em;
-      -webkit-transform: translate3d(0, -10px, 0);
-              transform: translate3d(0, -10px, 0);
-      opacity: 0;
-    }
-    .mercury-dropdown-ul li a {
-      color: #222222;
-      text-decoration: none;
-      font-size: 1em;
-    }
-    .mercury-dropdown-ul.open {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-    }
-    .mercury-dropdown-ul.open li {
-      -webkit-transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
-      transition: all 350ms cubic-bezier(0.19, 1, 0.22, 1);
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-      opacity: 1;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    .mercury-dropdown-ul.open li:last-child{
-        border-bottom: none;
-    }
-    .open li:nth-child(1) {
-      -webkit-transition-delay: 0.07s !important;
-              transition-delay: 0.07s !important;
-    }
-    .open li:nth-child(2) {
-      -webkit-transition-delay: 0.14s !important;
-              transition-delay: 0.14s !important;
-    }
-    .open li:nth-child(3) {
-      -webkit-transition-delay: 0.21s !important;
-              transition-delay: 0.21s !important;
-    }
-    .open li:nth-child(4) {
-      -webkit-transition-delay: 0.28s !important;
-              transition-delay: 0.28s !important;
-    }
-    .open li:nth-child(5) {
-      -webkit-transition-delay: 0.35s !important;
-              transition-delay: 0.35s !important;
-    }
 </style>
 
 
@@ -437,8 +410,11 @@
             <div class="scenarioCustomization"></div>
         </div>
     </div>
+
+   
 </div>
-<div class="udkmenu-grid udkmenu-closed" node="panel_scenario">
+<!-- Scenario Details -->
+<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_scenario">
     <div class="modal-header">
       <i class="fa fa-close modal-header-close-icon"></i>
       <h4 class="modal-title">Scenario Details</h4>
@@ -447,75 +423,159 @@
         <!-- Line 1 -->
         <div class="row">
             <div class="col-md-12">
-                <div class='col-md-4'>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="input_scenario_name" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Scenario Name</label>
+                <div role="tabpanel">
+                    <ul class="tab-nav" role="tablist">
+                        <li class="">
+                            <a href="#scenario_general" aria-controls="scenario_general" role="tab" data-toggle="tab" aria-expanded="false">General Information</a>
+                        </li>
+                        <li class="active">
+                            <a href="#rule_details" aria-controls="rule_details" role="tab" data-toggle="tab" aria-expanded="true">Rule Details</a>
+                        </li>
+                        <li class="">
+                            <a href="#rule_setting" aria-controls="rule_setting" role="tab" data-toggle="tab" aria-expanded="false">Settings</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Scenario General Information Tab Panel -->
+                        <div role="tabpanel" class="tab-pane" id="scenario_general">
+                            <!-- Scenario General Information -->
+                            <div class="row">
+                                <!-- Line 1 -->
+                                <div class="col-md-12">
+                                    <!-- Scenario Name -->
+                                    <div class="col-md-4">
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input id="input_scenario_name" type="text" class="input-sm form-control fg-input" disabled>
+                                                <label class="fg-label">Scenario Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Author -->
+                                    <div class="col-md-4">
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input id="input_author_name" type="text" class="input-sm form-control fg-input" disabled>
+                                                <label class="fg-label">Author</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Last Editor -->
+                                    <div class="col-md-4">
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input id="input_last_edit" type="text" class="input-sm form-control fg-input" disabled>
+                                                <label class="fg-label">Last Edit</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Line 2 -->
+                                <div class="col-md-12">
+                                    <!-- Last Update -->
+                                    <div class="col-md-4">
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input id="input_last_update" type="text" class="input-sm form-control fg-input" disabled>
+                                                <label class="fg-label">Last Update</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Scenario Description -->
+                                    <div class="col-md-8">
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input id="input_scenario_desc" type="text" class="input-sm form-control fg-input" disabled>
+                                                <label class="fg-label">Scenario Description</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane active" id="rule_details">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group button-group mercury-dropdown-group">
+                                            <select class="selectpicker bs-select-hidden" data-live-search="true"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- Edit Rule -->
+                                        <button class="btn btn-primary btn-icon-text waves-effect" btn="eventEditRule">
+                                        <i class="zmdi zmdi-collection-text"></i> Edit Selected Rule</button>
+                                        <!-- Add Rule -->
+                                        <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddRule">
+                                        <i class="zmdi zmdi-collection-plus"></i> Add Rule</button>
+                                        <!-- Filter Inforamtion -->
+                                        <button class="btn btn-primary btn-icon-text waves-effect" btn="eventOpenFilters">
+                                        <i class="zmdi zmdi-collection-item"></i> View Filters</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <!-- Save Changes -->
+                                        <div style="position: absolute; right: 90px;">
+                                            <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveRuleChanges">
+                                            <i class="zmdi zmdi-check"></i> Save</button>
+                                        </div>   
+                                        <!-- Cancel Changes -->
+                                        <div style="position: absolute; right: 0px;">
+                                            <button class="btn btn-warning btn-icon-text waves-effect" btn="eventCancelRuleChanges">
+                                            <i class="zmdi zmdi-block"></i> Cancel</button>
+                                        </div>                                   
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="m-b-25 m-t-25 c-black f-500">Scenario Rules</p>
+                                    <div id="div_scenario_rules"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="rule_setting">
+                            <p>This is a setting page</p>
                         </div>
                     </div>
                 </div>
-                <div class='col-md-4'>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="input_author_name" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Author</label>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-md-4'>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="input_last_edit" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Last Edit</label>
-                        </div>
-                    </div>
-                </div>
+
+                <!-- Right Part Data Grid 
+                -->
             </div>
+            
         </div>
-        <!-- Line 2 -->
+        <!-- Line 4 
         <div class="row">
             <div class="col-md-12">
-                <div class='col-md-4'>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="input_last_update" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Last Update</label>
+                <div role="tabpanel">
+                    <ul class="tab-nav" role="tablist">
+                        <li class="active">
+                            <a href="#home11" aria-controls="home11" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
+                        </li>
+                        <li class="">
+                            <a href="#profile11" aria-controls="profile11" role="tab" data-toggle="tab" aria-expanded="false">Profile</a>
+                        </li>
+                        <li class="">
+                            <a href="#messages11" aria-controls="messages11" role="tab" data-toggle="tab" aria-expanded="false">Messages</a>
+                        </li>
+                        <li class="">
+                            <a href="#settings11" aria-controls="settings11" role="tab" data-toggle="tab" aria-expanded="false">Settings</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home11">
+                            <p>1</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile11">
+                            <p>2</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="messages11">
+                            <p>3</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="settings11">
+                            <p>4</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="input_scenario_desc" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Scenario Description</label>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-        <!-- Line 3 -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                    <div class="form-group button-group mercury-dropdown-group">
-                        <i class="mercury-icon"></i>
-                        <a class="mercury-dropdown" href="">Find Existing Rules</a>
-                        <ul class="mercury-dropdown-ul"></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-11">
-                    <p class="m-b-25 m-t-25 c-black f-500">Scenario Rules</p>
-                    <div id="div_scenario_rules"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Line 4 -->
-        <div class="row">
             <div class="col-md-12">
                 <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveScenario">
                     <i class="zmdi zmdi-check-all"></i> Save</button>
@@ -524,11 +584,11 @@
                 <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddFilter">
                     <i class="zmdi zmdi-collection-plus"></i> Add Filter</button>
             </div>
-        </div>
+        </div>-->
     </div>
-</div>
+</div> 
 <!-- Add Rule -->
-<div class="udkmenu-grid udkmenu-closed" node="panel_add_rule">
+<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_add_rule">
     <div class="modal-header">
       <i class="fa fa-close modal-header-close-icon"></i>
       <h4 class="modal-title"> Add Rule </h4>
@@ -557,13 +617,13 @@
     </div>
 </div>
 <!-- Edit Rule -->
-<div class="udkmenu-grid udkmenu-closed" node="panel_edit_rule">
+<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_edit_rule">
     <div class="modal-header">
       <i class="fa fa-close modal-header-close-icon"></i>
       <h4 class="modal-title"> Edit Rule </h4>
     </div>
 </div>
-<div class="udkmenu-grid udkmenu-closed" node="panel_add_filter">
+<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_add_filter">
     <div class="modal-header">
       <i class="fa fa-close modal-header-close-icon"></i>
       <h4 class="modal-title"> Add Filter </h4>
@@ -573,6 +633,6 @@
 
 <!-- Script -->
 
-<script type="text/javascript" src="../../lib/js/dataGrid/jszip.js"></script>
-<script type="text/javascript" src="../../lib/js/dataGrid/index.js"></script>
-<script type="text/javascript" src="../../lib/core.input.js"></script>
+<script type="text/javascript" src="lib/js/dataGrid/jszip.js"></script>
+<script type="text/javascript" src="lib/js/dataGrid/index.js"></script>
+<script type="text/javascript" src="lib/core.input.js"></script>
