@@ -13,6 +13,8 @@
 @import url('core.color.css');
 @import url('core.viewGrid.css');
 @import url('core.tab.css');
+@import url('core.collapse.css');
+@import url('core.matrix.css');
 @import url('bootstrap-select.css');
 @import url('iconic-font.min.css');
 @import url('font-awesome.min.css');
@@ -59,7 +61,7 @@ audio:not([controls]) {
 }
 
 [hidden], template {
-    display: none;
+    display: none !important;
 }
 
 *, button, input, i, a {

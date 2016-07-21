@@ -1,0 +1,140 @@
+  .b-matrix {
+      width: 100%;
+      position: relative;
+      margin: 0 30px 25px 0;
+      padding: 3px;
+      border-left: 2px solid #2196f3;
+      border-right: 2px solid #2196f3;
+      position: relative;
+      display: inline-block;
+  }
+  .b-matrix table {
+    width: 100%;
+  }
+  /*-----border-----*/
+  
+  .b-matrix_border:before,
+  .b-matrix_border:after,
+  .b-matrix__table_border:before,
+  .b-matrix__table_border:after {
+      position: absolute;
+      display: block;
+      width: 8px;
+      height: 2px;
+      background: #2196f3;
+      content: '';
+  }
+  
+  .b-matrix_border:before {
+      top: 0;
+      left: 0;
+  }
+  
+  .b-matrix_border:after {
+      top: 0;
+      right: 0;
+  }
+  
+  .b-matrix__table_border:before {
+      bottom: 0;
+      left: 0;
+  }
+  
+  .b-matrix__table_border:after {
+      bottom: 0;
+      right: 0;
+  }
+  /*-----border end-----*/
+  
+  .matrix-name-A,
+  .matrix-name-B {
+      position: absolute;
+      font-size: 14px;
+  }
+  
+  .matrix-name-A {
+      top: 0;
+      right: -35px;
+  }
+  
+  .matrix-name-B {
+      top: -20px;
+      left: 15px;
+      color: #bbbbbb;
+  }
+  
+  .matrix-cell {
+      display: block;
+      margin: 5px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 12px;
+  }
+  
+  .matrix-cell:focus,
+  .matrix-cell:hover {
+      outline-offset: 0px;
+      border-color: #09d;
+      outline: 1px solid #09d;
+  }
+  
+  .matrix-cell[disabled] {
+      background: #eee;
+      outline: none;
+  }
+  
+  .matrix-cell[disabled]:hover {
+      border-color: #ddd;
+      outline: none;
+  }
+  
+  .b-matrix td.col-condition {
+      width: 10%;
+  }
+  
+  .b-matrix td.col-3-value {
+      width: calc(60% - 60px);
+  }
+  .b-matrix td.col-4-value {
+      width: calc(50% - 75px);
+  }
+  
+  .b-matrix td.col-3 {
+      width: 30%;
+  }
+
+  .b-matrix td.col-hidden {
+    display: none;
+  }
+
+  .b-matrix td.col-5 {
+    width: 18%;
+  }
+
+  .b-matrix td.col-5-value {
+    width: calc(36% - 90px);
+  }
+
+  .b-matrix td:first-child {
+      padding-left: 15px;
+  }
+
+  .b-matrix td {
+      padding-right: 15px;
+  }
+  
+  .b-matrix td.col-4 {
+      width: 20%;
+  }
+
+  .b-matrix button.btn-xs {
+    padding: 2px 7px !important;
+  }
+
+  .b-matrix td.col-delete {
+    width: 2%;
+  }
+
+  .matrix-result .dx-datagrid-headers {
+      display: none !important;
+  }
