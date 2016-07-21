@@ -544,26 +544,10 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
-                                                                            <!-- Unit -->
-                                                                            <td class='col-5 col-unit col-hidden'>
-                                                                                <div class="form-group button-group">
-                                                                                    <select class="filterselect bs-select-hidden select-unit" data-live-search="true">
-                                                                                        <option>Unit</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
-                                                                            <!-- Category -->
-                                                                            <td class='col-5 col-unit col-hidden'>
-                                                                                <div class="form-group button-group">
-                                                                                    <select class="filterselect bs-select-hidden select-category" data-live-search="true">
-                                                                                        <option>Category</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
                                                                             <!-- Condition -->
                                                                             <td class='col-condition'>
                                                                                 <div class="form-group button-group">
-                                                                                    <select class="filterselect bs-select-hidden select-new-condition" data-live-search="true">
+                                                                                    <select class="filterselect bs-select-hidden select-condition" data-live-search="true">
                                                                                         <option value='EQ'>=</option>
                                                                                         <option value='GT'>></option>
                                                                                         <option value='LT'><</option>
@@ -572,11 +556,23 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
+                                                                            <!-- Unit -->
+                                                                            <td class='col-5 col-unit col-hidden'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-unit" data-live-search="true"></select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Category -->
+                                                                            <td class='col-5 col-unit col-hidden'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-category" data-live-search="true"></select>
+                                                                                </div>
+                                                                            </td>
                                                                             <!-- Value -->
-                                                                            <td class='col-3-value' colspan="4">
+                                                                            <td class='col-3-value' colspan="3">
                                                                                 <div class="form-group fg-float">
                                                                                     <div class="fg-line">
-                                                                                        <input id="input_new_value" type="text" class="input-sm form-control fg-input">
+                                                                                        <input type="text" class="input-sm form-control fg-input condition_value">
                                                                                         <label class="fg-label">Condition Value</label>
                                                                                     </div>
                                                                                 </div>
