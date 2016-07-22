@@ -1,0 +1,28 @@
+<div class="card">
+	<div class="card-header">
+	</div>
+	<div class="card-body card-padding">
+		<div class="row">
+			<div class="col-md-12">
+				<pre class="brush:js,toolbar:false">
+				/*
+					Identify specific typeof of element.
+					Example for using:
+						type(parameter) ----> Will return specific type of this param.
+					Return String value if detected:
+						'Object', 'Array', 'Boolean', 'Number', 'String' 
+				*/
+				var type = function(o){
+				    return Object.prototype.toString.call(o).replace(/\[object +(.*?)\]+/g,function(s0,s1){
+				           return s1;
+				    });
+				};	
+				</pre>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<script type="text/javascript">
+	SyntaxHighlighter.highlight();
+</script>
