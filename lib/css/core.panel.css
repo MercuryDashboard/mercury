@@ -1,0 +1,7 @@
+.mercury-slide-panel .modal-body {
+	height: calc(100% - 68px);
+}
+
+.mercury-slide-panel.wiki .modal-body {
+	background: RGBA(0, 58, 97, 1);
+}
