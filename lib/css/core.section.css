@@ -903,10 +903,6 @@ header.media + section {
     border-radius: 2px 2px 0 0;
 }
 
-.card-header.no-bottom-padding {
-    padding-bottom: 0;
-}
-
 .card-header h2 {
     margin: 0;
     line-height: 100%;

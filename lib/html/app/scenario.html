@@ -1,12 +1,5 @@
 <link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.common.css">
 <link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.light.css">
-<link rel="stylesheet" type="text/css" href="lib/plugin/orgChart/jquery.orgchart.css"">
-<!-- Template -->
-<link id="template-filter-matrix" rel="import" href="lib/html/template/scenario/filter.html">
-<link id="template-scenario-wiki" rel="import" href="lib/html/template/scenario/scenario.wiki.html">
-<link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html">
-<link id="template-scenario-create" rel="import" href="lib/html/template/scenario/scenario.create.html">
-
 <style type="text/css">
     .modal-header {
         padding: 20px !important;
@@ -28,96 +21,102 @@
         padding-left: 0 !important;
     }
 
-    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
-        color: #333333 !important;
-        text-decoration: none !important;
-        outline: 0 !important;
-        background-color: rgba(0, 0, 0, 0.075) !important;
-    }
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    color: #333333 !important;
+    text-decoration: none !important;
+    outline: 0 !important;
+    background-color: rgba(0, 0, 0, 0.075) !important;
+}
 
-    .bootstrap-select .dropdown-toggle:focus {
-      outline: none !important;
-    }
+.bootstrap-select .dropdown-toggle:focus {
+  outline: none !important;
+}
 
-    .bootstrap-select > .btn-default {
-      background: none !important;
-      border-bottom: 2px solid #2196f3 !important;
-      border-radius: 0;
-      padding-left: 0;
-      padding-right: 0;
-    }
+.bootstrap-select > .btn-default {
+  background: none !important;
+  border-bottom: 2px solid #2196f3 !important;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
 
-    .bootstrap-select .bs-searchbox {
-      padding: 5px 5px 5px 40px;
-      position: relative;
-      background: #f7f7f7;
-      margin-top: -10px;
-    }
+.bootstrap-select .bs-searchbox {
+  padding: 5px 5px 5px 40px;
+  position: relative;
+  background: #f7f7f7;
+  margin-top: -10px;
+}
 
-    .bootstrap-select .bs-searchbox:before {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 40px;
-      height: 100%;
-      content: "\f1c3";
-      font-family: 'Material-Design-Iconic-Font';
-      font-size: 25px;
-      padding: 4px 0 0 15px;
-    }
+.bootstrap-select .bs-searchbox:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  content: "\f1c3";
+  font-family: 'Material-Design-Iconic-Font';
+  font-size: 25px;
+  padding: 4px 0 0 15px;
+}
 
-    .bootstrap-select .bs-searchbox input {
-      border: 0;
-      background: transparent;
-    }
+.bootstrap-select .bs-searchbox input {
+  border: 0;
+  background: transparent;
+}
 
-    .bootstrap-select.btn-group .dropdown-menu li a.opt {
-      padding-left: 17px;
-    }
+.bootstrap-select.btn-group .dropdown-menu li a.opt {
+  padding-left: 17px;
+}
 
-    .bootstrap-select .check-mark {
-      margin-top: -5px !important;
-      font-size: 19px;
-      -webkit-transition: all;
-      -o-transition: all;
-      transition: all;
-      -webkit-transition-duration: 200ms;
-      transition-duration: 200ms;
-      -webkit-transform: scale(0);
-      -ms-transform: scale(0);
-      -o-transform: scale(0);
-      transform: scale(0);
-      display: block !important;
-      position: absolute;
-      top: 11px;
-      right: 15px;
-    }
+.bootstrap-select .check-mark {
+  margin-top: -5px !important;
+  font-size: 19px;
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  display: block !important;
+  position: absolute;
+  top: 11px;
+  right: 15px;
+}
 
-    .bootstrap-select .check-mark:before {
-      content: "\f26b";
-      font-family: 'Material-Design-Iconic-Font';
-    }
+.bootstrap-select .check-mark:before {
+  content: "\f26b";
+  font-family: 'Material-Design-Iconic-Font';
+}
 
-    .bootstrap-select .selected .check-mark {
-      -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-      -o-transform: scale(1);
-      transform: scale(1);
-    }
+.bootstrap-select .selected .check-mark {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
 
-    .bootstrap-select .notify {
-      bottom: 0 !important;
-      margin: 0 !important;
-      width: 100% !important;
-      border: 0 !important;
-      background: #f44336 !important;
-      color: #fff !important;
-      text-align: center;
-    }
+.bootstrap-select .notify {
+  bottom: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  border: 0 !important;
+  background: #f44336 !important;
+  color: #fff !important;
+  text-align: center;
+}
 
-    .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-      width: 100%;
-    }
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 100%;
+}
+
+    
+
+
+
+
 
     /*
         panel
@@ -320,7 +319,9 @@
         -ms-transform: translate3d(101%, 0, 0);
         -o-transform: translate3d(101%, 0, 0);
         transform: translate3d(101%, 0, 0);     
-    }    
+    }
+
+    
 </style>
 
 
@@ -328,27 +329,43 @@
     <div class="card">
         <div class="card-header">
             <h2>Scenario Management <small>Default Data Grid View</small></h2>
-            <ul class="actions a-alt">
-                <li class="dropdown">
-                    <button class="btn btn-primary btn-icon-text waves-effect" btn="eventWikiPage">
-                    <i class="zmdi zmdi-pin-help"></i> Wiki</button>
-                </li>
-                <li class="dropdown">
-                    <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddScenario">
-                    <i class="zmdi zmdi-plus"></i> Add Scenario</button>
-                </li>
-            </ul>
         </div>
         <div class="card-body card-padding">
             <div class="scenarioManagement"></div>
         </div>
-    </div>   
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Master Details View</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioDetail"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Data Summary View</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioSummary"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Scenario Management <small>Scenario Cell Customization</small></h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="scenarioCustomization"></div>
+        </div>
+    </div>
+
+   
 </div>
 <!-- Scenario Details -->
 <div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_scenario">
     <div class="modal-header">
-        <i class="fa fa-close modal-header-close-icon"></i>
-        <h4 class="modal-title">Scenario Details</h4>
+      <i class="fa fa-close modal-header-close-icon"></i>
+      <h4 class="modal-title">Scenario Details</h4>
     </div>
     <div class="modal-body">
         <!-- Line 1 -->
@@ -435,10 +452,10 @@
                                     <div class="col-md-6">
                                         <!-- Edit Rule -->
                                         <button class="btn btn-primary btn-icon-text waves-effect" btn="eventEditRule">
-                                        <i class="zmdi zmdi-collection-text"></i> Edit Selected Rule</button>
+                                        <i class="zmdi zmdi-collection-text"></i> Edit </button>
                                         <!-- Add Rule -->
                                         <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddRule">
-                                        <i class="zmdi zmdi-collection-plus"></i> Add Rule</button>
+                                        <i class="zmdi zmdi-collection-plus"></i> Add </button>
                                     </div>
                                     <div class="col-md-2">
                                         <!-- Save Changes -->
@@ -466,9 +483,9 @@
                                         <div class="panel panel-collapse">
                                             <div class="panel-heading active" role="tab">
                                                 <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
-                                                        Filter Settings
-                                                    </a>
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+                                                    New Filter Settings
+                                                </a>
                                                 </h4>
                                             </div>
                                             <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
@@ -496,8 +513,83 @@
                                                         </div>                                             
                                                     </div>
                                                     <div class="row margin20">
-                                                        <!-- Filter Template -->
-                                                        <div id="template-filter-wrapper" class="col-md-12"></div>
+                                                        <div class="col-md-12">
+                                                            <div class="b-matrix b-matrix_border" data-name="b">
+                                                                <span class="matrix-name-A">
+                                                                    <!-- Add Rule -->
+                                                                    <button class="btn btn-primary btn-xs waves-effect" btn='eventAddFilter'>
+                                                                        <i class="zmdi zmdi-plus"></i>
+                                                                    </button>
+                                                                </span>
+                                                                <span class="matrix-name-B">
+                                                                    Matrix Filter Settings (Click + to add more filters)
+                                                                </span>
+                                                                <table class="b-matrix__table b-matrix__table_border">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <!-- Type -->
+                                                                            <td class='col-3'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-type" data-live-search="true">
+                                                                                        <option value='sku'>SKU</option>
+                                                                                        <option value='unit'>Unit &amp; Category</option>
+                                                                                        <option value='case'>Case Quantity</option>
+                                                                                        <option value='daily'>Average Daily Sale</option>
+                                                                                        <option value='promotion'>Promotion</option>
+                                                                                        <option value='area'>Area</option>
+                                                                                        <option value='fc'>FC</option>
+                                                                                        <option value='roq'>ROQ</option>
+                                                                                        <option value='fractional'>Fractional Case</option>
+                                                                                        <option value='doc'>DOC</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Condition -->
+                                                                            <td class='col-condition'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-condition" data-live-search="true">
+                                                                                        <option value='EQ'>=</option>
+                                                                                        <option value='GT'>></option>
+                                                                                        <option value='LT'><</option>
+                                                                                        <option value='GE'>≥</option>
+                                                                                        <option value='LE'>≤</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Unit -->
+                                                                            <td class='col-5 col-unit col-hidden'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-unit" data-live-search="true"></select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Category -->
+                                                                            <td class='col-5 col-unit col-hidden'>
+                                                                                <div class="form-group button-group">
+                                                                                    <select class="filterselect bs-select-hidden select-category" data-live-search="true"></select>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Value -->
+                                                                            <td class='col-3-value' colspan="3">
+                                                                                <div class="form-group fg-float">
+                                                                                    <div class="fg-line">
+                                                                                        <input type="text" class="input-sm form-control fg-input condition_value">
+                                                                                        <label class="fg-label">Condition Value</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <!-- Delete -->
+                                                                            <td class='col-delete col-hidden'>
+                                                                                <div class="form-group fg-float">
+                                                                                    <button class="btn btn-danger btn-xs waves-effect" btn='eventDeleteFilter'>
+                                                                                        <i class="zmdi zmdi-minus"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -519,6 +611,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -586,17 +681,8 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    var eventFilterImport = function() {
-        var a = document.querySelector('link[rel="import"]').import;
-        var b = a.querySelector('div.b-matrix');
-        $("#template_filter").empty().append(b.cloneNode(true));
-        $('select.filterselect.select-type').selectpicker().on('changed.bs.select', eventSelectTypeChange);
-    };
-</script>
-
 <!-- Script -->
-<script type="text/javascript" src="lib/plugin/orgChart/jquery.orgchart.js"></script>
+
 <script type="text/javascript" src="lib/js/dataGrid/jszip.js"></script>
 <script type="text/javascript" src="lib/js/dataGrid/index.js"></script>
 <script type="text/javascript" src="lib/core.input.js"></script>

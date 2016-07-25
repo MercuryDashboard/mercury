@@ -15,7 +15,6 @@
 @import url('core.tab.css');
 @import url('core.collapse.css');
 @import url('core.matrix.css');
-@import url('core.panel.css');
 @import url('bootstrap-select.css');
 @import url('iconic-font.min.css');
 @import url('font-awesome.min.css');
@@ -174,7 +173,7 @@ button, input, optgroup, select, textarea {
     background-color: #EF5350;
 }
 .light-Amber.bg {
-    background-color: #FFC107;
+    background-color: gold;
 }
 .light-Purple.bg {
     background-color: #BA68C8;
