@@ -56,12 +56,25 @@
                 </td>
                 <!-- Value -->
                 <td class='col-3-value' colspan="3">
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input type="text" class="input-sm form-control fg-input condition_value">
-                            <label class="fg-label">Condition Value</label>
+                    <div class="col-md-12">
+                        <div class="col-md-11">
+                            <div class="form-group fg-float">
+                                <div class="fg-line">
+                                    <input type="text" class="input-sm form-control fg-input condition_value">
+                                    <label class="fg-label">Condition Value</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-md-1 col-3-value-upload" hidden="hidden">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-primary btn-file waves-effect">
+                                    <span class="fileinput-new">Select file</span>
+                                    <input type="hidden"><input type="file" name="...">
+                                </span>
+                                <span class="fileinput-filename"></span>
+                            </div>
+                        </div>
+                    </div>               
                 </td>
                 <!-- Delete -->
                 <td class='col-delete col-hidden'>

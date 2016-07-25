@@ -1,6 +1,6 @@
 <div class='scenario-create-wrapper'>
 	<div class="col-md-12">
-		<div class="col-md-5">
+		<div class="col-md-3">
 			<div class="form-group fg-float">
 		        <div class="fg-line">
 		            <input type="text" class="input-sm form-control fg-input">
@@ -8,7 +8,7 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<div class="form-group fg-float">
 		        <div class="fg-line">
 		            <input type="text" class="input-sm form-control fg-input">
@@ -16,14 +16,21 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="col-md-2">
-			<div class="fileinput fileinput-new" data-provides="fileinput">
-                <span class="btn btn-primary btn-file m-r-10 waves-effect">
-                    <span class="fileinput-new">Select file</span>
-                    <input type="hidden"><input type="file" name="...">
-                </span>
-                <span class="fileinput-filename"></span>
-            </div>
+		<div class="col-md-3">
+			<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
+			    <label class="btn">
+			        <input type="radio" name="scenario-create-rule" checked="">
+			        <i class="fa fa-circle-o"></i>
+			        <i class="fa fa-check-circle-o"></i>
+			        <span>Search Existing Rule</span>
+			    </label>
+			    <label class="btn">
+			        <input type="radio" name="scenario-create-rule">
+			        <i class="fa fa-circle-o"></i>
+			        <i class="fa fa-check-circle-o"></i>
+			        <span>Create Rule</span>
+			    </label>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -39,20 +46,25 @@
 		<div class="col-md-7">
 			<div class="form-group fg-float">
 		        <div class="fg-line">
-		            <input type="text" class="input-sm form-control fg-input">
+		            <input id='scenario-search-rule' type="text" class="input-sm form-control fg-input">
 		            <label class="fg-label">Type Name for searching ...</label>
 		        </div>
 		    </div>
 		</div>
 		<div class="col-md-2">
-			<button class="btn btn-primary btn-icon-text waves-effect" btn="">
+			<button class="btn btn-primary btn-icon-text waves-effect" btn='eventSearchRule'>
             <i class="zmdi zmdi-search"></i> Search Rule</button>
 		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div class='scenario-create-search-rule'></div>
 	</div>
 
 	<script type="text/javascript">
 		(function() {
 			$('select.select-rule').selectpicker();
+			
 		})();
 	</script>
 </div>
