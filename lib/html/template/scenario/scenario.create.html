@@ -19,13 +19,13 @@
 		<div class="col-md-3">
 			<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
 			    <label class="btn">
-			        <input type="radio" name="scenario-create-rule" checked="">
+			        <input type="radio" name="scenario-create-rule" checked="" value='search'>
 			        <i class="fa fa-circle-o"></i>
 			        <i class="fa fa-check-circle-o"></i>
 			        <span>Search Existing Rule</span>
 			    </label>
 			    <label class="btn">
-			        <input type="radio" name="scenario-create-rule">
+			        <input type="radio" name="scenario-create-rule" value='create'>
 			        <i class="fa fa-circle-o"></i>
 			        <i class="fa fa-check-circle-o"></i>
 			        <span>Create Rule</span>
@@ -33,37 +33,23 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12">
-		<div class="col-md-3">
-			<div class="form-group button-group">
-                <select class="filterselect bs-select-hidden select-rule" data-live-search="true">
-                    <option value='ruleName'>Rule Name</option>
-                    <option value='ruleCategory'>Rule Category</option>
-                    <option value='ruleType'>Rule Type</option>
-                </select>
-            </div>
-		</div>
-		<div class="col-md-7">
-			<div class="form-group">
-		        <div class="fg-line">
-		            <input id='scenario-search-rule' type="text" class="input-sm form-control" placeholder="Type Name for searching ...">
-		        </div>
-		    </div>
-		</div>
-		<div class="col-md-2">
-			<button class="btn btn-primary btn-icon-text waves-effect" btn='eventSearchRule'>
-            <i class="zmdi zmdi-search"></i> Search Rule</button>
-		</div>
-	</div>
 
-	<div class="col-md-12">
-		<div class='scenario-create-search-rule'></div>
+	<div class='template-rule-wrapper'>
+		
 	</div>
 
 	<script type="text/javascript">
 		(function() {
 			$('select.select-rule').selectpicker();
 			
+			$("[name='scenario-create-rule']").unbind('change').change(function() {
+				if ($(this).val() === "search") {
+					$('.template-scenario-search-rule').attr('active', 'true');
+				} else if ($(this).val() === "create") {
+					$('.template-scenario-search-rule').attr('active', 'false');
+				}
+			});
+
 		})();
 	</script>
 </div>

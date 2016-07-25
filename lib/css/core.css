@@ -62,7 +62,7 @@ audio:not([controls]) {
     height: 0;
 }
 
-[hidden], template {
+[hidden], template, [active='false'] {
     display: none !important;
 }
 
