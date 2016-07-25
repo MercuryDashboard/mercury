@@ -1,0 +1,29 @@
+<div class="card">
+	<div class="card-header">
+		<h2>
+            Util -> Template
+            <small>Allow developer to Import HTML Template. Clone for using.</small>
+        </h2>
+	</div>
+	<div class="card-body card-padding">
+		<div class="row">
+			<div class="col-md-12">
+				<pre class="brush:js,toolbar:false">
+					// First to declare which page to Import
+					<link id="template-import" rel="import" href="path/template.html">
+
+					// Import template (Shadow Dom) via JavaScript
+					var import = document.querySelector("#template-import").import,
+						target = import.querySelector('div');
+						
+					// Append Template-Target to Dom-body
+					document.querySelector('body').appendChild(target.cloneNode(true));
+				</pre>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<script type="text/javascript">
+	SyntaxHighlighter.highlight();
+</script>

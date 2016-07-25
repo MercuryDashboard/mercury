@@ -1,5 +1,9 @@
 <div class="card">
 	<div class="card-header">
+		<h2>
+            Util -> cookie.set(o); cookie.get(o); cookie.erase(o); cookie.getIndex(o);
+            <small>Allow developer [set] / [get] / [erase] data into Cookie.</small>
+        </h2>
 	</div>
 	<div class="card-body card-padding">
 		<div class="row">
@@ -8,32 +12,32 @@
 					/**
 					 *	cookie:
 					 * 	-------------------------------------------
-					 * 	[Function]: {cookie.setCookie}
+					 * 	[Function]: {cookie.set}
 					 * 		Parameter: {obj} typeof Object
 					 * 			{obj.cookieName} 	typeof String
 					 * 			{obj.cookieValue} 	typeof String
 					 * 			{obj.expireDate}	typeof String
 					 * 		Example:
-					  			cookie.setCookie({
+					  			cookie.set({
 					 				cookieName : "",
 					 				cookieValue : "",
 					 				expireDate : ""
 					 			});
 					 * 	-------------------------------------------
-					 * 	[Function]: {cookie.eraseCookie}
+					 * 	[Function]: {cookie.erase}
 					 * 		Parameter: {cookieName} typeof String
 					 * 	-------------------------------------------
-					 * 	[Function]: {cookie.getCookie}
+					 * 	[Function]: {cookie.get}
 					 * 		Parameter: {cookieName} typeof String
 					 * 		Return: cookie's Value
 					 * 	-------------------------------------------
-					 * 	[Function]: {cookie.getCookieIndex}
+					 * 	[Function]: {cookie.getIndex}
 					 * 		Parameter: {cookieName} typeof String
 					 * 		Return: cookie's Index
 					 * 	-------------------------------------------
 					 */
 					var cookie = {
-						setCookie : function(obj){
+						set : function(obj){
 							// SET OBJECT AND DELCARE VARIABLES
 							var obj = obj || {},
 								cookieName = obj.cookieName || '',
@@ -46,15 +50,15 @@
 							document.cookie = cookieName + "=" + escape(cookieValue) + ((expireDate==null) ? "" : "; expireDate = "+exdate.toGMTString());
 							return this;
 						},
-						eraseCookie : function(cookieName){
-							setCookie({
+						erase : function(cookieName){
+							set({
 								cookieName : cookieName,
 								cookieValue : "",
 								expireDate : -1
 							});
 							return this;
 						},
-						getCookie : function(cookieName){
+						get : function(cookieName){
 							var i, x, y, ARRcookies = document.cookie.split(";");
 							for ( i = 0; i < ARRcookies.length; i++) {
 								x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
@@ -66,7 +70,7 @@
 							}
 							return this;
 						},
-						getCookieIndex : function(cookieName){
+						getIndex : function(cookieName){
 							var all_cookies = document.cookie.split( ';' );
 							for(var i=0; i< document.cookie.length; i++){
 								try{
@@ -83,7 +87,6 @@
 							return this;
 						}
 					};
-
 				</pre>
 			</div>
 		</div>
