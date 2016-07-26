@@ -7,8 +7,16 @@
 <link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html">
 <link id="template-scenario-create" rel="import" href="lib/html/template/scenario/scenario.create.html">
 <link id='template-scenario-search-rule' rel="import" href="lib/html/template/scenario/scenario.search.rule.html">
+<link id="template-scenario-create-rule" rel="import" href="lib/html/template/scenario/scenario.create.rule.html">
+<link id="template-scenario-create-filter" rel="import" href="lib/html/template/scenario/scenario.create.filter.html">
 
 <style type="text/css">
+    .template-rule-wrapper, .template-filter-wrapper, .template-add-filter{
+        float: left;
+        width: 100%;
+        margin-top: 15px;
+    }
+
     .modal-header {
         padding: 20px !important;
         border-bottom: 2px solid #e5e5e5;
@@ -566,35 +574,7 @@
         
     </div>
 </div>
-<!-- Add Filter -->
-<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_add_filter">
-    <div class="modal-header">
-      <i class="fa fa-close modal-header-close-icon"></i>
-      <h4 class="modal-title"> Add Filter </h4>
-    </div>
-    <div class="modal-body">
-        
-    </div>
-</div>
-<!-- Edit Filter -->
-<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_edit_filter">
-    <div class="modal-header">
-      <i class="fa fa-close modal-header-close-icon"></i>
-      <h4 class="modal-title"> Edit Filter </h4>
-    </div>
-    <div class="modal-body">
-        
-    </div>
-</div>
 
-<script type="text/javascript">
-    var eventFilterImport = function() {
-        var a = document.querySelector('link[rel="import"]').import;
-        var b = a.querySelector('div.b-matrix');
-        $("#template_filter").empty().append(b.cloneNode(true));
-        $('select.filterselect.select-type').selectpicker().on('changed.bs.select', eventSelectTypeChange);
-    };
-</script>
 
 <!-- Script -->
 <script type="text/javascript" src="lib/plugin/orgChart/jquery.orgchart.js"></script>
