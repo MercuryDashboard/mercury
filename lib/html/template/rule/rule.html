@@ -1,0 +1,56 @@
+<template class="template-rule-main">
+	<style>
+		.template-rule-info-wrapper {
+			padding-top: 15px;
+		}
+	</style>
+	<div class="col-md-12">
+		<!--  -->
+		<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
+			<!-- Create Rule -->
+			<label class="btn">
+		        <input type="radio" name="scenario-create-rule" value='create' checked="">
+		        <i class="fa fa-circle-o"></i>
+		        <i class="fa fa-check-circle-o"></i>
+		        <span>Create Rule</span>
+		    </label>
+		    <!-- Search Rule -->
+		    <label class="btn">
+		        <input type="radio" name="scenario-create-rule" value='search'>
+		        <i class="fa fa-circle-o"></i>
+		        <i class="fa fa-check-circle-o"></i>
+		        <span>Search Existing Rule</span>
+		    </label>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<!-- Template Wrapper -->
+		<div class="rule-info"></div>
+	</div>
+	<script>
+		(function() {
+			// Import Template Rule-Create
+			var createTemplate = document.querySelector("#template-rule-create").import,
+				createContent = createTemplate.querySelector(".template").content;
+			// Import Template Rule-Search
+			var searchTemplate = document.querySelector("#template-rule-search").import,
+				searchContent = searchTemplate.querySelector(".template").content;
+			// Append Template
+            $('.rule-info')
+            	.append(createContent.cloneNode(true))
+            	.append(searchContent.cloneNode(true));
+            // Radio-Button Change Event
+            $("[name='scenario-create-rule']").unbind('change').change(function() {
+				if ($(this).val() === "search") {
+					$('.rule-info').find('.rule-search').attr('active', 'true');
+					$('.rule-info').find('.rule-create').attr('active', 'false');
+				} else if ($(this).val() === "create") {
+					$('.rule-info').find('.rule-search').attr('active', 'false');
+					$('.rule-info').find('.rule-create').attr('active', 'true');
+
+					$("#scenario-new-rule-name").val("Rule-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
+				}
+			});
+		})();
+	</script>
+</template>

@@ -1,7 +1,11 @@
 .panel-group {
   margin-bottom: 18px;
 }
-
+.panel-button-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .panel-group .panel {
   margin-bottom: 0;
   border-radius: 2px;

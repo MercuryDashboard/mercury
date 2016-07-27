@@ -6,8 +6,11 @@
 <link id="template-scenario-wiki" rel="import" href="lib/html/template/scenario/scenario.wiki.html">
 <link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html">
 <link id="template-scenario-create" rel="import" href="lib/html/template/scenario/scenario.create.html">
-<link id='template-scenario-search-rule' rel="import" href="lib/html/template/scenario/scenario.search.rule.html">
-<link id="template-scenario-create-rule" rel="import" href="lib/html/template/scenario/scenario.create.rule.html">
+<!-- Template: Rule -->
+<link id='template-rule' rel="import" href="lib/html/template/rule/rule.html">
+<link id='template-rule-search' rel="import" href="lib/html/template/rule/rule.search.html">
+<link id='template-rule-create' rel="import" href="lib/html/template/rule/rule.create.html">
+
 <link id="template-scenario-create-filter" rel="import" href="lib/html/template/scenario/scenario.create.filter.html">
 
 <style type="text/css">
@@ -478,32 +481,18 @@
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
                                                         Filter Settings
                                                     </a>
+                                                    <div class='panel-button-group'>
+                                                        <!-- Save Changes -->
+                                                        <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveFilter">
+                                                        <i class="zmdi zmdi-check"></i> Save</button>
+                                                        <!-- Cancel Changes -->
+                                                        <button class="btn btn-warning btn-icon-text waves-effect" btn="eventCancelRuleChanges">
+                                                        <i class="zmdi zmdi-block"></i> Cancel</button>
+                                                    </div>
                                                 </h4>
                                             </div>
                                             <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
                                                 <div class="panel-body">
-                                                    <!-- Add New Filter -->
-                                                    <div class="row margin20">
-                                                        <div class="col-md-12">
-                                                            <!-- Filter Name : Automatic generic -->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group fg-float">
-                                                                    <div class="fg-line">
-                                                                        <input id="input_new_filter" type="text" class="input-sm form-control fg-input">
-                                                                        <label class="fg-label">Filter Name</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <!-- Save Changes -->
-                                                                <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveFilter">
-                                                                <i class="zmdi zmdi-check"></i> Save</button>
-                                                                <!-- Cancel Changes -->
-                                                                <button class="btn btn-warning btn-icon-text waves-effect" btn="eventCancelRuleChanges">
-                                                                <i class="zmdi zmdi-block"></i> Cancel</button>
-                                                            </div>
-                                                        </div>                                             
-                                                    </div>
                                                     <div class="row margin20">
                                                         <!-- Filter Template -->
                                                         <div id="template-filter-wrapper" class="col-md-12"></div>

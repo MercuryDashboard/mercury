@@ -26,23 +26,7 @@
 	  	<li>
 	    	Step 2: Rule Settings
 	    	<div class="copy">
-	    		<div class="col-md-12">
-	    			<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
-					    <label class="btn">
-					        <input type="radio" name="scenario-create-rule" value='search'>
-					        <i class="fa fa-circle-o"></i>
-					        <i class="fa fa-check-circle-o"></i>
-					        <span>Search Existing Rule</span>
-					    </label>
-					    <label class="btn">
-					        <input type="radio" name="scenario-create-rule" value='create' checked="">
-					        <i class="fa fa-circle-o"></i>
-					        <i class="fa fa-check-circle-o"></i>
-					        <span>Create Rule</span>
-					    </label>
-					</div>
-	    		</div>
-	    		<div class='template-rule-wrapper'></div>
+	    		<div class='row template-rule-content'></div>
 	    	</div>
 	  	</li>
 	  	<li>
@@ -83,17 +67,7 @@
 		(function() {
 			$('select.select-rule').selectpicker();
 			
-			$("[name='scenario-create-rule']").unbind('change').change(function() {
-				if ($(this).val() === "search") {
-					$('.template-scenario-search-rule').attr('active', 'true');
-					$('.template-scenario-create-rule').attr('active', 'false');
-				} else if ($(this).val() === "create") {
-					$('.template-scenario-search-rule').attr('active', 'false');
-					$('.template-scenario-create-rule').attr('active', 'true');
-
-					$("#scenario-new-rule-name").val("Rule-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
-				}
-			});
+			
 
 		})();
 	</script>

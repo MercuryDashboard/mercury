@@ -1,0 +1,187 @@
+<template class='template'>
+	<style>
+		.rule-search {
+			margin-top: 15px;
+		}
+		.rule-search-result {
+			padding-left: 15px;
+			margin-bottom: 15px;
+		}
+	</style>
+	<div class="row rule-search" active='false'>
+		<!-- Search Criteria -->
+		<div class="col-md-12">
+			<div class="col-md-3">
+				<div class="form-group button-group">
+	                <select class="filterselect bs-select-hidden select-rule" data-live-search="true">
+	                    <option value='ruleName'>Rule Name</option>
+	                    <option value='ruleCategory'>Rule Category</option>
+	                    <option value='ruleType'>Rule Type</option>
+	                </select>
+	            </div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+			        <div class="fg-line">
+			            <input id='scenario-search-rule' type="text" class="input-sm form-control" placeholder="Type something for searching ...">
+			        </div>
+			    </div>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary btn-icon-text waves-effect" btn='eventSearchRule'>
+	            <i class="zmdi zmdi-search"></i> Search Rule</button>
+			</div>
+		</div>
+		<!-- Search Result -->
+		<div class="col-md-12">
+			<div class='rule-search-result'></div>
+		</div>		
+	</div>
+	<script>
+		(function(){
+			/*
+                Auto Complete for Searching Rules
+             */
+            var extratRule = function(o) {
+            	if (!oAutoComplete.hasOwnProperty(o.type)) {
+            		oAutoComplete[o.type] = [];
+            		var aTemp = [];
+            		$.each(scenarioData, function(i,v) {
+			            $.each(v.rules, function(ii, vv) {
+			            	if (vv[o.type].hasOwnProperty('display')) {
+			            		if ($.inArray(vv[o.type].display, aTemp) === -1) {
+			                        aTemp.push(vv[o.type].display);
+			                        oAutoComplete[o.type].push(vv[o.type].display);
+			                    }
+			            	} else {
+			            		if ($.inArray(vv[o.type], aTemp) === -1) {
+			                        aTemp.push(vv[o.type]);
+			                        oAutoComplete[o.type].push(vv[o.type]);
+			                    }
+			            	}			            	
+			            });    
+			        });
+            	}
+            	return oAutoComplete[o.type];
+		    };
+
+            var ruleName = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: extratRule({type: 'ruleName'})
+            });
+
+            var ruleCategory = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: extratRule({type: 'ruleCategory'})
+            });
+
+            var ruleType = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: extratRule({type: 'ruleType'})
+            });
+
+			$('div.rule-search').find('select.select-rule').selectpicker().on('changed.bs.select', function(){
+            	if ($(this).val() === 'ruleName') {
+            		$('#scenario-search-rule').typeahead("destroy").typeahead({
+		                hint: true,
+		                highlight: true,
+		                minLength: 1
+		            },{
+		              name: 'ruleName',
+		              source: ruleName
+		            });
+            	}
+            	if ($(this).val() === 'ruleCategory') {
+            		$('#scenario-search-rule').typeahead("destroy").typeahead({
+		                hint: true,
+		                highlight: true,
+		                minLength: 1
+		            },{
+		              name: 'ruleCategory',
+		              source: ruleCategory
+		            });
+            	}
+            	if ($(this).val() === 'ruleType') {
+            		$('#scenario-search-rule').typeahead("destroy").typeahead({
+		                hint: true,
+		                highlight: true,
+		                minLength: 1
+		            },{
+		              name: 'ruleType',
+		              source: ruleType
+		            });
+            	}
+        	}).trigger('changed.bs.select');
+
+		    var eventSearchRule = function(str) {
+		    	var sRuleCondition = $('div.rule-search').find('select.select-rule option:selected').val(),
+		    		sCriteria = str || '',
+		            aRules = [], aTemp = [];
+
+		        $.each(scenarioData, function(i,v) {
+		            $.each(v.rules, function(ii, vv) {
+		            	if (vv[sRuleCondition].hasOwnProperty('display')) {
+		            		if (sCriteria !== '' && sCriteria == vv[sRuleCondition].display) { 
+			                    aTemp.push(vv[sRuleCondition].display);
+			                    aRules.push(vv);
+			                }
+		            	} else {
+		            		if (sCriteria !== '' && sCriteria == vv.ruleName) { 
+			                    if ($.inArray(vv.ruleName, aTemp) === -1) {
+			                        aTemp.push(vv.ruleName);
+			                        aRules.push(vv);
+			                    }
+			                }
+		            	}
+
+		                if (sCriteria === '') {
+		                    aRules.push(vv);
+		                }     
+		            });    
+		        });
+
+		        $('.rule-search-result').dxDataGrid({
+		            dataSource: aRules,
+		            showRowLines: true,
+		            selection: {
+		                mode: 'multiple',
+		                showCheckBoxesMode: 'always'
+		            },
+		            columns: [{
+		                dataField: 'ruleName',
+		                caption: "Rule Name",
+		                allowResizing: true
+		            }, {
+		                dataField: 'ruleCategory.display',
+		                caption: "Rule Category",
+		                allowResizing: true
+		            }, {
+		                dataField: 'ruleType.display',
+		                caption: 'Rule Type',
+		                allowResizing: true
+		            }, {
+		                dataField: 'action.display',
+		                caption: "Action",
+		                allowResizing: true
+		            }],
+		            pager: {
+		                showPageSizeSelector: true,
+		                allowedPageSizes: [5, 10, 15, 20],
+		                showInfo: true
+		            },
+		            paging: {
+		                pageSize: 15
+		            }
+		        });
+		    };
+
+		    $('.rule-search').find("[btn='eventSearchRule']").unbind('click').click(function() {
+                eventSearchRule($("#scenario-search-rule").val());
+            });
+
+		})();
+	</script>
+</template>
