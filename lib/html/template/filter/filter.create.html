@@ -1,0 +1,25 @@
+<template class="template">
+	<div class="col-md-12">
+		<div class="col-md-3">
+			<div class="form-group fg-float">
+			    <div class="fg-line">
+			        <input id="scenario-new-filter-name" type="text" class="input-sm form-control fg-input">
+			        <label class="fg-label">Filter Name</label>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="filter-create-matrix"></div>
+	</div>
+	<script>
+		(function() {
+			if (!oFilterMatrixTemplate) {
+				var matrixTemplate = document.querySelector("#template-filter-matrix").import;
+				oFilterMatrixTemplate = matrixTemplate.querySelector(".template").cloneNode(true);
+				oFilterMatrix = oFilterMatrixTemplate.content.querySelector('table.b-matrix__table tr').cloneNode(true);
+			}
+			$('.filter-create-matrix').append(oFilterMatrixTemplate.content.cloneNode(true));
+		})();
+	</script>
+</template>

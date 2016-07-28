@@ -1,0 +1,158 @@
+<template class="template">
+	<!-- Template for Adding Filters -->
+	<div class="b-matrix b-matrix_border" data-name="b">
+	    <span class="matrix-name-A">
+	        <!-- Add Rule -->
+	        <button class="btn btn-primary btn-xs waves-effect" btn='eventAddFilter'>
+	            <i class="zmdi zmdi-plus"></i>
+	        </button>
+	    </span>
+	    <span class="matrix-name-B">
+	        Matrix Filter Settings (Click + to add more filters)
+	    </span>
+	    <table class="b-matrix__table b-matrix__table_border">
+	        <tr>
+	            <!-- Type -->
+	            <td class='col-3'>
+	                <div class="form-group button-group">
+	                    <select class="filterselect bs-select-hidden select-type" data-live-search="true">
+	                        <option value='sku'>SKU</option>
+	                        <option value='unit'>Unit &amp; Category</option>
+	                        <option value='case'>Case Quantity</option>
+	                        <option value='daily'>Average Daily Sale</option>
+	                        <option value='promotion'>Promotion</option>
+	                        <option value='area'>Area</option>
+	                        <option value='fc'>FC</option>
+	                        <option value="inventory">Inventory</option>
+	                        <option value='roq'>Raw ROQ</option>
+	                        <option value='fractional'>Fractional Case</option>
+	                        <option value='doc'>DOC</option>
+	                    </select>
+	                </div>
+	            </td>
+	            <!-- Condition -->
+	            <td class='col-condition'>
+	                <div class="form-group button-group">
+	                    <select class="filterselect bs-select-hidden select-condition" data-live-search="true">
+	                        <option value='EQ'>=</option>
+	                        <option value='GT'>></option>
+	                        <option value='LT'><</option>
+	                        <option value='GE'>≥</option>
+	                        <option value='LE'>≤</option>
+	                    </select>
+	                </div>
+	            </td>
+	            <!-- Unit -->
+	            <td class='col-5 col-unit col-hidden'>
+	                <div class="form-group button-group">
+	                    <select class="filterselect bs-select-hidden select-unit" data-live-search="true"></select>
+	                </div>
+	            </td>
+	            <!-- Category -->
+	            <td class='col-5 col-unit col-hidden'>
+	                <div class="form-group button-group">
+	                    <select class="filterselect bs-select-hidden select-category" data-live-search="true"></select>
+	                </div>
+	            </td>
+	            <!-- Value -->
+	            <td class='col-3-value' colspan="2">
+	                <div class="col-md-12">
+	                    <div class="col-md-10">
+	                        <div class="form-group">
+	                            <div class="fg-line">
+	                                <input type="text" class="input-sm form-control fg-input condition_value" placeholder="Condition Value">
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-1 col-3-value-upload">
+	                        <div class="fileinput fileinput-new" data-provides="fileinput">
+	                            <span class="btn btn-primary btn-file waves-effect">
+	                                <span class="fileinput-new">Upload .csv</span>
+	                                <input type="hidden"><input type="file" name="...">
+	                            </span>
+	                            <span class="fileinput-filename"></span>
+	                        </div>
+	                    </div>
+	                </div>               
+	            </td>
+	            <!-- Delete -->
+	            <td class='col-delete col-hidden'>
+	                <div class="form-group fg-float">
+	                    <button class="btn btn-danger btn-xs waves-effect" btn='eventDeleteFilter'>
+	                        <i class="zmdi zmdi-minus"></i>
+	                    </button>
+	                </div>
+	            </td>
+	        </tr>
+	    </table>
+	</div>
+	<script>
+		(function() {
+
+			$('table.b-matrix__table').find('select.filterselect.select-type').selectpicker().on('changed.bs.select', function(){
+		        selectTypeChange($(this));
+		    });
+
+		    $('table.b-matrix__table').find('select.select-condition').selectpicker('refresh');
+
+			$("[btn='eventAddFilter']").unbind('click').click(function() {
+				var $table = $(this).closest('div.b-matrix').find('table.b-matrix__table'),
+					$instance = $(oFilterMatrix.cloneNode(true));
+				$table.append($instance);
+
+				$instance.find('select.filterselect.select-type').selectpicker('refresh').on('changed.bs.select', function(){
+		            selectTypeChange($(this));
+		        });
+
+				$instance.find('select.select-condition').selectpicker('refresh');
+
+				$instance.find('td.col-delete').removeClass('col-hidden').click(function() {
+	                $instance.remove();
+	            });
+			});
+
+			/*
+				Change Event : select-type
+			 */
+			var selectTypeChange = function(o) {
+				var eAnchor = o.closest('tr');
+		        if (o.val() === "unit") {
+		            eAnchor.find('td.col-3').removeClass('col-3').addClass('col-5');
+		            eAnchor.find("td.col-hidden:not('.col-delete')").removeClass('col-hidden');
+		            eAnchor.find('td.col-3-value').addClass('col-hidden');
+		            selectUnitChange(eAnchor);
+		        } else if (o.val() === "sku") {
+		            eAnchor.find('td.col-5').removeClass('col-5').addClass('col-3');
+		            eAnchor.find('td.col-unit').addClass('col-hidden');
+		            eAnchor.find('td.col-3-value').removeClass('col-hidden');
+		            eAnchor.find('div.col-3-value-upload').removeAttr('hidden');
+		        } else {
+		            eAnchor.find('td.col-5').removeClass('col-5').addClass('col-3');
+		            eAnchor.find('td.col-unit').addClass('col-hidden');
+		            eAnchor.find('td.col-3-value').removeClass('col-hidden');
+		            eAnchor.find('div.col-3-value-upload').attr('hidden','hidden');
+		        }
+		    };
+		    /*
+		    	Change Event : select-unit
+		     */
+		    var selectUnitChange = function(container) {
+		        var eOptionAll = $('<option>', {'html' : 'ALL', 'value' : 'ALL'}).data('options', ['All']);
+		        container.find('select.select-unit').empty().append(eOptionAll);
+		        $.each(uc, function(i,v) {
+		            var eOption = $('<option>', {'html' : v.unit, 'value' : v.unit}).data('options', v.categories);
+		            container.find('select.select-unit').append(eOption);
+		        });
+		        container.find('select.select-unit').selectpicker('refresh').on('changed.bs.select', function() {
+		            container.find('select.select-category').empty();
+		            var aOptions = $(this).find('option:selected').data('options').sort();
+		            $.each(aOptions, function(i,v){
+		                var eOption = $('<option>', {'html' : v, 'value' : v});
+		                container.find('select.select-category').append(eOption);
+		            });
+		            container.find('select.select-category').selectpicker('refresh');
+		        }).trigger('changed.bs.select');
+		    };
+		})();
+	</script>
+</template>

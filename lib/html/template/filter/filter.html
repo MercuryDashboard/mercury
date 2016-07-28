@@ -1,3 +1,45 @@
-<template>
-	
+<template class="template-filter-main">
+	<div class="col-md-12">
+		<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
+			<!-- Create Filter -->
+			<label class="btn">
+		        <input type="radio" name="scenario-create-filter" value='create' checked="">
+		        <i class="fa fa-circle-o"></i>
+		        <i class="fa fa-check-circle-o"></i>
+		        <span>Create Filter</span>
+		    </label>
+		    <!-- Search Filter -->
+		    <label class="btn">
+		        <input type="radio" name="scenario-create-filter" value='search'>
+		        <i class="fa fa-circle-o"></i>
+		        <i class="fa fa-check-circle-o"></i>
+		        <span>Search Existing Filter</span>
+		    </label>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<!-- Template Filter -->
+		<div class="filter-info"></div>
+	</div>
+	<script>
+		(function() {
+			
+			if (!oFilterCreateTemplate) {
+				// Import Template Rule-Create
+				var createTemplate = document.querySelector("#template-filter-create").import;
+				oFilterCreateTemplate = createTemplate.querySelector(".template").cloneNode(true);
+			}
+			if (!oFilterSearchTemplate) {
+				var searchTemplate = document.querySelector("#template-filter-search").import;
+				oFilterSearchTemplate = searchTemplate.querySelector(".template").cloneNode(true);
+			}
+			
+			$('.filter-info')
+				.empty()
+				.append(oFilterCreateTemplate.content.cloneNode(true))
+				.append(oFilterSearchTemplate.content.cloneNode(true));
+
+
+		})();
+	</script>
 </template>
