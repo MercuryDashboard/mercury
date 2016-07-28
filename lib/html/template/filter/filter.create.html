@@ -1,5 +1,5 @@
 <template class="template">
-	<div class="col-md-12">
+	<div class="col-md-12 margin-top-15">
 		<div class="col-md-3">
 			<div class="form-group fg-float">
 			    <div class="fg-line">
@@ -9,11 +9,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12 margin-bottom-15">
 		<div class="filter-create-matrix"></div>
 	</div>
 	<script>
 		(function() {
+			$("#scenario-new-filter-name").val("Filter-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
 			if (!oFilterMatrixTemplate) {
 				var matrixTemplate = document.querySelector("#template-filter-matrix").import;
 				oFilterMatrixTemplate = matrixTemplate.querySelector(".template").cloneNode(true);

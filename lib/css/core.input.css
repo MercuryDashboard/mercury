@@ -707,3 +707,19 @@
     .twitter-typeahead .tt-hint {
         color: #818181 !important;
     }
+
+    .dp-label {
+        -webkit-transition: all;
+        -o-transition: all;
+        transition: all;
+        -webkit-transition-duration: 200ms;
+        transition-duration: 200ms;
+        position: absolute;
+        margin-top: -10px;
+        font-weight: 400;
+        color: #959595;
+        pointer-events: none;
+        z-index: 0;
+        white-space: nowrap;
+        font-size: 11px;
+    }

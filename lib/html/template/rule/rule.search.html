@@ -1,18 +1,15 @@
 <template class='template'>
 	<style>
-		.rule-search {
-			margin-top: 15px;
-		}
 		.rule-search-result {
 			padding-left: 15px;
-			margin-bottom: 15px;
 		}
 	</style>
-	<div class="row rule-search" active='false'>
+	<div class="row rule-search margin-top-15 margin-bottom-15" active='false'>
 		<!-- Search Criteria -->
 		<div class="col-md-12">
 			<div class="col-md-3">
 				<div class="form-group button-group">
+					<label class="dp-label">Search By</label>
 	                <select class="filterselect bs-select-hidden select-rule" data-live-search="true">
 	                    <option value='ruleName'>Rule Name</option>
 	                    <option value='ruleCategory'>Rule Category</option>
@@ -23,7 +20,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 			        <div class="fg-line">
-			            <input id='scenario-search-rule' type="text" class="input-sm form-control" placeholder="Type something for searching ...">
+			            <input id='scenario-search-rule' type="text" class="input-sm form-control" placeholder="Type something to search ...">
 			        </div>
 			    </div>
 			</div>

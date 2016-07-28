@@ -1,6 +1,6 @@
 <template class="template">
 	<!-- Template for Adding Filters -->
-	<div class="b-matrix b-matrix_border" data-name="b">
+	<div class="b-matrix b-matrix_border margin-top-15 margin-bottom-15 padding-top-15" data-name="b">
 	    <span class="matrix-name-A">
 	        <!-- Add Rule -->
 	        <button class="btn btn-primary btn-xs waves-effect" btn='eventAddFilter'>
@@ -11,10 +11,11 @@
 	        Matrix Filter Settings (Click + to add more filters)
 	    </span>
 	    <table class="b-matrix__table b-matrix__table_border">
-	        <tr>
+	        <tr class="margin-top-5">
 	            <!-- Type -->
 	            <td class='col-3'>
 	                <div class="form-group button-group">
+	                	<label class="dp-label">Filter Object</label>
 	                    <select class="filterselect bs-select-hidden select-type" data-live-search="true">
 	                        <option value='sku'>SKU</option>
 	                        <option value='unit'>Unit &amp; Category</option>
@@ -33,6 +34,7 @@
 	            <!-- Condition -->
 	            <td class='col-condition'>
 	                <div class="form-group button-group">
+	                	<label class="dp-label">Filter Condition</label>
 	                    <select class="filterselect bs-select-hidden select-condition" data-live-search="true">
 	                        <option value='EQ'>=</option>
 	                        <option value='GT'>></option>
@@ -45,12 +47,14 @@
 	            <!-- Unit -->
 	            <td class='col-5 col-unit col-hidden'>
 	                <div class="form-group button-group">
+	                	<label class="dp-label">Unit</label>
 	                    <select class="filterselect bs-select-hidden select-unit" data-live-search="true"></select>
 	                </div>
 	            </td>
 	            <!-- Category -->
 	            <td class='col-5 col-unit col-hidden'>
 	                <div class="form-group button-group">
+	                	<label class="dp-label">Category</label>
 	                    <select class="filterselect bs-select-hidden select-category" data-live-search="true"></select>
 	                </div>
 	            </td>
