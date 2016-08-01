@@ -1,0 +1,9 @@
+<template class="template" active="false">
+	<div class="col-md-12 margin-top-15 margin-bottom-15"></div>
+</template>
+<script>
+	if (!window.template.hasOwnProperty('searchFilter')) {
+        var $template = document.querySelector('#template-filter-search').import;
+        window.template.searchFilter = $template.querySelector('template').cloneNode(true);
+    }
+</script>

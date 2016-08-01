@@ -1,0 +1,16 @@
+<template class="template">
+	<ul class="steps">
+		<li>
+			<span> {Step Title} </span>
+	    	<input type="checkbox">
+	    	<div class="copy"></div>
+		</li>
+	</ul>
+</template>
+<script>
+	if (!window.template.hasOwnProperty('step')) {
+        var stepTemplate = document.querySelector("#template-step").import;
+        window.template.step = stepTemplate.querySelector(".template").cloneNode(true);
+        window.template.step.li = window.template.step.content.querySelector('li').cloneNode(true);
+    }
+</script>

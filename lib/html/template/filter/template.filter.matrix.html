@@ -11,7 +11,7 @@
 	        Matrix Filter Settings (Click + to add more filters)
 	    </span>
 	    <table class="b-matrix__table b-matrix__table_border">
-	        <tr class="margin-top-5">
+	        <tr>
 	            <!-- Type -->
 	            <td class='col-3'>
 	                <div class="form-group button-group">
@@ -101,7 +101,7 @@
 
 			$("[btn='eventAddFilter']").unbind('click').click(function() {
 				var $table = $(this).closest('div.b-matrix').find('table.b-matrix__table'),
-					$instance = $(oFilterMatrix.cloneNode(true));
+					$instance = $(template.filterMatrix.tr.cloneNode(true));
 				$table.append($instance);
 
 				$instance.find('select.filterselect.select-type').selectpicker('refresh').on('changed.bs.select', function(){
@@ -160,3 +160,10 @@
 		})();
 	</script>
 </template>
+<script>
+	if (!window.template.hasOwnProperty('filterMatrix')) {
+        var $template = document.querySelector('#template-filter-matrix').import;
+        window.template.filterMatrix = $template.querySelector('template').cloneNode(true);
+        window.template.filterMatrix.tr = window.template.filterMatrix.content.querySelector('tr').cloneNode(true);
+    }
+</script>

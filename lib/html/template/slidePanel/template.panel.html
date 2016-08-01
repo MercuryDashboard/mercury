@@ -1,0 +1,24 @@
+<template class="template">
+	<div class="mercury-slide-panel mercury-slide-panel-closed" node="">
+	    <div class="modal-header">
+	      <i class="fa fa-close modal-header-close-icon"></i>
+	      <h4 class="modal-title"> {{Title}} </h4>
+	    </div>
+	    <div class="modal-body">
+	        <div class="row">
+	        	<div class="col-md-12 slide-panel-content"></div>
+	        </div>
+	    </div>    
+	</div>
+	<script>
+        $(".modal-header-close-icon").click(function() {
+            $(this).closest('.mercury-slide-panel').addClass('mercury-slide-panel-closed');
+        });
+    </script>
+</template>
+<script>
+    if (!window.template.hasOwnProperty('slidePanel')) {
+        var panelTemplate = document.querySelector("#template-panel").import;
+        window.template.slidePanel = panelTemplate.querySelector('template').cloneNode(true)
+    }
+</script>

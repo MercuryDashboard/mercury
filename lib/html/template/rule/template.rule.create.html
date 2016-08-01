@@ -48,3 +48,9 @@
 		})();
 	</script>
 </template>
+<script>
+	if (!window.template.hasOwnProperty('createRule')) {
+        var $template = document.querySelector("#template-rule-create").import;
+        window.template.createRule = $template.querySelector('template').cloneNode(true)
+    }
+</script>

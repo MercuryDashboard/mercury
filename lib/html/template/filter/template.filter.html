@@ -22,24 +22,17 @@
 		<div class="filter-info"></div>
 	</div>
 	<script>
-		(function() {
-			
-			if (!oFilterCreateTemplate) {
-				// Import Template Rule-Create
-				var createTemplate = document.querySelector("#template-filter-create").import;
-				oFilterCreateTemplate = createTemplate.querySelector(".template").cloneNode(true);
-			}
-			if (!oFilterSearchTemplate) {
-				var searchTemplate = document.querySelector("#template-filter-search").import;
-				oFilterSearchTemplate = searchTemplate.querySelector(".template").cloneNode(true);
-			}
-			
+		(function() {			
 			$('.filter-info')
 				.empty()
-				.append(oFilterCreateTemplate.content.cloneNode(true))
-				.append(oFilterSearchTemplate.content.cloneNode(true));
-
-
+				.append(template.createFilter.content.cloneNode(true))
+				.append(template.searchFilter.content.cloneNode(true));
 		})();
 	</script>
 </template>
+<script>
+	if (!window.template.hasOwnProperty('filter')) {
+        var $template = document.querySelector('#template-filter').import;
+        window.template.filter = $template.querySelector('template').cloneNode(true);
+    }
+</script>

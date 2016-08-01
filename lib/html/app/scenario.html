@@ -2,19 +2,22 @@
 <link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.light.css">
 <link rel="stylesheet" type="text/css" href="lib/plugin/orgChart/jquery.orgchart.css"">
 <!-- Template: Slide Panel -->
-<link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html">
+<link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html" >
+<link id="template-panel" rel="import" href="lib/html/template/slidePanel/template.panel.html">
 <!-- Template: Scenario -->
 <link id="template-scenario-wiki" rel="import" href="lib/html/template/scenario/scenario.wiki.html">
 <link id="template-scenario-create" rel="import" href="lib/html/template/scenario/scenario.create.html">
 <!-- Template: Rule -->
-<link id='template-rule' rel="import" href="lib/html/template/rule/rule.html">
-<link id='template-rule-search' rel="import" href="lib/html/template/rule/rule.search.html">
-<link id='template-rule-create' rel="import" href="lib/html/template/rule/rule.create.html">
+<link id='template-rule' rel="import" href="lib/html/template/rule/template.rule.html">
+<link id='template-rule-search' rel="import" href="lib/html/template/rule/template.rule.search.html">
+<link id='template-rule-create' rel="import" href="lib/html/template/rule/template.rule.create.html">
 <!-- Template: Filter -->
-<link id="template-filter" rel="import" href="lib/html/template/filter/filter.html">
-<link id="template-filter-search" rel="import" href="lib/html/template/filter/filter.search.html">
-<link id="template-filter-create" rel="import" href="lib/html/template/filter/filter.create.html">
-<link id="template-filter-matrix" rel="import" href="lib/html/template/filter/filter.matrix.html">
+<link id="template-filter" rel="import" href="lib/html/template/filter/template.filter.html">
+<link id="template-filter-search" rel="import" href="lib/html/template/filter/template.filter.search.html">
+<link id="template-filter-create" rel="import" href="lib/html/template/filter/template.filter.create.html">
+<link id="template-filter-matrix" rel="import" href="lib/html/template/filter/template.filter.matrix.html">
+<!-- Template: Filter -->
+<link id="template-step" rel="import" href="lib/html/template/step/template.step.html">
 
 <style type="text/css">
     .template-rule-wrapper, .template-filter-wrapper, .template-add-filter{
@@ -487,10 +490,10 @@
                                                     <div class='panel-button-group'>
                                                         <!-- Save Changes -->
                                                         <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveFilter">
-                                                        <i class="zmdi zmdi-check"></i> Save</button>
+                                                        <i class="zmdi zmdi-check"></i> Save New Added Filters</button>
                                                         <!-- Cancel Changes -->
                                                         <button class="btn btn-warning btn-icon-text waves-effect" btn="eventCancelRuleChanges">
-                                                        <i class="zmdi zmdi-block"></i> Cancel</button>
+                                                        <i class="zmdi zmdi-block"></i> Cancel &amp; Back</button>
                                                     </div>
                                                 </h4>
                                             </div>
@@ -527,46 +530,6 @@
         </div>
     </div>
 </div> 
-<!-- Add Rule -->
-<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_add_rule">
-    <div class="modal-header">
-      <i class="fa fa-close modal-header-close-icon"></i>
-      <h4 class="modal-title"> Add Rule </h4>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class='col-md-4'>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Rule Name</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input id="" type="text" class="input-sm form-control fg-input" disabled>
-                            <label class="fg-label">Scenario Description</label>
-                        </div>
-                    </div>
-                </div>
-            </div>                      
-        </div>
-    </div>
-</div>
-<!-- Edit Rule -->
-<div class="mercury-slide-panel mercury-slide-panel-closed" node="panel_edit_rule">
-    <div class="modal-header">
-      <i class="fa fa-close modal-header-close-icon"></i>
-      <h4 class="modal-title"> Edit Rule </h4>
-    </div>
-    <div class="modal-body">
-        
-    </div>
-</div>
-
 
 <!-- Script -->
 <script type="text/javascript" src="lib/plugin/orgChart/jquery.orgchart.js"></script>

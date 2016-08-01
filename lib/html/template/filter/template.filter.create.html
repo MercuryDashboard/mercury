@@ -15,12 +15,13 @@
 	<script>
 		(function() {
 			$("#scenario-new-filter-name").val("Filter-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
-			if (!oFilterMatrixTemplate) {
-				var matrixTemplate = document.querySelector("#template-filter-matrix").import;
-				oFilterMatrixTemplate = matrixTemplate.querySelector(".template").cloneNode(true);
-				oFilterMatrix = oFilterMatrixTemplate.content.querySelector('table.b-matrix__table tr').cloneNode(true);
-			}
-			$('.filter-create-matrix').append(oFilterMatrixTemplate.content.cloneNode(true));
+			$('.filter-create-matrix').append(template.filterMatrix.content.cloneNode(true));
 		})();
 	</script>
 </template>
+<script>
+	if (!window.template.hasOwnProperty('createFilter')) {
+        var $template = document.querySelector('#template-filter-create').import;
+        window.template.createFilter = $template.querySelector('template').cloneNode(true);
+    }
+</script>

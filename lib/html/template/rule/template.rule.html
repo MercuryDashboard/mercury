@@ -1,4 +1,4 @@
-<template class="template-rule-main">
+<template class="template">
 	<style>
 		.template-rule-info-wrapper {
 			padding-top: 15px;
@@ -28,24 +28,12 @@
 		<div class="rule-info"></div>
 	</div>
 	<script>
-		(function() {
-			if (!oRuleCreateTemplate) {
-				// Import Template Rule-Create
-				var createTemplate = document.querySelector("#template-rule-create").import;
-				oRuleCreateTemplate = createTemplate.querySelector(".template").cloneNode(true);
-			}
-			
-			if (!oRuleSearchTemplate) {
-				// Import Template Rule-Search
-				var searchTemplate = document.querySelector("#template-rule-search").import;
-				oRuleSearchTemplate = searchTemplate.querySelector(".template").cloneNode(true);
-			}
-			
+		(function() {			
 			// Append Template
             $('.rule-info')
             	.empty()
-            	.append(oRuleCreateTemplate.content.cloneNode(true))
-            	.append(oRuleSearchTemplate.content.cloneNode(true));
+            	.append(template.createRule.content.cloneNode(true))
+            	.append(template.searchRule.content.cloneNode(true));
             // Radio-Button Change Event
             $("[name='scenario-create-rule']").unbind('change').change(function() {
 				if ($(this).val() === "search") {
@@ -61,3 +49,9 @@
 		})();
 	</script>
 </template>
+<script>
+	if (!window.template.hasOwnProperty('rule')) {
+        var $template = document.querySelector('#template-rule').import;
+        window.template.rule = $template.querySelector('template').cloneNode(true);
+    }
+</script>
