@@ -4,7 +4,7 @@
 			<div class="col-md-3">
 				<div class="form-group fg-float">
 				    <div class="fg-line">
-				        <input id="scenario-new-rule-name" type="text" class="input-sm form-control fg-input">
+				        <input type="text" class="input-sm form-control fg-input new-rule-name">
 				        <label class="fg-label">Rule Name</label>
 				    </div>
 				</div>
@@ -44,7 +44,8 @@
 	<script>
 		(function() {
 			$('select.create-rule-category, select.create-rule-type, select.create-rule-action').selectpicker();
-			$("#scenario-new-rule-name").val("Rule-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');	
+			$(".new-rule-name").val('');
+			$(".new-rule-name").val("Rule-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');	
 		})();
 	</script>
 </template>

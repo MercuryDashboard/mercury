@@ -1,7 +1,105 @@
 .mercury-slide-panel .modal-body {
-	height: calc(100% - 68px);
+    height: calc(100% - 68px);
 }
 
 .mercury-slide-panel.wiki .modal-body {
-	background: RGBA(0, 58, 97, 1);
+    background: RGBA(0, 58, 97, 1);
+}
+
+.right-corner-ul {
+    position: absolute;
+    right: 70px;
+    top: 19px;
+    list-style: none;
+}
+
+div.mercury-slide-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 285px);
+    height: 100%;
+    z-index: 99;
+    background: #fff;
+    overflow-y: auto;
+    -webkit-transition: -webkit-transform 0.8s ease;
+    -moz-transition: -moz-transform 0.8s ease;
+    -ms-transition: -ms-transform 0.8s ease;
+    -o-transition: -o-transform 0.8s ease;
+    transition: transform 0.8s ease;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+    -moz-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1279px) {
+    div.mercury-slide-panel {
+        width: calc(100% - 55px);
+    }
+}
+
+div.mercury-slide-panel.panel-suspend {
+    position: absolute;
+    top: 0px;
+}
+
+div.mercury-slide-panel.highest {
+    z-index: 1 !important;
+}
+
+div.mercury-slide-panel.panel-opened {
+    -webkit-transition: -webkit-transform 0.4s ease;
+    -webkit-transition-property: transform;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease;
+    -webkit-transition-delay: initial;
+    -moz-transition: -moz-transform 0.4s ease;
+    -ms-transition: -ms-transform 0.4s ease;
+    -o-transition: -o-transform 0.4s ease;
+    transition: transform 0.4s ease;
+    transition-property: transform;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+    transition-delay: initial;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -moz-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0, 0, 0);
+    position: relative;
+}
+
+div.mercury-slide-panel.panel-childopened {
+    -webkit-transform: translate3d(-30%, 0, 0);
+    -moz-transform: translate3d(-30%, 0, 0);
+    -ms-transform: translate3d(-30%, 0, 0);
+    -o-transform: translate3d(-30%, 0, 0);
+    transform: translate3d(-30%, 0, 0);
+    position: absolute;
+}
+
+div.mercury-slide-panel.mercury-slide-panel-closed {
+    -webkit-transition: -webkit-transform 0.8s ease;
+    -webkit-transition-property: transform;
+    -webkit-transition-duration: 0.8s;
+    -webkit-transition-timing-function: ease;
+    -webkit-transition-delay: initial;
+    -moz-transition: -moz-transform 0.8s ease;
+    -ms-transition: -ms-transform 0.8s ease;
+    -o-transition: -o-transform 0.8s ease;
+    transition: transform 0.8s ease;
+    transition-property: transform;
+    transition-duration: 0.8s;
+    transition-timing-function: ease;
+    transition-delay: initial;
+    -webkit-transform: translate3d(101%, 0, 0);
+    -moz-transform: translate3d(101%, 0, 0);
+    -ms-transform: translate3d(101%, 0, 0);
+    -o-transform: translate3d(101%, 0, 0);
+    transform: translate3d(101%, 0, 0);
 }

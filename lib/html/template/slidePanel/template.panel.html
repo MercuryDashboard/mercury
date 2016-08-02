@@ -11,9 +11,11 @@
 	    </div>    
 	</div>
 	<script>
-        $(".modal-header-close-icon").click(function() {
-            $(this).closest('.mercury-slide-panel').addClass('mercury-slide-panel-closed');
-        });
+        (function() {
+        	$(".modal-header-close-icon").unbind('click').click(function() {
+	            $(this).closest('.mercury-slide-panel').addClass('mercury-slide-panel-closed');
+	        });
+        })();
     </script>
 </template>
 <script>

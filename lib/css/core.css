@@ -6,10 +6,7 @@
 @import url('core.icons.css');
 @import url('core.buttons.css');
 @import url('core.actions.css');
-@import url('core.notification.css');
-@import url('notification/sweetalert.css');
 @import url('core.input.css');
-@import url('core.dropdown.css');
 @import url('core.checkbox.css');
 @import url('core.color.css');
 @import url('core.viewGrid.css');
@@ -18,11 +15,16 @@
 @import url('core.matrix.css');
 @import url('core.panel.css');
 @import url('core.step.css');
-@import url('bootstrap-select.css');
-@import url('iconic-font.min.css');
-@import url('font-awesome.min.css');
-@import url('highlight/shCore.css');
-@import url('highlight/shThemeDefault.css');
+@import url('core.overwrite.css');
+
+/* Plugin Styles */
+@import url('../plugin/selectPicker/bootstrap-select.css');
+@import url('../plugin/codeSnippet/shCore.css');
+@import url('../plugin/codeSnippet/shThemeDefault.css');
+@import url('../plugin/fontAwesome/font-awesome.min.css');
+@import url('../plugin/iconicFont/iconic-font.min.css');
+@import url('../plugin/sweetAlert/sweetalert.css');
+
 
 /* Tag Styles */
 
@@ -146,74 +148,7 @@ button, input, optgroup, select, textarea {
     margin: 0;
 }
 
-.overflow-hidden {
-    overflow: hidden !important;
-}
 
-.overflow-x-hidden {
-    overflow-x: hidden !important;
-}
-
-.overflow-y-hidden {
-    overflow-y: hidden !important;
-}
-
-.margin-top-5 {
-    margin-top: 5px !important;
-}
-
-.margin-top-10 {
-    margin-top: 10px !important;
-}
-
-.margin-top-15 {
-    margin-top: 15px !important;
-}
-
-.margin-top-20 {
-    margin-top: 20px !important;
-}
-
-.margin-bottom-5 {
-    margin-bottom: 5px !important;
-}
-
-.margin-bottom-10 {
-    margin-bottom: 10px !important;
-}
-
-.margin-bottom-15 {
-    margin-bottom: 15px !important;
-}
-
-.margin-bottom-20 {
-    margin-bottom: 20px !important;
-}
-
-.padding-top-5 {
-    padding-top: 5px !important;
-}
-.padding-top-10 {
-    padding-top: 10px !important;
-}
-.padding-top-15 {
-    padding-top: 15px !important;
-}
-.padding-top-20 {
-    padding-top: 20px !important;
-}
-.padding-bottom-5 {
-    padding-bottom: 5px !important;
-}
-.padding-bottom-10 {
-    padding-bottom: 10px !important;
-}
-.padding-bottom-15 {
-    padding-bottom: 15px !important;
-}
-.padding-bottom-20 {
-    padding-bottom: 20px !important;
-}
 /*
     Grid Color Shcema
  */

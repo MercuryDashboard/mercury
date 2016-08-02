@@ -3,7 +3,7 @@
 		<div class="col-md-3">
 			<div class="form-group fg-float">
 			    <div class="fg-line">
-			        <input id="scenario-new-filter-name" type="text" class="input-sm form-control fg-input">
+			        <input type="text" class="input-sm form-control fg-input new-filter-name">
 			        <label class="fg-label">Filter Name</label>
 			    </div>
 			</div>
@@ -14,7 +14,10 @@
 	</div>
 	<script>
 		(function() {
-			$("#scenario-new-filter-name").val("Filter-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
+
+			$(".new-filter-name").val("");
+			$(".new-filter-name").val("Filter-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
+
 			$('.filter-create-matrix').append(template.filterMatrix.content.cloneNode(true));
 		})();
 	</script>

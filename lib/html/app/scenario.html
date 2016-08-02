@@ -1,8 +1,7 @@
-<link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.common.css">
-<link rel="stylesheet" type="text/css" href="lib/css/dataGrid/dx.light.css">
+<link rel="stylesheet" type="text/css" href="lib/plugin/dxDataGrid/dx.common.css">
+<link rel="stylesheet" type="text/css" href="lib/plugin/dxDataGrid/dx.light.css">
 <link rel="stylesheet" type="text/css" href="lib/plugin/orgChart/jquery.orgchart.css"">
 <!-- Template: Slide Panel -->
-<link id="template-slide-panel" rel="import" href="lib/html/template/slidePanel/panel.html" >
 <link id="template-panel" rel="import" href="lib/html/template/slidePanel/template.panel.html">
 <!-- Template: Scenario -->
 <link id="template-scenario-wiki" rel="import" href="lib/html/template/scenario/scenario.wiki.html">
@@ -18,329 +17,6 @@
 <link id="template-filter-matrix" rel="import" href="lib/html/template/filter/template.filter.matrix.html">
 <!-- Template: Filter -->
 <link id="template-step" rel="import" href="lib/html/template/step/template.step.html">
-
-<style type="text/css">
-    .template-rule-wrapper, .template-filter-wrapper, .template-add-filter{
-        float: left;
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    .modal-header {
-        padding: 20px !important;
-        border-bottom: 2px solid #e5e5e5;
-    }
-
-    .row.margin20 {
-        margin-top: 20px !important;
-    }
-
-    .modal-header-close-icon {
-        color: #959595;
-        position: absolute;
-        top: 23px;
-        right: 20px;
-        cursor: pointer !important;
-    }
-    .modal-body div.col-md-12, .modal-body div.col-md-6 {
-        padding-left: 0 !important;
-    }
-
-    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
-        color: #333333 !important;
-        text-decoration: none !important;
-        outline: 0 !important;
-        background-color: rgba(0, 0, 0, 0.075) !important;
-    }
-
-    .bootstrap-select .dropdown-toggle:focus {
-      outline: none !important;
-    }
-
-    .bootstrap-select > .btn-default {
-      background: none !important;
-      border-bottom: 2px solid #2196f3 !important;
-      border-radius: 0;
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .bootstrap-select .bs-searchbox {
-      padding: 5px 5px 5px 40px;
-      position: relative;
-      background: #f7f7f7;
-      margin-top: -10px;
-    }
-
-    .bootstrap-select .bs-searchbox:before {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 40px;
-      height: 100%;
-      content: "\f1c3";
-      font-family: 'Material-Design-Iconic-Font';
-      font-size: 25px;
-      padding: 4px 0 0 15px;
-    }
-
-    .bootstrap-select .bs-searchbox input {
-      border: 0;
-      background: transparent;
-    }
-
-    .bootstrap-select.btn-group .dropdown-menu li a.opt {
-      padding-left: 17px;
-    }
-
-    .bootstrap-select .check-mark {
-      margin-top: -5px !important;
-      font-size: 19px;
-      -webkit-transition: all;
-      -o-transition: all;
-      transition: all;
-      -webkit-transition-duration: 200ms;
-      transition-duration: 200ms;
-      -webkit-transform: scale(0);
-      -ms-transform: scale(0);
-      -o-transform: scale(0);
-      transform: scale(0);
-      display: block !important;
-      position: absolute;
-      top: 11px;
-      right: 15px;
-    }
-
-    .bootstrap-select .check-mark:before {
-      content: "\f26b";
-      font-family: 'Material-Design-Iconic-Font';
-    }
-
-    .bootstrap-select .selected .check-mark {
-      -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-      -o-transform: scale(1);
-      transform: scale(1);
-    }
-
-    .bootstrap-select .notify {
-      bottom: 0 !important;
-      margin: 0 !important;
-      width: 100% !important;
-      border: 0 !important;
-      background: #f44336 !important;
-      color: #fff !important;
-      text-align: center;
-    }
-
-    .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-      width: 100%;
-    }
-
-    /*
-        panel
-     */
-    ul.udkmenu, ul.udkmenu ul, ul.udkmenu li {
-        margin: 0;
-        padding: 0;
-    }
-    ul.udkmenu {
-        width: 100%;
-        height: 41px !important;
-        float: left;
-        border-bottom: 1px solid #CCCCCC;
-        background-color: #fff;
-        text-transform: capitalize;
-        color: #767676;
-        overflow: hidden;
-    }
-    ul.udkmenu > li {
-        height: 42px;
-        color: #848484;
-        display: table-cell;
-        font-size: 15px;
-        padding-left: 12px;
-        padding-right: 12px;
-        vertical-align: middle;
-    }
-    ul.udkmenu > li > a {
-        height: 36px;
-        line-height: 36px;
-        text-align: center;
-        text-decoration: none;
-        margin-top: 4px;
-    }
-    ul.udkmenu li {
-        list-style-type: none;
-        float: left;
-        position: relative;
-    }
-    ul.udkmenu > li.selected > a{
-        border-bottom: 4px solid #0096d9;
-        color: #000;
-        margin-top: 1px;
-    }
-    ul.udkmenu a{
-        font-size: 14px;
-        text-decoration: none;
-        float: left;
-        color: #767676;
-    }
-    ul.udkmenu > li > a {
-        font-family: "HPSimplified_Bd","Arial",sans-serif;
-    }
-    ul.udkmenu a {
-        float: left;
-        color: #767676;
-        line-height: 22px;
-        text-transform: capitalize;
-    }
-    ul.udkmenu a:hover {
-        color: #007dba;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    ul.udkmenu li:visited > a {
-        color: #000;
-    }
-    .udkmenu ul:visited > a {
-        color: #000;
-    }
-    .udkmenu ul a:active {
-        background-color: #0096d6;
-    }
-
-
-    div.udkmenu-panel {
-        width: 100%;
-        height: 100%;
-        min-height: 30px;
-        position: fixed;
-        top: 35px;
-        z-index: 1;
-        background: #fff;
-        transition: all .2s ease-in-out;
-        border: 2px solid;
-        border-color: #ccc #ccc #0096D6;
-        border-bottom: 3px solid #0096D6;
-        display: none;
-    }
-    div.udkmenu-panel:before {
-        border-bottom: 8px solid #ccc;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        content: '';
-        position: absolute;
-        left: 10px;
-        top: -9px;
-    }
-    div.udkmenu-panel:after {
-        border-bottom: 8px solid #fff;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        content: '';
-        position: absolute;
-        left: 10px;
-        top: -7px;
-    }
-    div.udkmenu-wrapper{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-
-
-
-    div.mercury-slide-panel {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: calc(100% - 285px);
-        height: 100%;
-        z-index: 99;
-        background: #fff;
-        overflow-y: auto;
-
-        -webkit-transition: -webkit-transform 0.8s ease;
-        -moz-transition: -moz-transform 0.8s ease;
-        -ms-transition: -ms-transform 0.8s ease;
-        -o-transition: -o-transform 0.8s ease;
-        transition: transform 0.8s ease;
-        -webkit-transform: translate3d(0%, 0, 0);
-        -moz-transform: translate3d(0%, 0, 0);
-        -ms-transform: translate3d(0%, 0, 0);
-        -o-transform: translate3d(0%, 0, 0);
-        transform: translate3d(0%, 0, 0);
-
-        -moz-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
-        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3);
-    }
-    @media (max-width: 1279px) {
-        div.mercury-slide-panel {
-            width: calc(100% - 55px);
-        }
-    }
-    
-    div.mercury-slide-panel.udkmenu-suspend{
-        position: absolute;
-        top: 0px;
-    }
-    div.mercury-slide-panel.highest{
-        z-index: 1 !important;
-    }
-    div.mercury-slide-panel.udkmenu-opened {
-        -webkit-transition: -webkit-transform 0.4s ease;
-        -webkit-transition-property: transform;
-        -webkit-transition-duration: 0.4s;
-        -webkit-transition-timing-function: ease;
-        -webkit-transition-delay: initial;
-        -moz-transition: -moz-transform 0.4s ease;
-        -ms-transition: -ms-transform 0.4s ease;
-        -o-transition: -o-transform 0.4s ease;
-        transition: transform 0.4s ease;
-        transition-property: transform;
-        transition-duration: 0.4s;
-        transition-timing-function: ease;
-        transition-delay: initial;
-        -webkit-transform: translate3d(0%, 0, 0);
-        -moz-transform: translate3d(0%, 0, 0);
-        -ms-transform: translate3d(0%, 0, 0);
-        -o-transform: translate3d(0%, 0, 0);
-        transform: translate3d(0, 0, 0);
-        position: relative;
-    }
-    div.mercury-slide-panel.udkmenu-childopened{
-        -webkit-transform: translate3d(-30%, 0, 0);
-        -moz-transform: translate3d(-30%, 0, 0);
-        -ms-transform: translate3d(-30%, 0, 0);
-        -o-transform: translate3d(-30%, 0, 0);
-        transform: translate3d(-30%, 0, 0);
-        position: absolute;
-    }
-    div.mercury-slide-panel.mercury-slide-panel-closed {
-        -webkit-transition: -webkit-transform 0.8s ease;
-        -webkit-transition-property: transform;
-        -webkit-transition-duration: 0.8s;
-        -webkit-transition-timing-function: ease;
-        -webkit-transition-delay: initial;
-        -moz-transition: -moz-transform 0.8s ease;
-        -ms-transition: -ms-transform 0.8s ease;
-        -o-transition: -o-transform 0.8s ease;
-        transition: transform 0.8s ease;
-        transition-property: transform;
-        transition-duration: 0.8s;
-        transition-timing-function: ease;
-        transition-delay: initial;
-        -webkit-transform: translate3d(101%, 0, 0);
-        -moz-transform: translate3d(101%, 0, 0);
-        -ms-transform: translate3d(101%, 0, 0);
-        -o-transform: translate3d(101%, 0, 0);
-        transform: translate3d(101%, 0, 0);     
-    }    
-</style>
-
 
 <div class="container">
     <div class="card">
@@ -367,6 +43,13 @@
     <div class="modal-header">
         <i class="fa fa-close modal-header-close-icon"></i>
         <h4 class="modal-title">Scenario Details</h4>
+        <ul class="right-corner-ul">
+            <li>
+                <!-- Add Rule -->
+                <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddRule">
+                <i class="zmdi zmdi-collection-plus"></i> Add Rule</button>
+            </li>
+        </ul>
     </div>
     <div class="modal-body">
         <!-- Line 1 -->
@@ -445,34 +128,6 @@
                         <div role="tabpanel" class="tab-pane active" id="rules">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-md-4">
-                                        <div class="form-group button-group mercury-dropdown-group">
-                                            <select class="selectpicker bs-select-hidden select-scenario-rules" data-live-search="true"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!-- Edit Rule -->
-                                        <button class="btn btn-primary btn-icon-text waves-effect" btn="eventEditRule">
-                                        <i class="zmdi zmdi-collection-text"></i> Edit Selected Rule</button>
-                                        <!-- Add Rule -->
-                                        <button class="btn btn-primary btn-icon-text waves-effect" btn="eventAddRule">
-                                        <i class="zmdi zmdi-collection-plus"></i> Add Rule</button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <!-- Save Changes -->
-                                        <div style="position: absolute; right: 90px;">
-                                            <button class="btn btn-success btn-icon-text waves-effect" btn="eventSaveRuleChanges">
-                                            <i class="zmdi zmdi-check"></i> Save</button>
-                                        </div>   
-                                        <!-- Cancel Changes -->
-                                        <div style="position: absolute; right: 0px;">
-                                            <button class="btn btn-warning btn-icon-text waves-effect" btn="eventCancelRuleChanges">
-                                            <i class="zmdi zmdi-block"></i> Cancel</button>
-                                        </div>                                   
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <p class="m-b-25 m-t-25 c-black f-500">Existing Rules</p>
                                     <div id="div_scenario_rules"></div>
                                 </div>
                             </div>
@@ -499,7 +154,7 @@
                                             </div>
                                             <div id="collapseOne" class="collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
                                                 <div class="panel-body">
-                                                    <div class="row margin20">
+                                                    <div class="row margin-top-20">
                                                         <!-- Filter Template -->
                                                         <div id="template-filter-wrapper" class="col-md-12"></div>
                                                     </div>
@@ -531,8 +186,11 @@
     </div>
 </div> 
 
-<!-- Script -->
+<!-- Plugin Import : dxDataGrid -->
+<script type="text/javascript" src="lib/plugin/dxDataGrid/dx.all.js"></script>
+<script type="text/javascript" src="lib/plugin/jsZip/jszip.js"></script>
+<!-- Plugin Import : Org Chart -->
 <script type="text/javascript" src="lib/plugin/orgChart/jquery.orgchart.js"></script>
-<script type="text/javascript" src="lib/js/dataGrid/jszip.js"></script>
-<script type="text/javascript" src="lib/js/dataGrid/index.js"></script>
+<!-- Controller Script -->
+<script type="text/javascript" src="lib/js/controller/scenario.controller.js"></script>
 <script type="text/javascript" src="lib/core.input.js"></script>

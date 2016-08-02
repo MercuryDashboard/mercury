@@ -72,7 +72,7 @@
 	                        <div class="fileinput fileinput-new" data-provides="fileinput">
 	                            <span class="btn btn-primary btn-file waves-effect">
 	                                <span class="fileinput-new">Upload .csv</span>
-	                                <input type="hidden"><input type="file" name="...">
+	                                <input type="hidden"><input type="file" class='matrix-upload' name="...">
 	                            </span>
 	                            <span class="fileinput-filename"></span>
 	                        </div>
@@ -157,6 +157,50 @@
 		            container.find('select.select-category').selectpicker('refresh');
 		        }).trigger('changed.bs.select');
 		    };
+
+		    $(".matrix-upload").change(function(e) {
+		    	var $this = $(this);
+	        	// Get file extension
+	            var sExtension = $(this).val().split(".").pop().toLowerCase();
+	            // Identify if extension equals to .csv
+	            if ($.inArray(sExtension, ["csv"]) == -1) { // Not the .csv file
+	                sweetAlert("File Type Error", "Please upload the .csv file!", "error");
+	                return false;
+	            }
+	            if (e.target.files != undefined) {
+	            	// Open FileReader
+	                var reader = new FileReader();
+	                // Load file
+	                reader.onload = function(e) {
+	                	// Remove "Enter" symbol. Return Array Object.
+	                    var aFileArray = e.target.result.split("\n");
+	                    // Column Length
+	                    var iColumnLength = aFileArray[0].split(",").length;
+	                    // Result value
+	                    var sResult = "";
+	                    // File Array Length
+	                    var iFileArrayLength = aFileArray.length;
+	                    // Loop aFileArray
+	                    for (var i = 0; i < iFileArrayLength; i++) {
+	                    	// Array of each line, split via ","
+	                        var aLineArray = aFileArray[i].split(",");
+	                        // Line Array Length
+	                        var iLineArrayLength = aLineArray.length;
+	                        // Loop aLineArray
+	                        for (var j = 0; j < iLineArrayLength; j++) {
+	                            if ( (i+j) === (iFileArrayLength + iLineArrayLength - 2) ) {
+	                                sResult += aLineArray[j];
+	                            } else {
+	                                sResult += aLineArray[j] + ",";
+	                            }
+	                        }
+	                    }
+	                    $this.closest('td.col-3-value').find('.condition_value').val(sResult);
+	                };
+	                reader.readAsText(e.target.files.item(0));
+	            }
+	            $this.val("");
+	        });
 		})();
 	</script>
 </template>
