@@ -1,4 +1,4 @@
-<template class="template">
+<template>
 	<!-- Template for Adding Filters -->
 	<div class="b-matrix b-matrix_border margin-top-15 margin-bottom-15 padding-top-15" data-name="b">
 	    <span class="matrix-name-A">
@@ -10,7 +10,8 @@
 	    <span class="matrix-name-B">
 	        Matrix Filter Settings (Click + to add more filters)
 	    </span>
-	    <table class="b-matrix__table b-matrix__table_border">
+	    <input type="hidden" name="" value="1">
+	    <table class="b-matrix__table b-matrix__table_border" class='abc'>
 	        <tr>
 	            <!-- Type -->
 	            <td class='col-3'>
@@ -92,17 +93,42 @@
 	</div>
 	<script>
 		(function() {
+			var oFilterObject = function() {
+				return {
+					"condition": {
+	                    "code": "",
+	                    "display": ""
+	                },
+	                "object": {
+	                    "code": "",
+	                    "display": ""
+	                },
+	                "value": ""
+				}
+			};
+
+			var that;
+
+			if (!$('table.b-matrix__table').data('filters')) {
+
+			}
 
 			$('table.b-matrix__table').find('select.filterselect.select-type').selectpicker().on('changed.bs.select', function(){
 		        selectTypeChange($(this));
+		    });
+
+		    $('table.b-matrix__table').prev().on('click', function() {
+
 		    });
 
 		    $('table.b-matrix__table').find('select.select-condition').selectpicker('refresh');
 
 			$("[btn='eventAddFilter']").unbind('click').click(function() {
 				var $table = $(this).closest('div.b-matrix').find('table.b-matrix__table'),
-					$instance = $(template.filterMatrix.tr.cloneNode(true));
+					$instance = $(template.filterMatrix.tr.cloneNode(true)),
+					$rowNumber = $table.prev();
 				$table.append($instance);
+				$rowNumber.val(Number($rowNumber.val())+1).trigger('click');
 
 				$instance.find('select.filterselect.select-type').selectpicker('refresh').on('changed.bs.select', function(){
 		            selectTypeChange($(this));
@@ -112,6 +138,7 @@
 
 				$instance.find('td.col-delete').removeClass('col-hidden').click(function() {
 	                $instance.remove();
+	                $rowNumber.val(Number($rowNumber.val())-1).trigger('click');
 	            });
 			});
 

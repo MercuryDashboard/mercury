@@ -1,0 +1,189 @@
+<template>
+	<div class="col-md-12"></div>
+	<script>
+
+		var oFilterObject = function() {
+			return {
+				"condition": {
+                    "code": "",
+                    "display": ""
+                },
+                "object": {
+                    "code": "",
+                    "display": ""
+                },
+                "value": ""
+			}
+		};
+
+		var oFilter = function() {
+			return {
+				_id: {
+		            "$oid": ""
+		        },
+		        author: "",
+		        filterName: "",
+		        guid: "",
+		        lastEditUser: "",
+		        lastUpdateTime: {
+		            $date: ""
+		        },
+		        objects: []
+			}
+		};
+
+		var oRule = function() {
+			return {
+				"active": true,
+                "filterRef": "",
+                "ruleName": "",
+                "ruleCategory": {
+                    "display": "",
+                    "value": ""
+                },
+                "ruleType": {
+                    "display": "",
+                    "value": ""
+                },
+                "action": {
+                    "display": "",
+                    "value": ""
+                },
+                "defaultCriticalRatio": "",
+                "minTargetInv": "",
+                "criticalRatio": "",
+                "horizonAdjust": ""
+			}
+		};
+
+		var oScenario = function() {
+			return {
+				"_id": {
+		            "$oid": ""
+		        },
+		        "guid": "",
+		        "lastEditUser": "",
+		        "lastUpdateTime": {
+		            "$date": ""
+		        },
+		        "author": "",
+		        "scenarioName": "",
+		        "scenarioDesc": "",
+		        "production": false,
+		        "rules": []
+			}
+		};
+
+		var MatrixEditor = (function() {
+			var o = {};
+
+			o.init = function() {
+				// Generate Object-Structure
+				this.scenario = oScenario();
+				this.rule = oRule();
+				this.filter = oFilter();
+				this.filterObj = oFilterObject();
+				// Declare Scenario Info
+				this.parent = $(".mercury-slide-panel:not('.mercury-slide-panel-closed')");
+				this.scenarioName = this.parent.find('.scenario-name-new');
+				this.scenarioDesc = this.parent.find('.scenario-desc-new');
+
+				// Declare Rule Info
+				this.ruleRole = this.parent.find("[name='scenario-create-rule']:checked").val();
+				this.ruleName = this.parent.find('input.new-rule-name');
+				this.ruleCategory = this.parent.find('select.create-rule-category');
+				this.ruleType = this.parent.find('select.create-rule-type');
+				this.ruleAction = this.parent.find('select.create-rule-action');
+					//
+					this.rule.ruleName = this.ruleName.val();
+
+					this.rule.ruleCategory.display = this.ruleCategory.find("option:selected").text();
+					this.rule.ruleCategory.value = this.ruleCategory.find("option:selected").val();
+
+					this.rule.ruleType.display = this.ruleType.find("option:selected").text();
+					this.rule.ruleType.value = this.ruleType.find("option:selected").val();
+
+					this.rule.action.display = this.ruleAction.find("option:selected").text();
+					this.rule.action.value = this.ruleAction.find("option:selected").val();
+
+				// Declare Filter Info
+				this.filterRole = this.parent.find("[name='scenario-create-filter']:checked").val();
+				this.filterName = this.parent.find('input.new-filter-name');
+				this.filterList = this.parent.find('table.b-matrix__table');
+					// 
+					this.filter = this.filterName.val();
+
+				this.binding();
+			};
+
+			o.binding = function() {
+				if (this.ruleRole === "create") {
+					this.ruleName.keyup(this.ruleNameChange);
+					this.ruleCategory.on('changed.bs.select', this.ruleCategoryChange);
+					this.ruleType.on('changed.bs.select', this.ruleTypeChange);
+					this.ruleAction.on('changed.bs.select', this.ruleActionChange);
+				} else {
+					// to be continued ...
+				}
+
+				if (this.filterRole === "create") {
+					this.filterName.keyup(this.filterNameChange);
+
+					$.each(this.filterList.find('tr'), function() {
+						
+					});
+				} else {
+					// to be continued ...
+				}
+
+			};
+
+			o.ruleNameChange = function() {
+				o.rule.ruleName = $(this).val();
+			};
+
+			o.ruleCategoryChange = function() {
+				o.rule.ruleCategory.display = $(this).find("option:selected").text();
+				o.rule.ruleCategory.value = $(this).find("option:selected").val();
+			};
+
+			o.ruleTypeChange = function() {
+				o.rule.ruleType.display = $(this).find("option:selected").text();
+				o.rule.ruleType.value = $(this).find("option:selected").val();
+			};
+
+			o.ruleActionChange = function() {
+				o.rule.action.display = $(this).find("option:selected").text();
+				o.rule.action.value = $(this).find("option:selected").val();
+			};
+
+			o.filterNameChange = function() {
+				o.filter.filterName = $(this).val();
+			};
+
+			o.JSON = function(){
+			    // replace brackets with entities
+			    // this.content = this.content.replace(/<|>/g, function(chr){
+			    //     return chr == "<" ? "&lt;" : "&gt;";
+			    // });
+			    //  // replace newline char with nothing
+			    // this.content = this.content.replace(/\n/g, "");
+			    // return JSON.stringify(this.makePost.call(this), null, " ");
+			  };
+
+			o.post = function() {
+				return o.rule;
+			};
+
+			return o;
+		})();
+
+		MatrixEditor.init();
+	</script>
+</template>
+<script>
+	if (!window.template.hasOwnProperty('result')) {
+        var $template = document.querySelector('#template-matrix-result').import;
+        window.template.result = $template.querySelector('template').cloneNode(true);
+    }
+</script>
