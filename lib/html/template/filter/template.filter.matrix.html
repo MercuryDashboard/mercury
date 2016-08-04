@@ -168,7 +168,7 @@
 		    	$.each(t.find('tr'), function(i, v) {
 		    		aData.push($(this).data('filter'));
 		    	});
-		    	t.data('filters', aData);
+		    	return t.data('filters', aData);
 		    };
 
 			$.each($('table.b-matrix__table'), function(i, v) {

@@ -1,66 +1,69 @@
-<div class='scenario-create-wrapper'>
-	<ul class="steps">
-		<li>
-	    	<span>Step 1: Scenario Settings</span>
-	    	<input type="checkbox">
-	    	<div class="copy">
-	    		<div class="col-md-12">
-					<div class="col-md-3">
-						<div class="form-group fg-float">
-					        <div class="fg-line">
-					            <input type="text" class="input-sm form-control fg-input scenario-name-new">
-					            <label class="fg-label">Scenario Name</label>
-					        </div>
-					    </div>
+<template>
+	<div class='scenario-create-wrapper'>
+		<ul class="steps">
+			<li>
+		    	<span>Step 1: Scenario Settings</span>
+		    	<input type="checkbox">
+		    	<div class="copy">
+		    		<div class="col-md-12">
+						<div class="col-md-3">
+							<div class="form-group fg-float">
+						        <div class="fg-line">
+						            <input type="text" class="input-sm form-control fg-input scenario-name-new">
+						            <label class="fg-label">Scenario Name</label>
+						        </div>
+						    </div>
+						</div>
+						<div class="col-md-8">
+							<div class="form-group fg-float">
+						        <div class="fg-line">
+						            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
+						            <label class="fg-label">Scenario Description</label>
+						        </div>
+						    </div>
+						</div>		
 					</div>
-					<div class="col-md-8">
-						<div class="form-group fg-float">
-					        <div class="fg-line">
-					            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
-					            <label class="fg-label">Scenario Description</label>
-					        </div>
-					    </div>
-					</div>		
-				</div>
-	    	</div>
-	  	</li>
-	  	<li>
-	    	<span>
-	    		Step 2: Rule Settings
-	    			<button class="btn btn-success btn-xs btn-icon-text waves-effect" btn="eventSaveRuleFilters">
-                	<i class="zmdi zmdi-collection-plus"></i> Save this Rule with below Filters</button>
-	    	</span>
-	    	<input type="checkbox">
-	    	<div class="copy">
-	    		<div class='row template-rule-content'></div>
-	    	</div>
-	  	</li>
-	  	<li>
-	  		<span>
-	  			Step 3: Filter Settings
-	  		</span>
-	  		<input type="checkbox">
-	  		<div class="copy">
-	  			<div class="row template-filter-content"></div>
-	  		</div>
-	  	</li>
-	  	<li>
-	  		Step 4: Reivew &amp; Save
-	  		<input type="checkbox">
-	  		<div class="copy">
-	  			<div class="row template-result-content"></div>
-	  		</div>
-	  	</li>
-	</ul>
-	
-	
-
+		    	</div>
+		  	</li>
+		  	<li>
+		    	<span>
+		    		Step 2: Rule Settings
+		    			<button class="btn btn-success btn-xs btn-icon-text waves-effect" btn="eventSaveRuleFilters">
+	                	<i class="zmdi zmdi-collection-plus"></i> Save this Rule with below Filters</button>
+		    	</span>
+		    	<input type="checkbox">
+		    	<div class="copy">
+		    		<div class='row template-rule-content'></div>
+		    	</div>
+		  	</li>
+		  	<li>
+		  		<span>
+		  			Step 3: Filter Settings
+		  		</span>
+		  		<input type="checkbox">
+		  		<div class="copy">
+		  			<div class="row template-filter-content"></div>
+		  		</div>
+		  	</li>
+		  	<li>
+		  		Step 4: Reivew &amp; Save
+		  		<input type="checkbox">
+		  		<div class="copy">
+		  			<div class="row template-result-content"></div>
+		  		</div>
+		  	</li>
+		</ul>		
+	</div>
 	<script type="text/javascript">
 		(function() {
 			$('select.select-rule').selectpicker();
 		})();
 	</script>
-</div>
-
-
+</template>
+<script>
+	if (!window.template.hasOwnProperty('scenario')) {
+        var $template = document.querySelector('#template-scenario-create').import;
+        window.template.scenario = $template.querySelector('template').cloneNode(true);
+    }
+</script>
 

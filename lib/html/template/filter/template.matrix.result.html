@@ -2,22 +2,7 @@
 	<div class="col-md-12">
 		<div class='matrix-result-preview'></div>
 	</div>
-	<script>
-
-		var oFilterObject = function() {
-			return {
-				"condition": {
-                    "code": "",
-                    "display": ""
-                },
-                "object": {
-                    "code": "",
-                    "display": ""
-                },
-                "value": ""
-			}
-		};
-
+	<script async>
 		var oFilter = function() {
 			return {
 				_id: {
@@ -85,9 +70,8 @@
 				this.rule = oRule();
 				this.filter = oFilter();
 				// Declare Scenario Info
-				this.parent = $(".mercury-slide-panel:not('.mercury-slide-panel-closed')");
+				this.parent = $("[node='scenario-create-panel']");
 				this.saveRules = this.parent.find("[btn='eventSaveRuleFilters']");
-				console.log(this.saveRules);
 
 				this.scenarioName = this.parent.find('input.scenario-name-new');
 					this.scenario.scenarioName = this.scenarioName.val();
@@ -118,9 +102,14 @@
 				// Declare Filter Info
 				this.filterRole = this.parent.find("[name='scenario-create-filter']:checked").val();
 				this.filterName = this.parent.find('input.new-filter-name');
-				this.filterList = this.parent.find('table.b-matrix__table');
 					// 
 					this.filter.filterName = this.filterName.val();
+				this.filterList = this.parent.find('table.b-matrix__table');
+					//
+					this.filter.lastUpdateTime.$date = new Date().valueOf();
+					this.filter.author = "Xi, Jie";
+					this.filter.lastEditUser = "Xi, Jie";
+					
 
 				this.binding();
 				this.render();
@@ -144,15 +133,14 @@
 				if (this.filterRole === "create") {
 					this.filterName.on('keyup paste blur', o.filterNameChange);
 					this.filterList.on('paste', o.filterListChange);
-
 				} else {
 					// to be continued ...
 				}
 
-				this.saveRules.on('click', function(e) {
-					e.stopPropagation();
-					console.log(e);
-				});
+				// this.saveRules.on('click', function() {
+					
+				// });
+				this.filterList.trigger('paste');
 			};
 
 			o.scenarioNameChange = function() {
@@ -169,29 +157,49 @@
 
 			o.ruleNameChange = function() {
 				o.rule.ruleName = $(this).val();
+				o.ruleInstance.refresh();
 			};
 
 			o.ruleCategoryChange = function() {
 				o.rule.ruleCategory.display = $(this).find("option:selected").text();
 				o.rule.ruleCategory.value = $(this).find("option:selected").val();
+				o.ruleInstance.refresh();
 			};
 
 			o.ruleTypeChange = function() {
 				o.rule.ruleType.display = $(this).find("option:selected").text();
 				o.rule.ruleType.value = $(this).find("option:selected").val();
+				o.ruleInstance.refresh();
 			};
 
 			o.ruleActionChange = function() {
 				o.rule.action.display = $(this).find("option:selected").text();
 				o.rule.action.value = $(this).find("option:selected").val();
+				o.ruleInstance.refresh();
 			};
 
 			o.filterNameChange = function() {
 				o.filter.filterName = $(this).val();
+				o.filterInstance.refresh();
 			};
 
 			o.filterListChange = function() {
 				o.filter.objects = $(this).data('filters');
+				o.filters = $(this).data('filters');
+
+				$.each(o.filters, function(i,v) {
+					v.filterName = o.filter.filterName;
+					v.author = o.filter.author;
+                    v.lastEditUser = o.filter.lastEditUser;
+                    v.lastUpdateTime = o.filter.lastUpdateTime.$date; 
+				});
+
+				if (o.hasOwnProperty('filterInstance')) {
+					o.filterInstance.option({
+						dataSource: o.filters
+					});
+					o.filterInstance.refresh();
+				}
 			};
 
 			o.render = function() {
@@ -233,15 +241,132 @@
 			        }],
 			        masterDetail: {
 			            enabled: true,
-			            template: function(container, options) {
-			                //masterDetailScenario(container, options);
+			            template: function(container) {
+			            	$('<div>', {'class' : 'matrix-result-rule'}).appendTo(container);
+			                o.renderRule();
 			            }
 			        }
 			    }).dxDataGrid('instance');
 			};
 
 			o.renderRule = function() {
+				o.ruleInstance = $('.matrix-result-rule').dxDataGrid({
+	                dataSource: [o.rule],
+	                columnAutoWidth: true,
+	                showRowLines: true,
+	                allowColumnReordering: true,
+	                columnAutoWidth: true,
+	                filterRow: {
+	                    visible: true,
+	                    applyFilter: "auto"
+	                },
+	                columns: [{
+	                    dataField: "ruleName",
+	                    caption: 'Rule Name',
+	                    allowResizing: true
+	                }, {
+	                    dataField: "ruleCategory.display",
+	                    caption: "Rule Category",
+	                    allowResizing: true
+	                }, {
+	                    dataField: "ruleType.display",
+	                    caption: "Rule Type",
+	                    allowResizing: true
+	                }, {
+	                    dataField: "action.display",
+	                    caption: "Action",
+	                    allowResizing: true
+	                }, {
+	                    caption: "Active",
+	                    dataType: "boolean",
+	                    width: 80,
+	                    calculateCellValue: function(rowData) {
+	                        return rowData.active == true;
+	                    }
+	                }],masterDetail: {
+	                    enabled: true,
+	                    template: function(container) {
+	                        $('<div>', {'class' : 'matrix-result-filter'}).appendTo(container);
+	                        o.renderFilter();
+	                    }
+	                }
+	            }).dxDataGrid('instance');
+			};
 
+			o.renderFilter = function() {
+				o.filterInstance = $('.matrix-result-filter').dxDataGrid({
+		            dataSource : o.filters,
+		            showRowLines: true,
+		            allowColumnReordering: true,
+		            wordWrapEnabled: true,
+		            columns: [{
+		                    dataField: "filterName",
+		                    caption: "Filter Name",
+		                    groupIndex: 0
+		                }, {
+		                    dataField: "author",
+		                    caption: "Author",
+		                    visible: false
+		                }, {
+		                    dataField: "lastEditUser",
+		                    caption: "Last Editor",
+		                    visible: false
+		                }, {
+		                    dataField: "lastUpdateTime",
+		                    caption: "Last Update Time",
+		                    dateType: "date",
+		                    visible: false,
+		                    cellTemplate: function(container, options){
+		                        var oDate = new Date(Number(options.data.lastUpdateTime));
+		                        container.append((oDate.getMonth() + 1) +"/"+oDate.getDate()+ '/' + oDate.getFullYear());
+		                    }
+		                }, {
+		                    caption: "Condition Name",
+		                    dataField: "object.display",
+		                    alignment: "left"
+		                }, {
+		                    dataField: "condition.code",
+		                    alignment: "center",
+		                    caption: "Condition",
+		                    customizeText: function(cellInfo) {
+		                        switch (cellInfo.value) {
+		                            case "EQ":
+		                                return "=";
+		                                break;
+		                            case "GE":
+		                                return "≥";
+		                                break;
+		                            case "LE":
+		                                return "≤";
+		                                break;
+		                            case "LT":
+		                                return "<";
+		                                break;
+		                            case "GT": 
+		                                return ">";
+		                                break;
+		                        }
+		                    }
+		                }, {
+		                    dataField: "value",
+		                    alignment: "left",
+		                    caption: "Value"
+		                }
+		            ],
+		            sortByGroupSummaryInfo: [{
+		                summaryItem: "count"
+		            }],
+		            summary: {
+		                groupItems: [{
+		                    column: "object.display",
+		                    summaryType: "count",
+		                    displayFormat: "{0} conditions",
+		                }]
+		            },
+		            // onInitNewRow: function(e){
+		            // 	e.data = o.filters.pop();
+		            // }
+		        }).dxDataGrid('instance');
 			};
 
 			return o;
