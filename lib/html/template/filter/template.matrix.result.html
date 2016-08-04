@@ -1,5 +1,7 @@
 <template>
-	<div class="col-md-12"></div>
+	<div class="col-md-12">
+		<div class='matrix-result-preview'></div>
+	</div>
 	<script>
 
 		var oFilterObject = function() {
@@ -82,26 +84,33 @@
 				this.scenario = oScenario();
 				this.rule = oRule();
 				this.filter = oFilter();
-				this.filterObj = oFilterObject();
 				// Declare Scenario Info
 				this.parent = $(".mercury-slide-panel:not('.mercury-slide-panel-closed')");
-				this.scenarioName = this.parent.find('.scenario-name-new');
-				this.scenarioDesc = this.parent.find('.scenario-desc-new');
+				this.saveRules = this.parent.find("[btn='eventSaveRuleFilters']");
+				console.log(this.saveRules);
+
+				this.scenarioName = this.parent.find('input.scenario-name-new');
+					this.scenario.scenarioName = this.scenarioName.val();
+				this.scenarioDesc = this.parent.find('input.scenario-desc-new');
+					this.scenario.scenarioDesc = this.scenarioDesc.val();
+					this.scenario.author = "Xi, Jie";
+					this.scenario.lastEditUser = "Xi, Jie";
+					this.scenario.lastUpdateTime.$date = new Date().valueOf();
 
 				// Declare Rule Info
 				this.ruleRole = this.parent.find("[name='scenario-create-rule']:checked").val();
 				this.ruleName = this.parent.find('input.new-rule-name');
-				this.ruleCategory = this.parent.find('select.create-rule-category');
-				this.ruleType = this.parent.find('select.create-rule-type');
-				this.ruleAction = this.parent.find('select.create-rule-action');
 					//
 					this.rule.ruleName = this.ruleName.val();
+				this.ruleCategory = this.parent.find('select.create-rule-category');
 
 					this.rule.ruleCategory.display = this.ruleCategory.find("option:selected").text();
 					this.rule.ruleCategory.value = this.ruleCategory.find("option:selected").val();
+				this.ruleType = this.parent.find('select.create-rule-type');
 
 					this.rule.ruleType.display = this.ruleType.find("option:selected").text();
 					this.rule.ruleType.value = this.ruleType.find("option:selected").val();
+				this.ruleAction = this.parent.find('select.create-rule-action');
 
 					this.rule.action.display = this.ruleAction.find("option:selected").text();
 					this.rule.action.value = this.ruleAction.find("option:selected").val();
@@ -111,31 +120,51 @@
 				this.filterName = this.parent.find('input.new-filter-name');
 				this.filterList = this.parent.find('table.b-matrix__table');
 					// 
-					this.filter = this.filterName.val();
+					this.filter.filterName = this.filterName.val();
 
 				this.binding();
+				this.render();
 			};
 
 			o.binding = function() {
+
+				this.scenarioName.on('keyup paste blur', o.scenarioNameChange);
+
+				this.scenarioDesc.on('keyup paste blur', o.scenarioDescChange);
+
 				if (this.ruleRole === "create") {
-					this.ruleName.keyup(this.ruleNameChange);
-					this.ruleCategory.on('changed.bs.select', this.ruleCategoryChange);
-					this.ruleType.on('changed.bs.select', this.ruleTypeChange);
-					this.ruleAction.on('changed.bs.select', this.ruleActionChange);
+					this.ruleName.on('keyup paste blur', o.ruleNameChange);
+					this.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
+					this.ruleType.on('changed.bs.select', o.ruleTypeChange);
+					this.ruleAction.on('changed.bs.select', o.ruleActionChange);
 				} else {
 					// to be continued ...
 				}
 
 				if (this.filterRole === "create") {
-					this.filterName.keyup(this.filterNameChange);
+					this.filterName.on('keyup paste blur', o.filterNameChange);
+					this.filterList.on('paste', o.filterListChange);
 
-					$.each(this.filterList.find('tr'), function() {
-						
-					});
 				} else {
 					// to be continued ...
 				}
 
+				this.saveRules.on('click', function(e) {
+					e.stopPropagation();
+					console.log(e);
+				});
+			};
+
+			o.scenarioNameChange = function() {
+				o.scenario.scenarioName = $(this).val();
+				o.scenario.lastUpdateTime.$date = new Date().valueOf();
+				o.scenarioInstance.refresh();
+			};
+
+			o.scenarioDescChange = function() {
+				o.scenario.scenarioDesc = $(this).val();
+				o.scenario.lastUpdateTime.$date = new Date().valueOf();
+				o.scenarioInstance.refresh();
 			};
 
 			o.ruleNameChange = function() {
@@ -161,24 +190,64 @@
 				o.filter.filterName = $(this).val();
 			};
 
-			o.JSON = function(){
-			    // replace brackets with entities
-			    // this.content = this.content.replace(/<|>/g, function(chr){
-			    //     return chr == "<" ? "&lt;" : "&gt;";
-			    // });
-			    //  // replace newline char with nothing
-			    // this.content = this.content.replace(/\n/g, "");
-			    // return JSON.stringify(this.makePost.call(this), null, " ");
-			  };
+			o.filterListChange = function() {
+				o.filter.objects = $(this).data('filters');
+			};
 
-			o.post = function() {
-				return o.rule;
+			o.render = function() {
+				o.scenarioInstance = $('.matrix-result-preview').dxDataGrid({
+			        dataSource: [o.scenario],
+			        filterRow: {
+			            visible: true,
+			            applyFilter: "auto"
+			        },
+			        allowColumnReordering: true,
+			        sorting: { 
+			            mode: 'multiple' 
+			        },
+			        showRowLines: true,
+			        columns: [{
+			            dataField: 'scenarioName',
+			            caption: "Scenario Name",
+			            allowResizing: true
+			        }, {
+			            dataField: 'author',
+			            caption: "Author",
+			            allowResizing: true,
+			            width: 150
+			        }, {
+			            dataField: 'last Update Time',
+			            allowResizing: true,
+			            allowGrouping: false,
+			            dataType: 'date',
+			            width: 200,
+			            cellTemplate: function(container, options){
+			                var oDate = new Date(Number(options.data.lastUpdateTime.$date));
+			                container.append((oDate.getMonth() + 1) +"/"+oDate.getDate()+ '/' + oDate.getFullYear());
+			            }
+			        }, {
+			            dataField: 'lastEditUser',
+			            caption: "Last Editer",
+			            allowResizing: true,
+			            width: 200
+			        }],
+			        masterDetail: {
+			            enabled: true,
+			            template: function(container, options) {
+			                //masterDetailScenario(container, options);
+			            }
+			        }
+			    }).dxDataGrid('instance');
+			};
+
+			o.renderRule = function() {
+
 			};
 
 			return o;
 		})();
 
-		MatrixEditor.init();
+		
 	</script>
 </template>
 <script>

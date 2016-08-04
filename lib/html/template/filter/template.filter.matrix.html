@@ -10,7 +10,6 @@
 	    <span class="matrix-name-B">
 	        Matrix Filter Settings (Click + to add more filters)
 	    </span>
-	    <input type="hidden" name="" value="1">
 	    <table class="b-matrix__table b-matrix__table_border" class='abc'>
 	        <tr>
 	            <!-- Type -->
@@ -107,127 +106,176 @@
 				}
 			};
 
-			var that;
-
-			if (!$('table.b-matrix__table').data('filters')) {
-
-			}
-
-			$('table.b-matrix__table').find('select.filterselect.select-type').selectpicker().on('changed.bs.select', function(){
-		        selectTypeChange($(this));
-		    });
-
-		    $('table.b-matrix__table').prev().on('click', function() {
-
-		    });
-
-		    $('table.b-matrix__table').find('select.select-condition').selectpicker('refresh');
-
-			$("[btn='eventAddFilter']").unbind('click').click(function() {
-				var $table = $(this).closest('div.b-matrix').find('table.b-matrix__table'),
-					$instance = $(template.filterMatrix.tr.cloneNode(true)),
-					$rowNumber = $table.prev();
-				$table.append($instance);
-				$rowNumber.val(Number($rowNumber.val())+1).trigger('click');
-
-				$instance.find('select.filterselect.select-type').selectpicker('refresh').on('changed.bs.select', function(){
-		            selectTypeChange($(this));
-		        });
-
-				$instance.find('select.select-condition').selectpicker('refresh');
-
-				$instance.find('td.col-delete').removeClass('col-hidden').click(function() {
-	                $instance.remove();
-	                $rowNumber.val(Number($rowNumber.val())-1).trigger('click');
-	            });
-			});
-
 			/*
 				Change Event : select-type
 			 */
-			var selectTypeChange = function(o) {
-				var eAnchor = o.closest('tr');
-		        if (o.val() === "unit") {
-		            eAnchor.find('td.col-3').removeClass('col-3').addClass('col-5');
-		            eAnchor.find("td.col-hidden:not('.col-delete')").removeClass('col-hidden');
-		            eAnchor.find('td.col-3-value').addClass('col-hidden');
-		            selectUnitChange(eAnchor);
-		        } else if (o.val() === "sku") {
-		            eAnchor.find('td.col-5').removeClass('col-5').addClass('col-3');
-		            eAnchor.find('td.col-unit').addClass('col-hidden');
-		            eAnchor.find('td.col-3-value').removeClass('col-hidden');
-		            eAnchor.find('div.col-3-value-upload').removeAttr('hidden');
+			var selectTypeChange = function(t, o) {
+				var tr = t.closest('tr');
+				o.value = "";
+		        if (t.val() === "unit") {
+		            tr.find('td.col-3').removeClass('col-3').addClass('col-5');
+		            tr.find("td.col-hidden:not('.col-delete')").removeClass('col-hidden');
+		            tr.find('td.col-3-value').addClass('col-hidden');
+		            selectUnitChange(tr, o);
+		        } else if (t.val() === "sku") {
+		            tr.find('td.col-5').removeClass('col-5').addClass('col-3');
+		            tr.find('td.col-unit').addClass('col-hidden');
+		            tr.find('td.col-3-value').removeClass('col-hidden');
+		            tr.find('div.col-3-value-upload').removeAttr('hidden');
 		        } else {
-		            eAnchor.find('td.col-5').removeClass('col-5').addClass('col-3');
-		            eAnchor.find('td.col-unit').addClass('col-hidden');
-		            eAnchor.find('td.col-3-value').removeClass('col-hidden');
-		            eAnchor.find('div.col-3-value-upload').attr('hidden','hidden');
+		            tr.find('td.col-5').removeClass('col-5').addClass('col-3');
+		            tr.find('td.col-unit').addClass('col-hidden');
+		            tr.find('td.col-3-value').removeClass('col-hidden');
+		            tr.find('div.col-3-value-upload').attr('hidden','hidden');
 		        }
+
+		        o.object.display = t.find('option:selected').text();
+				o.object.code = t.find('option:selected').val();
+		    };
+
+		    var selectConditionChange = function(t, o) {
+		    	o.condition.display = t.find('option:selected').text();
+				o.condition.code = t.find('option:selected').val();
 		    };
 		    /*
 		    	Change Event : select-unit
 		     */
-		    var selectUnitChange = function(container) {
+		    var selectUnitChange = function(tr, o) {
 		        var eOptionAll = $('<option>', {'html' : 'ALL', 'value' : 'ALL'}).data('options', ['All']);
-		        container.find('select.select-unit').empty().append(eOptionAll);
+		        tr.find('select.select-unit').empty().append(eOptionAll);
+
 		        $.each(uc, function(i,v) {
 		            var eOption = $('<option>', {'html' : v.unit, 'value' : v.unit}).data('options', v.categories);
-		            container.find('select.select-unit').append(eOption);
+		            tr.find('select.select-unit').append(eOption);
 		        });
-		        container.find('select.select-unit').selectpicker('refresh').on('changed.bs.select', function() {
-		            container.find('select.select-category').empty();
+		        tr.find('select.select-unit').selectpicker('refresh').on('changed.bs.select', function() {
+		        	var sUnitValue = $(this).find('option:selected').val();
+		            tr.find('select.select-category').empty();
 		            var aOptions = $(this).find('option:selected').data('options').sort();
 		            $.each(aOptions, function(i,v){
 		                var eOption = $('<option>', {'html' : v, 'value' : v});
-		                container.find('select.select-category').append(eOption);
+		                tr.find('select.select-category').append(eOption);
 		            });
-		            container.find('select.select-category').selectpicker('refresh');
+		            tr.find('select.select-category').selectpicker('refresh').on('changed.bs.select', function() {
+		            	o.value = sUnitValue + $(this).find('option:selected').val();
+		            	tr.closest('table').trigger('paste');
+		            }).trigger('changed.bs.select');
 		        }).trigger('changed.bs.select');
 		    };
 
-		    $(".matrix-upload").change(function(e) {
-		    	var $this = $(this);
-	        	// Get file extension
-	            var sExtension = $(this).val().split(".").pop().toLowerCase();
-	            // Identify if extension equals to .csv
-	            if ($.inArray(sExtension, ["csv"]) == -1) { // Not the .csv file
-	                sweetAlert("File Type Error", "Please upload the .csv file!", "error");
-	                return false;
-	            }
-	            if (e.target.files != undefined) {
-	            	// Open FileReader
-	                var reader = new FileReader();
-	                // Load file
-	                reader.onload = function(e) {
-	                	// Remove "Enter" symbol. Return Array Object.
-	                    var aFileArray = e.target.result.split("\n");
-	                    // Column Length
-	                    var iColumnLength = aFileArray[0].split(",").length;
-	                    // Result value
-	                    var sResult = "";
-	                    // File Array Length
-	                    var iFileArrayLength = aFileArray.length;
-	                    // Loop aFileArray
-	                    for (var i = 0; i < iFileArrayLength; i++) {
-	                    	// Array of each line, split via ","
-	                        var aLineArray = aFileArray[i].split(",");
-	                        // Line Array Length
-	                        var iLineArrayLength = aLineArray.length;
-	                        // Loop aLineArray
-	                        for (var j = 0; j < iLineArrayLength; j++) {
-	                            if ( (i+j) === (iFileArrayLength + iLineArrayLength - 2) ) {
-	                                sResult += aLineArray[j];
-	                            } else {
-	                                sResult += aLineArray[j] + ",";
-	                            }
-	                        }
-	                    }
-	                    $this.closest('td.col-3-value').find('.condition_value').val(sResult);
-	                };
-	                reader.readAsText(e.target.files.item(0));
-	            }
-	            $this.val("");
-	        });
+		    var tableDataChange = function(t) {
+		    	var aData = [];
+		    	$.each(t.find('tr'), function(i, v) {
+		    		aData.push($(this).data('filter'));
+		    	});
+		    	t.data('filters', aData);
+		    };
+
+			$.each($('table.b-matrix__table'), function(i, v) {
+				if (!$(this).data('filters')) {
+					var oData = oFilterObject(),
+						that = $(this);
+					that.data('filters', []);
+					that.on('paste', function() {
+						tableDataChange(that);
+					});
+					that.find('tr').data('filter', oData);
+					
+					// Select Type Change Event
+					that.find('select.select-type').selectpicker().on('changed.bs.select', function(){
+				        selectTypeChange($(this), oData);
+				        that.trigger('paste');
+				    }).trigger('changed.bs.select');
+					// Select Condition Change Event
+					that.find('select.select-condition').selectpicker().on('changed.bs.select', function() {
+						selectConditionChange($(this), oData);
+						that.trigger('paste');
+					}).trigger('changed.bs.select');
+					// Input Value Update Event
+					that.find('input.condition_value').on('keyup paste blur', function() {
+						oData.value = $(this).val();
+						that.trigger('paste');
+					}).trigger('paste');
+
+					that.closest('div.b-matrix').find("[btn='eventAddFilter']").unbind('click').click(function() {
+						var $table = $(this).closest('div.b-matrix').find('table.b-matrix__table'),
+							$instance = $(template.filterMatrix.tr.cloneNode(true)),
+							oNewData = oFilterObject();
+
+						$instance.data('filter', oNewData);
+
+						$table.append($instance);
+
+						$instance.find('select.filterselect.select-type').selectpicker('refresh').on('changed.bs.select', function(){
+				            selectTypeChange($(this), oNewData);
+				            that.trigger('paste');
+				        }).trigger('changed.bs.select');
+
+						$instance.find('select.select-condition').selectpicker().on('changed.bs.select', function(){
+				            selectConditionChange($(this), oNewData);
+				            that.trigger('paste');
+				        }).trigger('changed.bs.select');
+
+				        $instance.find('input.condition_value').on('keyup paste blur', function() {
+							oNewData.value = $(this).val();
+							that.trigger('paste');
+						}).trigger('paste');
+
+						$instance.find('td.col-delete').removeClass('col-hidden').click(function() {
+			                $instance.remove();
+			                that.trigger('paste');
+			            });
+					});
+
+					that.find(".matrix-upload").change(function(e) {
+				    	var $this = $(this);
+			        	// Get file extension
+			            var sExtension = $(this).val().split(".").pop().toLowerCase();
+			            // Identify if extension equals to .csv
+			            if ($.inArray(sExtension, ["csv"]) == -1) { // Not the .csv file
+			                sweetAlert("File Type Error", "Please upload the .csv file!", "error");
+			                return false;
+			            }
+			            if (e.target.files != undefined) {
+			            	// Open FileReader
+			                var reader = new FileReader();
+			                // Load file
+			                reader.onload = function(e) {
+			                	// Remove "Enter" symbol. Return Array Object.
+			                    var aFileArray = e.target.result.split("\n");
+			                    // Column Length
+			                    var iColumnLength = aFileArray[0].split(",").length;
+			                    // Result value
+			                    var sResult = "";
+			                    // File Array Length
+			                    var iFileArrayLength = aFileArray.length;
+			                    // Loop aFileArray
+			                    for (var i = 0; i < iFileArrayLength; i++) {
+			                    	// Array of each line, split via ","
+			                        var aLineArray = aFileArray[i].split(",");
+			                        // Line Array Length
+			                        var iLineArrayLength = aLineArray.length;
+			                        // Loop aLineArray
+			                        for (var j = 0; j < iLineArrayLength; j++) {
+			                            if ( (i+j) === (iFileArrayLength + iLineArrayLength - 2) ) {
+			                                sResult += aLineArray[j];
+			                            } else {
+			                                sResult += aLineArray[j] + ",";
+			                            }
+			                        }
+			                    }
+			                    $this.closest('td.col-3-value').find('.condition_value').val(sResult).trigger('paste');
+			                    that.trigger('paste');
+			                };
+			                reader.readAsText(e.target.files.item(0));
+			            }
+			            $this.val("");
+			        });
+				}
+			});                                                                                                                           
+
+
+		    
 		})();
 	</script>
 </template>

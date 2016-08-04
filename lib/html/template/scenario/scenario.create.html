@@ -8,7 +8,7 @@
 					<div class="col-md-3">
 						<div class="form-group fg-float">
 					        <div class="fg-line">
-					            <input id="scenario-new-name" type="text" class="input-sm form-control fg-input">
+					            <input type="text" class="input-sm form-control fg-input scenario-name-new">
 					            <label class="fg-label">Scenario Name</label>
 					        </div>
 					    </div>
@@ -16,7 +16,7 @@
 					<div class="col-md-8">
 						<div class="form-group fg-float">
 					        <div class="fg-line">
-					            <input type="text" class="input-sm form-control fg-input">
+					            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
 					            <label class="fg-label">Scenario Description</label>
 					        </div>
 					    </div>
@@ -25,14 +25,20 @@
 	    	</div>
 	  	</li>
 	  	<li>
-	    	Step 2: Rule Settings
+	    	<span>
+	    		Step 2: Rule Settings
+	    			<button class="btn btn-success btn-xs btn-icon-text waves-effect" btn="eventSaveRuleFilters">
+                	<i class="zmdi zmdi-collection-plus"></i> Save this Rule with below Filters</button>
+	    	</span>
 	    	<input type="checkbox">
 	    	<div class="copy">
 	    		<div class='row template-rule-content'></div>
 	    	</div>
 	  	</li>
 	  	<li>
-	  		Step 3: Filter Settings
+	  		<span>
+	  			Step 3: Filter Settings
+	  		</span>
 	  		<input type="checkbox">
 	  		<div class="copy">
 	  			<div class="row template-filter-content"></div>

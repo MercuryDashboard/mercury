@@ -41,7 +41,7 @@
 .steps > li > input[type=checkbox] {
     position: absolute;
     cursor: pointer;
-    width: 100%;
+    width: 10%;
     height: 20px;
     z-index: 1;
     opacity: 0;
