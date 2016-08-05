@@ -288,3 +288,8 @@
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100% !important;
 }
+
+.dx-datagrid-rowsview .dx-row>.dx-master-detail-cell {
+    padding: 15px !important;
+    padding-left: 0;
+}
