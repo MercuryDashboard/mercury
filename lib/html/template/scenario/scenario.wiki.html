@@ -1,5 +1,5 @@
 <div class="scenario-wiki-wrapper">
-    <style type="text/css">
+<style type="text/css">
     .scenario-wiki-wrapper .orgchart {
         width: 100%;
         background: RGBA(0, 58, 97, 1);
@@ -39,8 +39,251 @@
         font-size: 12px !important;
         color: #000;
     }
-    </style>
-    <div class="chart-container"></div>
+
+
+        #timeline {
+        list-style: none;
+        margin: 50px 0 30px 60px;
+        padding-left: 30px;
+        border-left: 6px solid #fff;
+    }
+    
+    #timeline li {
+        margin: 40px 0;
+        position: relative;
+    }
+    
+    #timeline p {
+        margin: 0 0 15px;
+    }
+    
+    .date {
+        margin-top: -10px;
+        color: #fff;
+        top: 50%;
+        left: -95px;
+        font-size: 0.95em;
+        line-height: 20px;
+        position: absolute;
+    }
+    
+    .circle {
+        margin-top: -10px;
+        top: 50%;
+        left: -43px;
+        width: 20px;
+        height: 20px;
+        background: RGBA(0, 58, 97, 1);
+        border: 5px solid #fff;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+    }
+    
+    .content {
+        max-height: 20px;
+        padding: 50px 20px 0;
+        border-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 0.5em;
+        position: relative;
+    }
+    
+    .content:before,
+    .content:after {
+        content: "";
+        width: 0;
+        height: 0;
+        border: solid transparent;
+        position: absolute;
+        pointer-events: none;
+        right: 100%;
+    }
+    
+    .content:before {
+        border-right-color: inherit;
+        border-width: 20px;
+        top: 50%;
+        margin-top: -20px;
+    }
+    
+    .content:after {
+        border-right-color: RGBA(0, 58, 97, 1);
+        border-width: 17px;
+        top: 50%;
+        margin-top: -17px;
+    }
+    
+    .content p {
+        max-height: 0;
+        color: transparent;
+        text-align: justify;
+        word-break: break-word;
+        hyphens: auto;
+        overflow: hidden;
+    }
+    
+    #timeline label {
+        font-size: 1.3em;
+        position: absolute;
+        z-index: 100;
+        cursor: pointer;
+        top: 15px;
+        transition: transform 0.2s linear;
+        color: #fff;
+    }
+    
+    .radio {
+        display: none;
+    }
+    
+    .radio:checked + .relative label {
+        cursor: auto;
+        transform: translateX(42px);
+    }
+    
+    .radio:checked + .relative .circle {
+        background: #f98262;
+    }
+    
+    .radio:checked ~ .content {
+        max-height: 180px;
+        border-color: #fff;
+        margin-right: 20px;
+        transform: translateX(20px);
+        transition: max-height 0.4s linear, border-color 0.5s linear, transform 0.2s linear;
+    }
+    
+    .radio:checked ~ .content p {
+        max-height: 200px;
+        color: #fff;
+        transition: color 0.3s linear 0.3s;
+    }
+    /* -------------------------------------
+ * mobile phones (vertical version only)
+ * ------------------------------------- */
+    
+    @media screen and (max-width: 767px) {
+        #timeline {
+            margin-left: 0;
+            padding-left: 0;
+            border-left: none;
+        }
+        #timeline li {
+            margin: 50px 0;
+        }
+        label {
+            width: 85%;
+            font-size: 1.1em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: block;
+            transform: translateX(18px);
+        }
+        .content {
+            padding-top: 45px;
+            border-color: #fff;
+        }
+        .content:before,
+        .content:after {
+            border: solid transparent;
+            bottom: 100%;
+        }
+        .content:before {
+            border-bottom-color: inherit;
+            border-width: 17px;
+            top: -16px;
+            left: 50px;
+            margin-left: -17px;
+        }
+        .content:after {
+            border-bottom-color: #48b379;
+            border-width: 20px;
+            top: -20px;
+            left: 50px;
+            margin-left: -20px;
+        }
+        .content p {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .circle,
+        .date {
+            display: none;
+        }
+</style>
+    <ul id='timeline'>
+        <li class='work'>
+            <input class='radio' id='step1' name='works' type='radio' checked>
+            <div class="relative">
+                <label for='step1'>Create Your Scenario</label>
+                <span class='date'>Step 1</span>
+                <span class='circle'></span>
+            </div>
+            <div class='content'>
+                <p>
+                    Scenario Management includes : Scenario &gt; Rules &gt; Filters &gt; Conditions. <br>
+                    A single scenario may have several rules, and each rule may have several filters and one filter can have lot of conditions.<br>
+                    You must create a scenario before bundling any rules or filter. <br>
+                </p>
+            </div>
+        </li>
+        <li class='work'>
+            <input class='radio' id='step2' name='works' type='radio'>
+            <div class="relative">
+                <label for='step2'>Create a Rule</label>
+                <span class='date'>Step 2</span>
+                <span class='circle'></span>
+            </div>
+            <div class='content'>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
+                </p>
+            </div>
+        </li>
+        <li class='work'>
+            <input class='radio' id='step3' name='works' type='radio'>
+            <div class="relative">
+                <label for='step3'>Create a Filter</label>
+                <span class='date'>Step 3</span>
+                <span class='circle'></span>
+            </div>
+            <div class='content'>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
+                </p>
+            </div>
+        </li>
+        <li class='work'>
+            <input class='radio' id='step4' name='works' type='radio'>
+            <div class="relative">
+                <label for='step4'>Lorem ipsum dolor sit amet</label>
+                <span class='date'>Step 4</span>
+                <span class='circle'></span>
+            </div>
+            <div class='content'>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
+                </p>
+            </div>
+        </li>
+        <li class='work'>
+            <input class='radio' id='step5' name='works' type='radio'>
+            <div class="relative">
+                <label for='step5'>Lorem ipsum dolor sit amet</label>
+                <span class='date'>Step 5</span>
+                <span class='circle'></span>
+            </div>
+            <div class='content'>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus! Natus dicta qui est optio rerum.
+                </p>
+            </div>
+        </li>
+    </ul>
+
     <script type="text/javascript">
     (function($) {
         $(function() {
@@ -104,12 +347,12 @@
                 }]
             };
 
-            $('.chart-container').orgchart({
-                data: scenarioWiki,
-                nodeContent: 'description',
-                //direction: 'l2r',
-                zoom: true
-            });
+            // $('.chart-container').orgchart({
+            //     data: scenarioWiki,
+            //     nodeContent: 'description',
+            //     //direction: 'l2r',
+            //     zoom: true
+            // });
         });
     })(jQuery);
     </script>
