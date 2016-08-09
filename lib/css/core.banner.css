@@ -376,11 +376,6 @@ h2 {
   font-weight: 300;
 }
 
-.fa {
-  font-size: 20px !important;
-  color: white;
-}
-
 h2 {
   font-size: 36px;
   margin: 0 0 16px;
@@ -518,8 +513,7 @@ p {
 }
 
 .weather-widget {
-  width: 300px;
-  left: 35%;
+  width: 100%;
   position: relative;
 }
 
