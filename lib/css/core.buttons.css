@@ -20,7 +20,14 @@
     -ms-user-select: none;
     user-select: none;
 }
-
+.btn-icon {
+    border-radius: 50% !important;
+    width: 40px !important;
+    line-height: 43px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    text-align: center !important; 
+}
 td[role='gridcell'] .btn {
     padding－top: 0 !important;
     padding－bottom: 0 !important;

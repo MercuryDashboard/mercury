@@ -1,51 +1,306 @@
 <template>
+	<style type="text/css">
+		.wrapper {
+			  position: relative;
+			  top: 0;
+			  width: 100vw;
+			  height: 100vh;
+			  max-width: 100%;
+			  max-height: 100%;
+			  background: deepskyblue;
+			  overflow: hidden;
+			}
+
+			.dataSlide {
+			  position: absolute;
+			  width: 100%;
+			  height: 100%;
+			  top: 0;
+			  left: 0;
+			  bottom: 0;
+			  right: 0;
+			  margin: auto;
+			}
+			.dataSlide._active {
+			  z-index: 10;
+			}
+
+			.trans-layer, .section {
+			  position: absolute;
+			  width: 100%;
+			  height: 100%;
+			  top: 0;
+			  left: 0;
+			  bottom: 0;
+			  right: 0;
+			}
+
+			.trans-layer {
+			  background: #edecec;
+			  -webkit-transform: translateY(-100%) skew(0) rotate(0) scale(2);
+			          transform: translateY(-100%) skew(0) rotate(0) scale(2);
+			  border-radius: 50%;
+			  -webkit-transition: all 500ms ease-in-out;
+			  transition: all 500ms ease-in-out;
+			  -webkit-transition-delay: 500ms;
+			          transition-delay: 500ms;
+			}
+			._active .trans-layer {
+			  -webkit-transform: translateY(0) skew(0) rotate(0) scale(2);
+			          transform: translateY(0) skew(0) rotate(0) scale(2);
+			  -webkit-transition-delay: 0ms;
+			          transition-delay: 0ms;
+			}
+
+			.section {
+			  -webkit-transform: translateY(100%);
+			          transform: translateY(100%);
+			  -webkit-transition: all 500ms ease-in-out;
+			  transition: all 500ms ease-in-out;
+			  -webkit-transition-delay: 0ms;
+			          transition-delay: 0ms;
+			  background: #fff;
+			}
+			._active .section {
+			  -webkit-transform: translateY(0);
+			          transform: translateY(0);
+			  -webkit-transition-delay: 500ms;
+			          transition-delay: 500ms;
+			}
+
+			.section-content {
+			  display: -webkit-box;
+			  display: -webkit-flex;
+			  display: -ms-flexbox;
+			  display: flex;
+			  -webkit-flex-flow: column;
+			      -ms-flex-flow: column;
+			          flex-flow: column;
+			  width: 100%;
+			  height: 100%;
+			  opacity: 0;
+			  -webkit-transform: translateY(30px);
+			          transform: translateY(30px);
+			  -webkit-transition: all 500ms ease;
+			  transition: all 500ms ease;
+			  -webkit-transition-delay: 0s;
+			          transition-delay: 0s;
+
+			  padding-top: 55px;
+			  padding-left: 10px;
+			}
+
+			.section-content h1 {
+				padding-left: 15px;
+			}
+			._active .section-content {
+			  opacity: 1;
+			  -webkit-transform: translateY(0px);
+			          transform: translateY(0px);
+			  -webkit-transition-delay: 1000ms;
+			          transition-delay: 1000ms;
+			}
+
+			.nav-dots {
+			  position: absolute;
+			  top: 0%;
+			  left: 50%;
+			  /*-webkit-transform: translateY(-50%);
+			  transform: translateY(-50%);*/
+			  z-index: 20;
+			  width: 170px;
+			  margin-left: -85px;
+			}
+
+			.nav-dot {
+			  width: 10px;
+			  height: 10px;
+			  margin: 20px auto;
+			  border-radius: 50%;
+			  background: #2196f3;
+			  cursor: pointer;
+			  -webkit-transition: all 300ms ease-out;
+			  transition: all 300ms ease-out;
+			  float: left;
+			  margin-right: 20px;
+			}
+			.nav-dot.active {
+			  background: gold;
+			}
+
+			.next-btn, .prev-btn {
+			  width: 30px;
+			  height: 30px;
+			  position: absolute;
+			  z-index: 20;
+			  color: #2196f3;
+			  line-height: 30px;
+			  text-align: center;
+			  font-size: 24px;
+			  cursor: pointer;
+			}
+
+			.next-btn {
+			  top: 10px;
+			  right: 24px;
+			}
+
+			.prev-btn {
+			  top: 10px;
+			  left: 14px;
+			}
+	</style>
 	<div class='scenario-create-wrapper'>
-		<ul class="steps">
-			<li>
-		    	<span>Step 1: Scenario Settings</span>
-		    	<input type="checkbox">
-		    	<div class="copy">
-		    		<div class="col-md-12">
-						<div class="col-md-3">
-							<div class="form-group fg-float">
-						        <div class="fg-line">
-						            <input type="text" class="input-sm form-control fg-input scenario-name-new">
-						            <label class="fg-label">Scenario Name</label>
-						        </div>
-						    </div>
+		<div class="wrapper">
+			<div class="prev-btn">
+				<button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
+					<i class="zmdi zmdi-arrow-back"></i>
+				</button>
+			</div>
+			<div class="next-btn">
+				<button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
+					<i class="zmdi zmdi-arrow-forward"></i>
+				</button>
+			</div>
+			<div class="nav-dots">
+			    <div data-slide="1" class="nav-dot active"></div>
+			    <div data-slide="2" class="nav-dot"></div>
+			    <div data-slide="3" class="nav-dot"></div>
+			</div>
+			<div data-slide="1" class="dataSlide _active">
+			    <div id="layer-1" class="trans-layer"></div>
+			    <section id="section-1" class="section">
+			        <div class="section-content">
+			        	<h1>Step 1 : Scenario Settings</h1>
+			            <div class="col-md-12">
+							<div class="col-md-3">
+								<div class="form-group fg-float">
+							        <div class="fg-line">
+							            <input type="text" class="input-sm form-control fg-input scenario-name-new">
+							            <label class="fg-label">Scenario Name</label>
+							        </div>
+							    </div>
+							</div>
+							<div class="col-md-8">
+								<div class="form-group fg-float">
+							        <div class="fg-line">
+							            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
+							            <label class="fg-label">Scenario Description</label>
+							        </div>
+							    </div>
+							</div>		
 						</div>
-						<div class="col-md-8">
-							<div class="form-group fg-float">
-						        <div class="fg-line">
-						            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
-						            <label class="fg-label">Scenario Description</label>
-						        </div>
-						    </div>
-						</div>		
-					</div>
-		    	</div>
-		  	</li>
-		  	<li>
-		    	<span>
-		    		Step 2: Rule &amp; Filter Settings
-		    	</span>
-		    	<input type="checkbox" checked>
-		    	<div class="copy">
-		    		<div class='row template-rule-content'></div>
-		    	</div>
-		  	</li>
-		  	<li>
-		  		Final Step: Preview &amp; Save Result
-		  		<input type="checkbox">
-		  		<div class="copy">
-		  			<div class="row template-result-content"></div>
-		  		</div>
-		  	</li>
-		</ul>		
+			        </div>
+			    </section>
+			</div>
+			<div data-slide="2" class="dataSlide">
+			    <div id="layer-2" class="trans-layer"></div>
+			    <section id="section-2" class="section">
+			        <div class="section-content">
+			            <h1>Step 2 : Rule &amp; Filter Settings</h1>
+			            <div class='row template-rule-content'></div>
+			        </div>
+			    </section>
+			</div>
+			<div data-slide="3" class="dataSlide">
+			    <div id="layer-3" class="trans-layer"></div>
+			    <section id="section-3" class="section">
+			        <div class="section-content">
+			            <h1>Final Step : Preview &amp; Save</h1>
+			            <div class="row template-result-content"></div>
+			        </div>
+			    </section>
+			</div>
+		</div>
 	</div>
 	<script type="text/javascript">
 		(function() {
 			$('select.select-rule').selectpicker();
+
+			$('.wrapper').each(function() {
+				var $slider =  $(this);
+				var numberOfSlides = $slider.find('.dataSlide').length;
+				console.log(numberOfSlides);
+
+				$slider.find('.dataSlide:eq(0)').addClass('_active');
+				$slider.find('.nav-dot:eq(0)').addClass('active');
+
+				var $activeSlide = $slider.find('.dataSlide._active');
+				var $nextBtn = $slider.find('.next-btn');
+				var $prevBtn = $slider.find('.prev-btn');
+
+				$('.nav-dot').on('click', function() {
+					var slideToGo = $(this).data('slide');
+					goToSlide(slideToGo);
+				});
+
+
+				$slider.on('slide.changed', function() {
+					$('.nav-dot').removeClass('active');
+					var $activeDot = $('.nav-dot[data-slide="'+$('.dataSlide._active').data('slide')+'"]');
+					$activeDot.addClass('active');
+				});
+
+				$nextBtn.on('click', function(event) {
+					nextSlide();
+				});
+
+				$prevBtn.on('click', function(event) {
+					prevSlide();
+				});
+
+
+				function nextSlide() {
+					$activeSlide = $slider.find('.dataSlide._active');
+					var $nextSlide = $activeSlide.next('.dataSlide');
+					$activeSlide.removeClass('_active');
+					$nextSlide.addClass('_active');
+
+					var slideIndex = $slider.find('.dataSlide._active').index('.dataSlide');
+
+					if(slideIndex >= numberOfSlides || slideIndex <= -1 ) {
+				  		firstSlide();
+				  		$slider.trigger('slide.changed');  
+					} else {
+				  		$slider.trigger('slide.changed');  
+					}
+				} 
+
+				function prevSlide() {
+					$activeSlide = $slider.find('.dataSlide._active');
+
+					var $prevSlide = $activeSlide.prev('.dataSlide');
+					$activeSlide.removeClass('_active');
+					$prevSlide.addClass('_active');
+
+					var slideIndex = $slider.find('.dataSlide._active').index();
+
+					if (typeof $prevSlide === 'undefined'|| $prevSlide === null || $prevSlide.length == -1 || slideIndex <= -1 ) {
+					  lastSlide();
+					  $slider.trigger('slide.changed');
+					} else {
+					  $slider.trigger('slide.changed');  
+					}
+				} 
+
+				function firstSlide() {
+					$('.dataSlide._active').removeClass('_active');
+				  	$slider.find('.dataSlide:eq(0)').addClass('_active');
+				  	$activeSlide = $slider.find('.dataSlide:eq(0)');  
+				}
+
+				function lastSlide() {
+				  	$('.dataSlide._active').removeClass('_active');
+				  	$slider.find('.dataSlide').eq(numberOfSlides-1).addClass('_active');
+				}
+
+				function goToSlide(slideToGo) {
+				  	$('.dataSlide._active').removeClass('_active');
+				  	$slider.find('.dataSlide').eq(slideToGo -1).addClass('_active');
+				  	$activeSlide = $slider.find('.dataSlide').eq(slideToGo -1).addClass('_active');
+				  	$slider.trigger('slide.changed');  
+				}
+			});
 		})();
 	</script>
 </template>
