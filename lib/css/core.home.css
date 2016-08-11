@@ -177,6 +177,17 @@
     display: table-cell;
     vertical-align: middle;
 }
+@media (max-width: 1280px){
+    .weather-info h1 {
+        font-size: 1.6em;
+    }
+    .weather-info h4 {
+        font-size: 16px;
+    }
+    .weather-info h3 {
+        font-size: 20px;
+    }
+}
 
 .tile-clock {
     font-family: 'Montserrat';
