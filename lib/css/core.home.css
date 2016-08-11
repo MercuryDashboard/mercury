@@ -185,6 +185,11 @@
     vertical-align: middle;
     text-align: center;
 }
+@media (min-width: 1280px){
+    .tile-clock {
+        font-size: 3.5rem;
+    }
+}
 
 .tile .content-wrapper .tile-content .tile-img.tile-img-sm {
     position: absolute;
