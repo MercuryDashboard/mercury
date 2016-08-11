@@ -103,13 +103,11 @@
 
 			.nav-dots {
 			  position: absolute;
-			  top: 0%;
+			  top: 5px;
 			  left: 50%;
-			  /*-webkit-transform: translateY(-50%);
-			  transform: translateY(-50%);*/
 			  z-index: 20;
-			  width: 170px;
-			  margin-left: -85px;
+			  width: 500px;
+			  margin-left: -270px;
 			}
 
 			.nav-dot {
@@ -149,6 +147,125 @@
 			  top: 10px;
 			  left: 14px;
 			}
+
+
+
+			.progressbox {
+			  position: absolute;
+			  width: 100%;
+			  display: flex;
+			  align-items: center;
+			  height: 50px;
+			  box-sizing: border-box;
+			  z-index: 99;
+			}
+
+			.progressWrapper {
+			  position: relative;
+			  display: -webkit-box;
+			  display: -webkit-flex;
+			  display: -ms-flexbox;
+			  display: flex;
+			  -webkit-box-orient: horizontal;
+			  -webkit-box-direction: normal;
+			  -webkit-flex-direction: row;
+			      -ms-flex-direction: row;
+			          flex-direction: row;
+			  -webkit-box-pack: justify;
+			  -webkit-justify-content: space-between;
+			      -ms-flex-pack: justify;
+			          justify-content: space-between;
+			  width: 100%;
+			}
+
+			.bar {
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  background: #E8DFD8;
+			  width: 100%;
+			  height: 3px;
+			  border-radius: 10px;
+			  -webkit-transform: translate(-50%, -50%);
+			          transform: translate(-50%, -50%);
+			  overflow: hidden;
+			}
+			.bar__fill {
+			  display: block;
+			  background: #2196f3;
+			  height: 100%;
+			}
+
+			.point {
+			  position: relative;
+			  color: #9e9e9e;
+			  cursor: pointer;
+			}
+			.point:before {
+			  content: '';
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  width: 120px;
+			  height: 120px;
+			  border-radius: 100%;
+			  -webkit-transform: translate(-50%, -50%);
+			          transform: translate(-50%, -50%);
+			}
+			.show-radius .point:before {
+			  background: rgba(0, 0, 0, 0.1);
+			}
+			.point--complete, .point--active {
+			  color: #2196f3;
+			}
+
+			.bullet {
+			  z-index: 1;
+			  position: relative;
+			  background: #9e9e9e;
+			  width: 8px;
+			  height: 8px;
+			  border-radius: 100%;
+			  -webkit-transition: 0.3s ease;
+			  transition: 0.3s ease;
+			}
+			.point--complete .bullet, .point--active .bullet {
+			  background: #FFFFFF;
+			  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
+			}
+			.point--active .bullet {
+			  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
+			}
+
+			.progressbox .progress-label {
+			  position: absolute !important;
+			  width: 100px !important;
+			  text-align: center !important;
+			  margin: 15px 0 0 0 !important;
+			  margin-left: -43px !important;
+			  font-size: 11px !important;
+			  font-weight: 600 !important;
+			  text-transform: uppercase !important;
+			  color: #5e5e5e;
+			}
+
+			.radius-toggle {
+			  position: absolute;
+			  top: 20px;
+			  left: 20px;
+			  display: block;
+			  background: #FFF;
+			  border: 0;
+			  border-radius: 4px;
+			  box-shadow: 40px 0 65px rgba(212, 197, 186, 0.4);
+			  padding: 10px;
+			  color: #2196f3;
+			  font-size: 0.75rem;
+			  font-weight: 600;
+			  text-transform: uppercase;
+			}
+
+
 	</style>
 	<div class='scenario-create-wrapper'>
 		<div class="wrapper">
@@ -163,10 +280,26 @@
 				</button>
 			</div>
 			<div class="nav-dots">
-			    <div data-slide="1" class="nav-dot active"></div>
-			    <div data-slide="2" class="nav-dot"></div>
-			    <div data-slide="3" class="nav-dot"></div>
-			</div>
+			    <div class="progressbox">
+		            <div class="progressWrapper">
+		                <div class="bar">
+		                    <div style="width: 0%;" class="bar__fill"></div>
+		                </div>
+		                <div data-slide="1" class="point point--complete point--active">
+		                    <div class="bullet"></div>
+		                    <div class="progress-label">Scenario</div>
+		                </div>
+		                <div data-slide="2" class="point">
+		                    <div class="bullet"></div>
+		                    <div class="progress-label">Rules &amp; Filters</div>
+		                </div>
+		                <div data-slide="3" class="point">
+		                    <div class="bullet"></div>
+		                    <div class="progress-label">Preview &amp Save</div>
+		                </div>
+		            </div>
+		        </div>
+			</div> 
 			<div data-slide="1" class="dataSlide _active">
 			    <div id="layer-1" class="trans-layer"></div>
 			    <section id="section-1" class="section">
@@ -220,7 +353,6 @@
 			$('.wrapper').each(function() {
 				var $slider =  $(this);
 				var numberOfSlides = $slider.find('.dataSlide').length;
-				console.log(numberOfSlides);
 
 				$slider.find('.dataSlide:eq(0)').addClass('_active');
 				$slider.find('.nav-dot:eq(0)').addClass('active');
@@ -229,16 +361,36 @@
 				var $nextBtn = $slider.find('.next-btn');
 				var $prevBtn = $slider.find('.prev-btn');
 
-				$('.nav-dot').on('click', function() {
+				$('.point').on('click', function() {
 					var slideToGo = $(this).data('slide');
 					goToSlide(slideToGo);
 				});
 
-
 				$slider.on('slide.changed', function() {
-					$('.nav-dot').removeClass('active');
-					var $activeDot = $('.nav-dot[data-slide="'+$('.dataSlide._active').data('slide')+'"]');
-					$activeDot.addClass('active');
+					$('.point').removeClass('point--active');
+					var $activeDot = $('.point[data-slide="'+$('.dataSlide._active').data('slide')+'"]');
+					$activeDot.addClass('point--active');
+
+					var getTotalPoints = $('.point').length,
+			        	getIndex = $('.dataSlide._active').data('slide'),
+			        	getCompleteIndex = $('.point--active').index(),
+			        	thisPoint = $('.point--active');
+			        
+
+				    TweenMax.to($('.bar__fill'), 0.6, {
+				        width: (getIndex - 1) / (getTotalPoints - 1) * 100 + '%'
+				    });
+
+
+
+				    if (getIndex => getCompleteIndex) {
+				    	console.log(getIndex);
+				        $('.point--active').addClass('point--complete').removeClass('point--active');
+
+				        $(thisPoint).addClass('point--active');
+				        $(thisPoint).prevAll().addClass('point--complete');
+				        $(thisPoint).nextAll().removeClass('point--complete');
+				    }
 				});
 
 				$nextBtn.on('click', function(event) {
@@ -248,7 +400,6 @@
 				$prevBtn.on('click', function(event) {
 					prevSlide();
 				});
-
 
 				function nextSlide() {
 					$activeSlide = $slider.find('.dataSlide._active');
@@ -301,6 +452,7 @@
 				  	$slider.trigger('slide.changed');  
 				}
 			});
+
 		})();
 	</script>
 </template>
