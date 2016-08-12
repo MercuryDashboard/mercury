@@ -131,18 +131,100 @@
         </g>
     </svg>
 </script>
-
+<link rel="stylesheet" type="text/css" href="lib/css/core.clock.css">
 <!-- HTML -->
 <div class="container">
 	<div class="card no-background">
 		<div class="dashboard display-animation padding-0">
-	        <div class="tile tile-lg tile-pink ripple-effect margin-right-10 margin-bottom-10">
+	        <div class="tile tile-lg tile-amber ripple-effect margin-right-10 margin-bottom-10">
 	            <span class="content-wrapper">
 	                <span class="tile-content">
-	                    <span class="tile-img"></span>
-	                    <span class="tile-holder tile-holder-sm">
-	                        <span class="title">ROQ ?</span>
-	                    </span>
+                        <div id="flipclock">
+                            <div class="flip-pane flip-pane-1">
+                                <ul class="flip flip-item flip-hour">
+                                    <li class="active">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">10</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">10</div>
+                                                <div class="flip-apm">AM</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                    <li class="before">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">00</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">00</div>
+                                                <div class="flip-apm">PM</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <ul class="flip flip-item flip-minute">
+                                    <li class="before">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">41</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">41</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                    <li class="active">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">42</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">42</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flip-pane flip-pane-2">
+                                <ul class="flip flip-item flip-second">
+                                    <li class="before">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">29</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">29</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                    <li class="active">
+                                        <span>
+                                            <div class="flip-up">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">30</div>
+                                            </div>
+                                            <div class="flip-down">
+                                                <div class="flip-shadow"></div>
+                                                <div class="flip-text">30</div>
+                                            </div>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 	                </span>
 	            </span>
 	        </div>
@@ -168,29 +250,27 @@
 	            <span class="content-wrapper">
 	      			<span class="tile-content">
 	      				<span class="tile-body">
-	      					<div class="tile-clock"></div>
-	      				</span>
+                            <div class="weather-widget tile-weather">
+                                <div class="weather-icon"></div>
+                                <div class="weather-info">
+                                    <h1 class="weather-info-temp"><span id="temp">{{Temp}}</span> °<a href="#" id="scale">C</a></h1>
+                                    <h4 class="weather-info-desc">{{Description}}</h4>
+                                    <h3 class="weather-info-loc"><span  id="city">{{City}}</span>, <span  id="country">{{Country}}</span></h3>
+                                </div>
+                                <div class="error-message hide">
+                                    <h4 class="error-color">Oh Oh</h4>
+                                    <h4>{{Error}}</h4>
+                                </div>
+                            </div>
+                        </span>
 	      			</span>
 	            </span>
 	        </div>
 	        <!-- Digital Clock -->
-	        <div class="tile tile-lg tile-sqr tile-amber ripple-effect margin-right-10 margin-bottom-10" href="#">
+	        <div class="tile tile-lg tile-sqr tile-pink ripple-effect margin-right-10 margin-bottom-10" href="#">
 	            <span class="content-wrapper">
 	      			<span class="tile-content">
-	      				<span class="tile-body">
-		        			<div class="weather-widget tile-weather">
-	                            <div class="weather-icon"></div>
-	                            <div class="weather-info">
-	                                <h1 class="weather-info-temp"><span id="temp">{{Temp}}</span> °<a href="#" id="scale">C</a></h1>
-	                                <h4 class="weather-info-desc">{{Description}}</h4>
-	                                <h3 class="weather-info-loc"><span  id="city">{{City}}</span>, <span  id="country">{{Country}}</span></h3>
-	                            </div>
-	                            <div class="error-message hide">
-	                                <h4 class="error-color">Oh Oh</h4>
-	                                <h4>{{Error}}</h4>
-	                            </div>
-	                        </div>
-                        </span>
+	      				
 	            	</span>
 	            </span>
 	        </div>
@@ -204,7 +284,7 @@
 	            	</span>
 	            </span>
 	        </div>
-	        <div class="tile tile-lg tile-sqr tile-pink ripple-effect margin-bottom-10" href="#">
+	        <div class="tile tile-lg tile-sqr tile-amber ripple-effect margin-bottom-10" href="#">
 	            <span class="content-wrapper">
 	      			<span class="tile-content">
 
@@ -277,12 +357,157 @@
 		Digital Clock
 	 */
 	(function($) {
-	    var clock = function() {
-	    var time = new Date();
-	    var currentTime = time.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit", second: "2-digit"}); 
-	        $(".tile-clock").html(currentTime);
-	    }
-	    window.setInterval(clock, 1000);
+	    var FlipClock = function () {
+            var isPaused = false,
+                saveSec, saveMin, saveHou,
+                Second, Minute, Hour,
+                timeoutCallback,
+                flipClock = $( "#flipclock" );
+
+            function addZeros( num, no ) {
+                var str   = num.toString(),
+                    zero  = "",
+                    len   = str.length,
+                    total = no + 1;
+
+                if ( len < total ) {
+                    var zeroTotal = total - len, i;
+
+                    for ( i = 1; i <= zeroTotal; i++ ) {
+                        zero += "0";
+                    }
+
+                    str = zero + str;
+                }
+                return str;
+            }
+
+            function init() {
+                isPaused = false;
+                Second = new Control( '.flip-second' );
+                Minute = new Control( '.flip-minute' );
+                Hour   = new Control( '.flip-hour' );
+
+                Hour._setValue = Hour.setValue;
+                Hour.setValue = function( hours ) {
+                    this._setValue( hours );
+
+                    var apm = "AM";
+                    if ( hours > 12 ) {
+                        hours = hours - 12;
+                        apm = "PM";
+                    } else if ( hours == 12 ) {
+                        apm = "PM";
+                    }
+
+                    var nextli = this.els.eq( this.curr );
+                    nextli.find( ".flip-apm" ).html( apm );
+                };
+            }
+
+            function getTime() {
+                var currentTime = new Date();
+
+                return {
+                    value:   currentTime,
+                    seconds: currentTime.getSeconds(),
+                    minutes: currentTime.getMinutes(),
+                    hours:   currentTime.getHours()
+                }
+            }
+
+            function start() {
+                var time = getTime();
+
+                saveSec = time.seconds;
+                saveMin = time.minutes;
+                saveHou = time.hours;
+                Second.process( time.seconds );
+                Minute.process( time.minutes );
+                Hour.process( time.hours );
+
+                clearTimeout( timeoutCallback );
+                timeoutCallback = setTimeout( engine, 1000 );
+            }
+
+            function pause() {
+                isPaused = true;
+                clearTimeout( timeoutCallback );
+            }
+
+            function resume() {
+                isPaused = false;
+                engine();
+            }
+
+            function engine() {
+                if ( isPaused ) return;
+                clearTimeout( timeoutCallback );
+                timeoutCallback = setTimeout( engine, 1000 );
+
+                var time = getTime();
+
+                if ( saveSec != time.seconds ) {
+                    saveSec = time.seconds;
+                    Second.process( time.seconds );
+                }
+
+                if ( saveMin != time.minutes ) {
+                    saveMin = time.minutes;
+                    Minute.process( time.minutes );
+                }
+
+                if ( saveHou != time.hours ) {
+                    saveHou = time.hours;
+                    Hour.process( time.hours );
+                }
+            }
+
+            function Control( elSelector ) {
+                this.el   = flipClock.find( elSelector );
+                this.els  = this.el.find( 'li' );
+                this.curr = 0;
+            }
+
+            Control.prototype = {
+                process: function( value ) {
+                    var curli = this.els.filter( '.active' );
+
+                    if ( curli.is( ":last-child" ) ) {
+                        this.els.removeClass( "before" );
+                        curli.addClass( "before" ).removeClass( "active" );
+                        curli = this.els.eq( 0 );
+                        curli.addClass( "active" );
+                        this.curr = 0;
+                    } else {
+                        this.els.removeClass( "before" );
+                        curli.addClass( "before" ).removeClass( "active" );
+                        this.els.eq( 1 ).addClass( "active" );
+                        this.curr = 1;
+                    }
+
+                    this.setValue( value );
+                },
+
+                setValue: function( value ) {
+                    var formatedValue = addZeros( value, 1 ),
+                        nextli = this.els.eq( this.curr );
+
+                    nextli.find( ".flip-text" ).html( formatedValue );
+                }
+            };
+
+            return {
+                init: init,
+                start: start,
+                pause: pause,
+                resume: resume,
+            }
+        };
+
+        var flipClock = FlipClock();
+            flipClock.init();
+            flipClock.start();
 	})(jQuery);
 	/*
 		Calendar
