@@ -9,17 +9,17 @@
 		<div class="radio-checkbox-wrapper btn-group" data-toggle="buttons">
 			<!-- Create Rule -->
 			<label class="btn">
-		        <input type="radio" name="scenario-create-rule" value='create' checked="">
+		        <input type="radio" name="scenario-create-rule" value='create' checked=true>
 		        <i class="fa fa-circle-o"></i>
 		        <i class="fa fa-check-circle-o"></i>
 		        <span>Create Rule</span>
 		    </label>
 		    <!-- Search Rule -->
 		    <label class="btn">
-		        <input type="radio" name="scenario-create-rule" value='search'>
+		        <input type="radio" name="scenario-create-rule" value='search' >
 		        <i class="fa fa-circle-o"></i>
 		        <i class="fa fa-check-circle-o"></i>
-		        <span>Search Existing Rule</span>
+		        <span>Search Rule</span>
 		    </label>
 		</div>
 	</div>
@@ -35,13 +35,17 @@
             	.append(template.createRule.content.cloneNode(true))
             	.append(template.searchRule.content.cloneNode(true));
             // Radio-Button Change Event
-            $("[name='scenario-create-rule']").unbind('change').change(function() {
+            $("[name='scenario-create-rule']").change(function() {
 				if ($(this).val() === "search") {
-					$('.rule-info').find('.rule-search').attr('active', 'true');
-					$('.rule-info').find('.rule-create').attr('active', 'false');
+					$(this).closest('div.row').find('.rule-info').find('.rule-search').attr('active', 'true');
+					$(this).closest('div.row').find('.rule-info').find('.rule-create').attr('active', 'false');
+
+					$(this).closest('div.row').find("[copy='copy']").attr('active', true);
 				} else if ($(this).val() === "create") {
-					$('.rule-info').find('.rule-search').attr('active', 'false');
-					$('.rule-info').find('.rule-create').attr('active', 'true');
+					$(this).closest('div.row').find('.rule-info').find('.rule-search').attr('active', 'false');
+					$(this).closest('div.row').find('.rule-info').find('.rule-create').attr('active', 'true');
+
+					$(this).closest('div.row').find("[copy='copy']").attr('active', false);
 
 					$("#scenario-new-rule-name").val("Rule-"+new Date().valueOf()+"-XiJie").closest('.fg-line').addClass('fg-toggled');
 				}

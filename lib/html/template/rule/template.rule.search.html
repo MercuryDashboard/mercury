@@ -20,14 +20,14 @@
 			<div class="col-md-4">
 				<div class="form-group">
 			        <div class="fg-line">
-			            <input id='scenario-search-rule' type="text" class="input-sm form-control" placeholder="Type something to search ...">
+			            <input id="scenario-search-rule" type="text" class="input-sm form-control scenario-search-rule" placeholder="Type something to search ...">
 			        </div>
 			    </div>
 			</div>
 			<div class="col-md-5">
 				<button class="btn btn-primary btn-icon-text waves-effect" btn='eventSearchRule'>
 	            <i class="zmdi zmdi-search"></i> Search Rule</button>
-	            <button class="btn btn-primary btn-icon-text waves-effect" btn=''>
+	            <button class="btn btn-primary btn-icon-text waves-effect" btn='eventClearResult'>
 	            <i class="zmdi zmdi-refresh-sync"></i> Clear Results</button>
 			</div>
 		</div>
@@ -142,13 +142,12 @@
 		            });    
 		        });
 
-		        $('.rule-search-result').dxDataGrid({
+		        $('.rule-search-result').empty();
+
+		        $('<div>').dxDataGrid({
 		            dataSource: aRules,
 		            showRowLines: true,
-		            selection: {
-		                mode: 'multiple',
-		                showCheckBoxesMode: 'always'
-		            },
+		            showBorders: true,
 		            columns: [{
 		                dataField: 'ruleName',
 		                caption: "Rule Name",
@@ -165,6 +164,40 @@
 		                dataField: 'action.display',
 		                caption: "Action",
 		                allowResizing: true
+		            }, {
+		            	dataField: '',
+		            	caption: 'Copy',
+		            	width: 75,
+		            	cellTemplate: function(container, options) {
+		            		var eButton = $('<button>', { 'class': 'btn btn-primary btn-xs waves-effect'}).click(function() {
+		            			swal({ 
+				            		title: "Copy this Rule & Filters?", 
+				            		text: "Please confirm to copy this existing rule and its filters.", 
+				            		type: "success", 
+				            		showCancelButton: true, 
+				            		confirmButtonColor: "#DD6B55", 
+				            		confirmButtonText: "Copy", 
+				            		cancelButtonText: "Cancel", 
+				            		closeOnConfirm: false, 
+				            		closeOnCancel: false 
+				            	}, function(isConfirm){ 
+				            		if (isConfirm) { 
+				            			swal("","This Rule and its Filters have been copied!");
+				            			var $rule = options.data;
+				            				console.log($rule);
+				                        console.log(MatrixEditor);
+				            		} else { 
+				            			swal("Cancelled", "Your action has been canceled!", "success"); 
+				            		} 
+				            	});
+
+					        });
+
+					        var eIcon = $('<i>', {'class' : 'zmdi zmdi-collection-item'}),
+            					sMsg = "&nbsp;&nbsp;Copy&nbsp;&nbsp;";
+
+        					eButton.append(eIcon).append(sMsg).appendTo(container); 
+		            	}
 		            }],
 		            pager: {
 		                showPageSizeSelector: true,
@@ -174,11 +207,15 @@
 		            paging: {
 		                pageSize: 15
 		            }
-		        });
+		        }).appendTo($('.rule-search-result'));
 		    };
 
 		    $('.rule-search').find("[btn='eventSearchRule']").unbind('click').click(function() {
                 eventSearchRule($("#scenario-search-rule").val());
+            });
+
+            $('.rule-search').find("[btn='eventClearResult']").unbind('click').click(function() {
+                $('.rule-search-result').empty();
             });
 
 		})();

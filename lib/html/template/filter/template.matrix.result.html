@@ -89,8 +89,12 @@
             this.scenario.lastUpdateTime.$date = new Date().valueOf();
 
             // Declare Rule Info
-            this.ruleRole = this.parent.find("[name='scenario-create-rule']:checked").val();
+            this.ruleRole = this.parent.find("[name='scenario-create-rule']");
+                this.parent.find("[name='scenario-create-rule']:eq(0)").trigger('click');
+            this.ruleRoleChecked = this.parent.find("[name='scenario-create-rule']:checked").val();
+
             this.ruleName = this.parent.find('input.new-rule-name');
+            this.ruleNameSearch = this.parent.find('input#scenario-search-rule');
             //
             this.rule.ruleName = this.ruleName.val();
             this.ruleCategory = this.parent.find('select.create-rule-category');
@@ -128,13 +132,13 @@
 
             this.scenarioDesc.on('keyup paste blur', o.scenarioDescChange);
 
-            if (this.ruleRole === "create") {
-                this.ruleName.on('keyup paste blur', o.ruleNameChange);
-                this.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
-                this.ruleType.on('changed.bs.select', o.ruleTypeChange);
-                this.ruleAction.on('changed.bs.select', o.ruleActionChange);
-            } else {
-                // to be continued ...
+            this.ruleRole.on('change', o.ruleRoleChange);
+
+            if (this.ruleRoleChecked === 'create') {
+                o.ruleName.on('keyup paste blur', o.ruleNameChange);
+                o.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
+                o.ruleType.on('changed.bs.select', o.ruleTypeChange);
+                o.ruleAction.on('changed.bs.select', o.ruleActionChange);
             }
 
             if (this.filterRole === "create") {
@@ -158,10 +162,14 @@
             	}, function(isConfirm){ 
             		if (isConfirm) { 
             			swal("","Your current settings will be saved!");
-            			$('.steps > li:eq(1)').find('div.copy').empty().append(template.rule.content.cloneNode(true));
-            			$('.steps > li:eq(2)').find('div.copy').empty().append(template.filter.content.cloneNode(true));
+
+            			$("div[data-slide='2']").find('div.template-rule-content').empty()
+                            .append(template.rule.content.cloneNode(true))
+                            .append(template.filter.content.cloneNode(true));
 
             			o.init();
+
+                        $('.prev-btn').trigger('click');
             		} else { 
             			swal("Cancelled", "Your current settings will be saved!", "success"); 
             		} 
@@ -182,7 +190,31 @@
             o.scenarioInstance.refresh();
         };
 
+        o.ruleRoleChange = function() {
+            if ($(this).val() === 'create') {
+                if (o.ruleName.val() !== "") {
+                    o.ruleName.trigger('paste');
+                    o.scenario.rules[0].filterRef.push(o.filter);
+                    // o.ruleCategory.trigger('changed.bs.select');
+                    // o.ruleType.trigger('changed.bs.select');
+                    // o.ruleAction.trigger('changed.bs.select');
+                } else {
+                    o.ruleName.on('keyup paste blur', o.ruleNameChange);
+                    o.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
+                    o.ruleType.on('changed.bs.select', o.ruleTypeChange);
+                    o.ruleAction.on('changed.bs.select', o.ruleActionChange); 
+                }
+            } else if ($(this).val() === 'search') {
+                o.ruleNameSearch.on('keyup paste blur', o.ruleNameChange);
+                if (o.ruleNameSearch.val() !== "") {
+                    o.ruleNameSearch.trigger('paste');
+                }  
+                o.scenario.rules[0].filterRef = [];
+            }
+        };
+
         o.ruleNameChange = function() {
+
             o.rule.ruleName = $(this).val();
             o.scenarioInstance.refresh();
         };
