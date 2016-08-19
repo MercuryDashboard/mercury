@@ -69,6 +69,7 @@
     var MatrixEditor = (function() {
         var o = {};
         	o.scenario = oScenario();
+            o.oFilter = oFilter();
 
         o.init = function() {
             // Generate Object-Structure
@@ -195,26 +196,23 @@
                 if (o.ruleName.val() !== "") {
                     o.ruleName.trigger('paste');
                     o.scenario.rules[0].filterRef.push(o.filter);
-                    // o.ruleCategory.trigger('changed.bs.select');
-                    // o.ruleType.trigger('changed.bs.select');
-                    // o.ruleAction.trigger('changed.bs.select');
                 } else {
                     o.ruleName.on('keyup paste blur', o.ruleNameChange);
                     o.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
                     o.ruleType.on('changed.bs.select', o.ruleTypeChange);
-                    o.ruleAction.on('changed.bs.select', o.ruleActionChange); 
+                    o.ruleAction.on('changed.bs.select', o.ruleActionChange);
                 }
             } else if ($(this).val() === 'search') {
                 o.ruleNameSearch.on('keyup paste blur', o.ruleNameChange);
+                o.ruleCategoryUpdate();
                 if (o.ruleNameSearch.val() !== "") {
                     o.ruleNameSearch.trigger('paste');
                 }  
-                o.scenario.rules[0].filterRef = [];
+                o.scenario.rules[0].filterRef = [o.oFilter];
             }
         };
 
         o.ruleNameChange = function() {
-
             o.rule.ruleName = $(this).val();
             o.scenarioInstance.refresh();
         };
@@ -222,6 +220,28 @@
         o.ruleCategoryChange = function() {
             o.rule.ruleCategory.display = $(this).find("option:selected").text();
             o.rule.ruleCategory.value = $(this).find("option:selected").val();
+            o.scenarioInstance.refresh();
+        };
+
+        o.ruleCategoryUpdate = function() {
+            // Clear Rule Name
+            o.scenario.rules[0].ruleName = "";
+            // Clear Rule Category
+            o.scenario.rules[0].ruleCategory = {
+                display: "",
+                code: ""
+            };
+            // Clear Rule Type
+            o.scenario.rules[0].ruleType = {
+                display: "",
+                code: ""
+            };
+            // Clear Rule Action
+            o.scenario.rules[0].action = {
+                display: "",
+                code: ""
+            };
+            // Refresh Instance
             o.scenarioInstance.refresh();
         };
 
@@ -249,6 +269,38 @@
                 o.scenarioInstance.refresh();
             }
         };
+
+        o.filterListUpdate = function() {
+            var $reverseData = o.filterList.data('reverseData')[0];
+
+            o.parent.find('.filter-create-matrix').empty().append(template.filterMatrix.content.cloneNode(true));
+            o.filterList = o.parent.find('table.b-matrix__table');
+      
+            o.filter = $reverseData;
+            o.filter.lastEditUser = "Xi, Jie";
+            o.filter.lastUpdateTime.$date = new Date().valueOf();
+            o.filterName.val($reverseData.filterName).on('keyup paste blur', o.filterNameChange).trigger('paste');
+            o.filter.filterName = o.filterName;
+            o.filterList.data('filters', o.filter.objects);
+            o.filterlistRepaint();
+        };
+
+        o.filterlistRepaint = function() {
+            var $table = o.filterList,
+                $btn = $table.closest('.filter-create-matrix').find("[btn='eventAddFilter']");
+
+            $.each(o.filter.objects, function(i,v) {
+                $table.find('tr:last').find('select.select-type').selectpicker('val', v.object.code).trigger('changed.bs.select');
+                $table.find('tr:last').find('select.select-condition').selectpicker('val', v.condition.code).trigger('changed.bs.select');
+                $table.find('tr:last').find('input.condition_value').val(v.value).trigger('paste');
+
+                if (i+1 < o.filter.objects.length) {
+                    $btn.trigger('click');
+                }
+            });
+
+            o.filterList.on('paste', o.filterListChange);
+        }
 
         o.render = function() {
             o.scenarioInstance = $('.matrix-result-preview').dxDataGrid({
@@ -336,16 +388,20 @@
 						                wordWrapEnabled: true,
 						                columns: [{
 						                    dataField: "filterName",
-						                    caption: "Filter Name"
+						                    caption: "Filter Name",
+                                            allowResizing: true
 						                }, {
 						                    dataField: "author",
-						                    caption: "Author"
+						                    caption: "Author",
+                                            allowResizing: true
 						                }, {
 						                    dataField: "lastEditUser",
-						                    caption: "Last Editor"
+						                    caption: "Last Editor",
+                                            allowResizing: true
 						                }, {
 						                    dataField: "lastUpdateTime",
 						                    caption: "Last Update Time",
+                                            allowResizing: true,
 						                    dateType: "date",
 						                    cellTemplate: function(container, options) {
 						                        var oDate = new Date(Number(options.data.lastUpdateTime.$date));
