@@ -112,12 +112,12 @@
 			var selectTypeChange = function(t, o) {
 				var tr = t.closest('tr');
 				o.value = "";
-		        if (t.val() === "unit") {
+		        if (t.val() === "UNITCAT") {
 		            tr.find('td.col-3').removeClass('col-3').addClass('col-5');
 		            tr.find("td.col-hidden:not('.col-delete')").removeClass('col-hidden');
 		            tr.find('td.col-3-value').addClass('col-hidden');
 		            selectUnitChange(tr, o);
-		        } else if (t.val() === "sku") {
+		        } else if (t.val() === "SKU") {
 		            tr.find('td.col-5').removeClass('col-5').addClass('col-3');
 		            tr.find('td.col-unit').addClass('col-hidden');
 		            tr.find('td.col-3-value').removeClass('col-hidden');

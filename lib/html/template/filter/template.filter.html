@@ -9,13 +9,6 @@
 		        <span>Create Filter</span>
 		    </label>
 		    <!-- Search Filter -->
-		    <label class="btn">
-		        <input type="radio" name="scenario-create-filter" value='search'>
-		        <i class="fa fa-circle-o"></i>
-		        <i class="fa fa-check-circle-o"></i>
-		        <span>Search Filter</span>
-		    </label>
-		    <!-- Search Filter -->
 		    <label class="btn" active='false' copy="copy">
 		        <input type="radio" name="scenario-create-filter" value='copy'>
 		        <i class="fa fa-circle-o"></i>
@@ -32,8 +25,7 @@
 		(function() {			
 			$('.filter-info')
 				.empty()
-				.append(template.createFilter.content.cloneNode(true))
-				.append(template.searchFilter.content.cloneNode(true));
+				.append(template.createFilter.content.cloneNode(true));
 		})();
 	</script>
 </template>
