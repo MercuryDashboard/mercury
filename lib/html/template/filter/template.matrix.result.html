@@ -186,6 +186,19 @@
             			o.init();
 
                         $('.prev-btn').trigger('click');
+
+                        o.instance = {
+                            create: {
+                                html: null,
+                                rule: [],
+                                filters: {}
+                            },
+                            search: {
+                                html: null,
+                                rule: [],
+                                filters: {}
+                            }
+                        };
             		} else { 
             			swal("Cancelled", "Your current settings will be saved!", "success"); 
             		} 
@@ -222,10 +235,12 @@
                     // Re-Set Rules Data
                     o.scenario.rules = o.instance.create.rule;
                     // Re-Set Filters Data
-                    o.scenario.rules[0].filterRef = [o.instance.create.filters];
-
+                    o.scenario.rules[o.scenario.rules.length-1].filterRef = [o.instance.create.filters];
+                    // Re-Set Filter Instance
                     o.filterName.val(o.instance.create.filters.filterName);
+                    // Re-Set Filter Value
                     o.filter.filterName = o.filterName.val();
+                    // Re-Assign Filter Instance
                     o.filter = o.instance.create.filters;
                 }
                 // Re-bind events to Rule-Name Input, then trigger {paste}
@@ -236,7 +251,7 @@
                 o.ruleType.on('changed.bs.select', o.ruleTypeChange).trigger('changed.bs.select');
                 // Re-bind events to Rule-Action Dropdown, then trigger {changed.bs.select}
                 o.ruleAction.on('changed.bs.select', o.ruleActionChange).trigger('changed.bs.select');
-
+                // Re-bind events to Filter-Name Input, then trigger {paste}
                 o.filterName.on('keyup paste blur', o.filterNameChange).trigger('paste');
             } else if ($(this).val() === 'search') {
                 // Change Rule-Role-Checked status to {search}
@@ -247,15 +262,27 @@
                 if (o.instance.create.html) {
                     o.instance.create.html.detach();
                 }
+                // Re-Render Create-Instance
+                if (o.instance.search.rule.length !== 0) {
+                    // Re-append Create-Instance
+                    o.parent.find('div.filter-create-matrix').append(o.instance.search.html);
+                    // Re-Set Rules Data
+                    o.scenario.rules = o.instance.search.rule;
+                    // Re-Set Filters Data
+                    o.scenario.rules[o.scenario.rules.length-1].filterRef = [o.instance.search.filters];
+                    // Re-Set Filter Instance
+                    o.filterName.val(o.instance.search.filters.filterName);
+                    // Re-Set Filter Value
+                    o.filter.filterName = o.filterName.val();
+                    // Re-Assign Filter Instance
+                    o.filter = o.instance.search.filters;
+                    //
+                    o.scenarioInstance.refresh();
+                } else {
+                    o.scenario.rules[o.scenario.rules.length-1].filterRef = [o.oFilter];
+                }
                 // Re-bind events to Rule-Name-Search input
                 o.ruleNameSearch.on('keyup paste blur', o.ruleNameChange);
-                
-
-                //o.ruleCategoryUpdate();
-                if (o.ruleNameSearch.val() !== "") {
-                    o.ruleNameSearch.trigger('paste');
-                }  
-                o.scenario.rules[0].filterRef = [o.oFilter];
             }
         };
 
@@ -267,28 +294,6 @@
         o.ruleCategoryChange = function() {
             o.rule.ruleCategory.display = $(this).find("option:selected").text();
             o.rule.ruleCategory.value = $(this).find("option:selected").val();
-            o.scenarioInstance.refresh();
-        };
-
-        o.ruleCategoryUpdate = function() {
-            // Clear Rule Name
-            o.scenario.rules[0].ruleName = "";
-            // Clear Rule Category
-            o.scenario.rules[0].ruleCategory = {
-                display: "",
-                code: ""
-            };
-            // Clear Rule Type
-            o.scenario.rules[0].ruleType = {
-                display: "",
-                code: ""
-            };
-            // Clear Rule Action
-            o.scenario.rules[0].action = {
-                display: "",
-                code: ""
-            };
-            // Refresh Instance
             o.scenarioInstance.refresh();
         };
 

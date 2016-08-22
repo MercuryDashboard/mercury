@@ -216,7 +216,7 @@
                                             $rule.filterRef = [MatrixEditor.oFilter];
                                         }
                                         // Refresh the Instance
-                                        MatrixEditor.scenario.rules[0] = $rule;
+                                        MatrixEditor.scenario.rules[MatrixEditor.scenario.rules.length - 1] = $rule;
                                         MatrixEditor.scenarioInstance.refresh();
                                         
                                         MatrixEditor.filterList.data('reverseData', $rule.filterRef);
