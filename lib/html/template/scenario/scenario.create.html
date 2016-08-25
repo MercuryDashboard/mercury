@@ -1,462 +1,444 @@
 <template>
-	<style type="text/css">
-		.wrapper {
-			  position: relative;
-			  top: 0;
-			  width: 100vw;
-			  height: 100vh;
-			  max-width: 100%;
-			  max-height: 100%;
-			  background: deepskyblue;
-			  overflow: hidden;
-			}
+    <style type="text/css">
+    .wrapper {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+    .dataSlide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 100px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+    
+    .dataSlide._active {
+        z-index: 1;
+    }
+    
+    .trans-layer,
+    .section {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    
+    .section {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        -webkit-transition: all 500ms ease-in-out;
+        transition: all 500ms ease-in-out;
+        -webkit-transition-delay: 0ms;
+        transition-delay: 0ms;
+    }
+    
+    ._active .section {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-transition-delay: 500ms;
+        transition-delay: 500ms;
+    }
+    
+    .section-content {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-flow: column;
+        -ms-flex-flow: column;
+        flex-flow: column;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        -webkit-transform: translateY(30px);
+        transform: translateY(30px);
+        -webkit-transition: all 500ms ease;
+        transition: all 500ms ease;
+        -webkit-transition-delay: 0s;
+        transition-delay: 0s;
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+    
+    .section-content h1 {
+        padding-left: 0px;
+    }
+    
+    ._active .section-content {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        -webkit-transition-delay: 500ms;
+        transition-delay: 500ms;
+    }
+    
+    .nav-dots {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        width: 500px;
+        margin-left: -270px;
+    }
+    
+    .nav-dot {
+        width: 10px;
+        height: 10px;
+        margin: 20px auto;
+        border-radius: 50%;
+        background: #2196f3;
+        cursor: pointer;
+        -webkit-transition: all 300ms ease-out;
+        transition: all 300ms ease-out;
+        float: left;
+        margin-right: 20px;
+    }
+    
+    .nav-dot.active {
+        background: gold;
+    }
+    
+    .next-btn,
+    .prev-btn {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        color: #2196f3;
+        line-height: 30px;
+        text-align: center;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    
+    .next-btn {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .prev-btn {
+        top: 10px;
+        left: 0;
+    }
+    
+    .progressbox {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 50px;
+        box-sizing: border-box;
+    }
+    
+    .progressWrapper {
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #E8DFD8;
+        width: 100%;
+        height: 3px;
+        border-radius: 10px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+    }
+    
+    .bar__fill {
+        display: block;
+        background: #2196f3;
+        height: 100%;
+    }
+    
+    .point {
+        position: relative;
+        color: #9e9e9e;
+        cursor: pointer;
+    }
+    
+    .point:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .show-radius .point:before {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .point--complete,
+    .point--active {
+        color: #2196f3;
+    }
+    
+    .bullet {
+        z-index: 1;
+        position: relative;
+        background: #9e9e9e;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+    }
+    
+    .point--complete .bullet,
+    .point--active .bullet {
+        background: #FFFFFF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
+    }
+    
+    .point--active .bullet {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
+    }
+    
+    .progressbox .progress-label {
+        position: absolute !important;
+        width: 100px !important;
+        text-align: center !important;
+        margin: 15px 0 0 0 !important;
+        margin-left: -43px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        color: #5e5e5e;
+    }
+    
+    .radius-toggle {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: block;
+        background: #FFF;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: 40px 0 65px rgba(212, 197, 186, 0.4);
+        padding: 10px;
+        color: #2196f3;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    </style>
+    <div class='scenario-create-wrapper'>
 
-			.dataSlide {
-			  position: absolute;
-			  width: 100%;
-			  height: 100%;
-			  top: 0;
-			  left: 0;
-			  bottom: 0;
-			  right: 0;
-			  margin: auto;
-			}
-			.dataSlide._active {
-			  z-index: 10;
-			}
+        <div class="wrapper">
+            <div class="prev-btn">
+                <button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
+                    <i class="zmdi zmdi-arrow-back"></i>
+                </button>
+            </div>
+            <div class="next-btn">
+                <button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
+                    <i class="zmdi zmdi-arrow-forward"></i>
+                </button>
+            </div>
+            <div class="nav-dots">
+                <div class="progressbox">
+                    <div class="progressWrapper">
+                        <div class="bar">
+                            <div style="width: 0%;" class="bar__fill"></div>
+                        </div>
+                        <div data-slide="1" class="point point--complete point--active">
+                            <div class="bullet"></div>
+                            <div class="progress-label">Scenario</div>
+                        </div>
+                        <div data-slide="2" class="point">
+                            <div class="bullet"></div>
+                            <div class="progress-label">Rules &amp; Filters</div>
+                        </div>
+                        <div data-slide="3" class="point">
+                            <div class="bullet"></div>
+                            <div class="progress-label">Preview &amp Save</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-slide="1" class="dataSlide _active">
+                <section id="section-1" class="section">
+                    <div class="section-content">
+                        <h1>Step 1 : Scenario Settings</h1>
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group fg-float">
+                                    <div class="fg-line">
+                                        <input type="text" class="input-sm form-control fg-input scenario-name-new">
+                                        <label class="fg-label">Scenario Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group fg-float">
+                                    <div class="fg-line">
+                                        <input type="text" class="input-sm form-control fg-input scenario-desc-new">
+                                        <label class="fg-label">Scenario Description</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div data-slide="2" class="dataSlide">
+                <section id="section-2" class="section">
+                    <div class="section-content">
+                        <h1>Step 2 : Rule &amp; Filter Settings</h1>
+                        <div class='row template-rule-content'></div>
+                    </div>
+                </section>
+            </div>
+            <div data-slide="3" class="dataSlide">
+                <section id="section-3" class="section">
+                    <div class="section-content">
+                        <h1>Final Step : Preview &amp; Save</h1>
+                        <div class="row template-result-content"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    (function() {
+        $('select.select-rule').selectpicker();
 
-			.trans-layer, .section {
-			  position: absolute;
-			  width: 100%;
-			  height: 100%;
-			  top: 0;
-			  left: 0;
-			  bottom: 0;
-			  right: 0;
-			}
+        $('.wrapper').each(function() {
+            var $slider = $(this);
+            var numberOfSlides = $slider.find('.dataSlide').length;
 
-			.trans-layer {
-			  background: #edecec;
-			  -webkit-transform: translateY(-100%) skew(0) rotate(0) scale(2);
-			          transform: translateY(-100%) skew(0) rotate(0) scale(2);
-			  border-radius: 50%;
-			  -webkit-transition: all 500ms ease-in-out;
-			  transition: all 500ms ease-in-out;
-			  -webkit-transition-delay: 500ms;
-			          transition-delay: 500ms;
-			}
-			._active .trans-layer {
-			  -webkit-transform: translateY(0) skew(0) rotate(0) scale(2);
-			          transform: translateY(0) skew(0) rotate(0) scale(2);
-			  -webkit-transition-delay: 0ms;
-			          transition-delay: 0ms;
-			}
+            $slider.find('.dataSlide:eq(0)').addClass('_active');
+            $slider.find('.nav-dot:eq(0)').addClass('active');
 
-			.section {
-			  -webkit-transform: translateY(100%);
-			          transform: translateY(100%);
-			  -webkit-transition: all 500ms ease-in-out;
-			  transition: all 500ms ease-in-out;
-			  -webkit-transition-delay: 0ms;
-			          transition-delay: 0ms;
-			  background: #fff;
-			}
-			._active .section {
-			  -webkit-transform: translateY(0);
-			          transform: translateY(0);
-			  -webkit-transition-delay: 500ms;
-			          transition-delay: 500ms;
-			}
+            var $activeSlide = $slider.find('.dataSlide._active');
+            var $nextBtn = $slider.find('.next-btn');
+            var $prevBtn = $slider.find('.prev-btn');
 
-			.section-content {
-			  display: -webkit-box;
-			  display: -webkit-flex;
-			  display: -ms-flexbox;
-			  display: flex;
-			  -webkit-flex-flow: column;
-			      -ms-flex-flow: column;
-			          flex-flow: column;
-			  width: 100%;
-			  height: 100%;
-			  opacity: 0;
-			  -webkit-transform: translateY(30px);
-			          transform: translateY(30px);
-			  -webkit-transition: all 500ms ease;
-			  transition: all 500ms ease;
-			  -webkit-transition-delay: 0s;
-			          transition-delay: 0s;
+            $('.point').on('click', function() {
+                var slideToGo = $(this).data('slide');
+                goToSlide(slideToGo);
+            });
 
-			  padding-top: 55px;
-			  padding-left: 10px;
-			}
+            $slider.on('slide.changed', function() {
+                $('.point').removeClass('point--active');
+                var $activeDot = $('.point[data-slide="' + $('.dataSlide._active').data('slide') + '"]');
+                $activeDot.addClass('point--active');
 
-			.section-content h1 {
-				padding-left: 15px;
-			}
-			._active .section-content {
-			  opacity: 1;
-			  -webkit-transform: translateY(0px);
-			          transform: translateY(0px);
-			  -webkit-transition-delay: 1000ms;
-			          transition-delay: 1000ms;
-			}
-
-			.nav-dots {
-			  position: absolute;
-			  top: 5px;
-			  left: 50%;
-			  z-index: 20;
-			  width: 500px;
-			  margin-left: -270px;
-			}
-
-			.nav-dot {
-			  width: 10px;
-			  height: 10px;
-			  margin: 20px auto;
-			  border-radius: 50%;
-			  background: #2196f3;
-			  cursor: pointer;
-			  -webkit-transition: all 300ms ease-out;
-			  transition: all 300ms ease-out;
-			  float: left;
-			  margin-right: 20px;
-			}
-			.nav-dot.active {
-			  background: gold;
-			}
-
-			.next-btn, .prev-btn {
-			  width: 30px;
-			  height: 30px;
-			  position: absolute;
-			  z-index: 20;
-			  color: #2196f3;
-			  line-height: 30px;
-			  text-align: center;
-			  font-size: 24px;
-			  cursor: pointer;
-			}
-
-			.next-btn {
-			  top: 10px;
-			  right: 24px;
-			}
-
-			.prev-btn {
-			  top: 10px;
-			  left: 14px;
-			}
+                var getTotalPoints = $('.point').length,
+                    getIndex = $('.dataSlide._active').data('slide'),
+                    getCompleteIndex = $('.point--active').index(),
+                    thisPoint = $('.point--active');
 
 
+                TweenMax.to($('.bar__fill'), 0.6, {
+                    width: (getIndex - 1) / (getTotalPoints - 1) * 100 + '%'
+                });
 
-			.progressbox {
-			  position: absolute;
-			  width: 100%;
-			  display: flex;
-			  align-items: center;
-			  height: 50px;
-			  box-sizing: border-box;
-			  z-index: 99;
-			}
+                if (getIndex => getCompleteIndex) {
+                    $('.point--active').addClass('point--complete').removeClass('point--active');
 
-			.progressWrapper {
-			  position: relative;
-			  display: -webkit-box;
-			  display: -webkit-flex;
-			  display: -ms-flexbox;
-			  display: flex;
-			  -webkit-box-orient: horizontal;
-			  -webkit-box-direction: normal;
-			  -webkit-flex-direction: row;
-			      -ms-flex-direction: row;
-			          flex-direction: row;
-			  -webkit-box-pack: justify;
-			  -webkit-justify-content: space-between;
-			      -ms-flex-pack: justify;
-			          justify-content: space-between;
-			  width: 100%;
-			}
+                    $(thisPoint).addClass('point--active');
+                    $(thisPoint).prevAll().addClass('point--complete');
+                    $(thisPoint).nextAll().removeClass('point--complete');
+                }
+            });
 
-			.bar {
-			  position: absolute;
-			  top: 50%;
-			  left: 50%;
-			  background: #E8DFD8;
-			  width: 100%;
-			  height: 3px;
-			  border-radius: 10px;
-			  -webkit-transform: translate(-50%, -50%);
-			          transform: translate(-50%, -50%);
-			  overflow: hidden;
-			}
-			.bar__fill {
-			  display: block;
-			  background: #2196f3;
-			  height: 100%;
-			}
+            $nextBtn.on('click', function(event) {
+                nextSlide();
+            });
 
-			.point {
-			  position: relative;
-			  color: #9e9e9e;
-			  cursor: pointer;
-			}
-			.point:before {
-			  content: '';
-			  position: absolute;
-			  top: 50%;
-			  left: 50%;
-			  width: 120px;
-			  height: 120px;
-			  border-radius: 100%;
-			  -webkit-transform: translate(-50%, -50%);
-			          transform: translate(-50%, -50%);
-			}
-			.show-radius .point:before {
-			  background: rgba(0, 0, 0, 0.1);
-			}
-			.point--complete, .point--active {
-			  color: #2196f3;
-			}
+            $prevBtn.on('click', function(event) {
+                prevSlide();
+            });
 
-			.bullet {
-			  z-index: 1;
-			  position: relative;
-			  background: #9e9e9e;
-			  width: 8px;
-			  height: 8px;
-			  border-radius: 100%;
-			  -webkit-transition: 0.3s ease;
-			  transition: 0.3s ease;
-			}
-			.point--complete .bullet, .point--active .bullet {
-			  background: #FFFFFF;
-			  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
-			}
-			.point--active .bullet {
-			  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #2196f3;
-			}
+            function nextSlide() {
+                $activeSlide = $slider.find('.dataSlide._active');
+                var $nextSlide = $activeSlide.next('.dataSlide');
+                $activeSlide.removeClass('_active');
+                $nextSlide.addClass('_active');
 
-			.progressbox .progress-label {
-			  position: absolute !important;
-			  width: 100px !important;
-			  text-align: center !important;
-			  margin: 15px 0 0 0 !important;
-			  margin-left: -43px !important;
-			  font-size: 11px !important;
-			  font-weight: 600 !important;
-			  text-transform: uppercase !important;
-			  color: #5e5e5e;
-			}
+                var slideIndex = $slider.find('.dataSlide._active').index('.dataSlide');
 
-			.radius-toggle {
-			  position: absolute;
-			  top: 20px;
-			  left: 20px;
-			  display: block;
-			  background: #FFF;
-			  border: 0;
-			  border-radius: 4px;
-			  box-shadow: 40px 0 65px rgba(212, 197, 186, 0.4);
-			  padding: 10px;
-			  color: #2196f3;
-			  font-size: 0.75rem;
-			  font-weight: 600;
-			  text-transform: uppercase;
-			}
+                if (slideIndex >= numberOfSlides || slideIndex <= -1) {
+                    firstSlide();
+                    $slider.trigger('slide.changed');
+                } else {
+                    $slider.trigger('slide.changed');
+                }
+            }
 
+            function prevSlide() {
+                $activeSlide = $slider.find('.dataSlide._active');
 
-	</style>
-	<div class='scenario-create-wrapper'>
-		<div class="wrapper">
-			<div class="prev-btn">
-				<button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
-					<i class="zmdi zmdi-arrow-back"></i>
-				</button>
-			</div>
-			<div class="next-btn">
-				<button class="btn btn-primary btn-icon waves-effect waves-circle waves-float">
-					<i class="zmdi zmdi-arrow-forward"></i>
-				</button>
-			</div>
-			<div class="nav-dots">
-			    <div class="progressbox">
-		            <div class="progressWrapper">
-		                <div class="bar">
-		                    <div style="width: 0%;" class="bar__fill"></div>
-		                </div>
-		                <div data-slide="1" class="point point--complete point--active">
-		                    <div class="bullet"></div>
-		                    <div class="progress-label">Scenario</div>
-		                </div>
-		                <div data-slide="2" class="point">
-		                    <div class="bullet"></div>
-		                    <div class="progress-label">Rules &amp; Filters</div>
-		                </div>
-		                <div data-slide="3" class="point">
-		                    <div class="bullet"></div>
-		                    <div class="progress-label">Preview &amp Save</div>
-		                </div>
-		            </div>
-		        </div>
-			</div> 
-			<div data-slide="1" class="dataSlide _active">
-			    <div id="layer-1" class="trans-layer"></div>
-			    <section id="section-1" class="section">
-			        <div class="section-content">
-			        	<h1>Step 1 : Scenario Settings</h1>
-			            <div class="col-md-12">
-							<div class="col-md-3">
-								<div class="form-group fg-float">
-							        <div class="fg-line">
-							            <input type="text" class="input-sm form-control fg-input scenario-name-new">
-							            <label class="fg-label">Scenario Name</label>
-							        </div>
-							    </div>
-							</div>
-							<div class="col-md-8">
-								<div class="form-group fg-float">
-							        <div class="fg-line">
-							            <input type="text" class="input-sm form-control fg-input scenario-desc-new">
-							            <label class="fg-label">Scenario Description</label>
-							        </div>
-							    </div>
-							</div>		
-						</div>
-			        </div>
-			    </section>
-			</div>
-			<div data-slide="2" class="dataSlide">
-			    <div id="layer-2" class="trans-layer"></div>
-			    <section id="section-2" class="section">
-			        <div class="section-content">
-			            <h1>Step 2 : Rule &amp; Filter Settings</h1>
-			            <div class='row template-rule-content'></div>
-			        </div>
-			    </section>
-			</div>
-			<div data-slide="3" class="dataSlide">
-			    <div id="layer-3" class="trans-layer"></div>
-			    <section id="section-3" class="section">
-			        <div class="section-content">
-			            <h1>Final Step : Preview &amp; Save</h1>
-			            <div class="row template-result-content"></div>
-			        </div>
-			    </section>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		(function() {
-			$('select.select-rule').selectpicker();
+                var $prevSlide = $activeSlide.prev('.dataSlide');
+                $activeSlide.removeClass('_active');
+                $prevSlide.addClass('_active');
 
-			$('.wrapper').each(function() {
-				var $slider =  $(this);
-				var numberOfSlides = $slider.find('.dataSlide').length;
+                var slideIndex = $slider.find('.dataSlide._active').index();
 
-				$slider.find('.dataSlide:eq(0)').addClass('_active');
-				$slider.find('.nav-dot:eq(0)').addClass('active');
+                if (typeof $prevSlide === 'undefined' || $prevSlide === null || $prevSlide.length == -1 || slideIndex <= -1) {
+                    lastSlide();
+                    $slider.trigger('slide.changed');
+                } else {
+                    $slider.trigger('slide.changed');
+                }
+            }
 
-				var $activeSlide = $slider.find('.dataSlide._active');
-				var $nextBtn = $slider.find('.next-btn');
-				var $prevBtn = $slider.find('.prev-btn');
+            function firstSlide() {
+                $('.dataSlide._active').removeClass('_active');
+                $slider.find('.dataSlide:eq(0)').addClass('_active');
+                $activeSlide = $slider.find('.dataSlide:eq(0)');
+            }
 
-				$('.point').on('click', function() {
-					var slideToGo = $(this).data('slide');
-					goToSlide(slideToGo);
-				});
+            function lastSlide() {
+                $('.dataSlide._active').removeClass('_active');
+                $slider.find('.dataSlide').eq(numberOfSlides - 1).addClass('_active');
+            }
 
-				$slider.on('slide.changed', function() {
-					$('.point').removeClass('point--active');
-					var $activeDot = $('.point[data-slide="'+$('.dataSlide._active').data('slide')+'"]');
-					$activeDot.addClass('point--active');
+            function goToSlide(slideToGo) {
+                $('.dataSlide._active').removeClass('_active');
+                $slider.find('.dataSlide').eq(slideToGo - 1).addClass('_active');
+                $activeSlide = $slider.find('.dataSlide').eq(slideToGo - 1).addClass('_active');
+                $slider.trigger('slide.changed');
+            }
+        });
 
-					var getTotalPoints = $('.point').length,
-			        	getIndex = $('.dataSlide._active').data('slide'),
-			        	getCompleteIndex = $('.point--active').index(),
-			        	thisPoint = $('.point--active');
-			        
-
-				    TweenMax.to($('.bar__fill'), 0.6, {
-				        width: (getIndex - 1) / (getTotalPoints - 1) * 100 + '%'
-				    });
-
-				    if (getIndex => getCompleteIndex) {
-				        $('.point--active').addClass('point--complete').removeClass('point--active');
-
-				        $(thisPoint).addClass('point--active');
-				        $(thisPoint).prevAll().addClass('point--complete');
-				        $(thisPoint).nextAll().removeClass('point--complete');
-				    }
-				});
-
-				$nextBtn.on('click', function(event) {
-					nextSlide();
-				});
-
-				$prevBtn.on('click', function(event) {
-					prevSlide();
-				});
-
-				function nextSlide() {
-					$activeSlide = $slider.find('.dataSlide._active');
-					var $nextSlide = $activeSlide.next('.dataSlide');
-					$activeSlide.removeClass('_active');
-					$nextSlide.addClass('_active');
-
-					var slideIndex = $slider.find('.dataSlide._active').index('.dataSlide');
-
-					if(slideIndex >= numberOfSlides || slideIndex <= -1 ) {
-				  		firstSlide();
-				  		$slider.trigger('slide.changed');  
-					} else {
-				  		$slider.trigger('slide.changed');  
-					}
-				} 
-
-				function prevSlide() {
-					$activeSlide = $slider.find('.dataSlide._active');
-
-					var $prevSlide = $activeSlide.prev('.dataSlide');
-					$activeSlide.removeClass('_active');
-					$prevSlide.addClass('_active');
-
-					var slideIndex = $slider.find('.dataSlide._active').index();
-
-					if (typeof $prevSlide === 'undefined'|| $prevSlide === null || $prevSlide.length == -1 || slideIndex <= -1 ) {
-					  lastSlide();
-					  $slider.trigger('slide.changed');
-					} else {
-					  $slider.trigger('slide.changed');  
-					}
-				} 
-
-				function firstSlide() {
-					$('.dataSlide._active').removeClass('_active');
-				  	$slider.find('.dataSlide:eq(0)').addClass('_active');
-				  	$activeSlide = $slider.find('.dataSlide:eq(0)');  
-				}
-
-				function lastSlide() {
-				  	$('.dataSlide._active').removeClass('_active');
-				  	$slider.find('.dataSlide').eq(numberOfSlides-1).addClass('_active');
-				}
-
-				function goToSlide(slideToGo) {
-				  	$('.dataSlide._active').removeClass('_active');
-				  	$slider.find('.dataSlide').eq(slideToGo -1).addClass('_active');
-				  	$activeSlide = $slider.find('.dataSlide').eq(slideToGo -1).addClass('_active');
-				  	$slider.trigger('slide.changed');  
-				}
-			});
-
-		})();
-	</script>
+    })();
+    </script>
 </template>
 <script>
-	if (!window.template.hasOwnProperty('scenario')) {
-        var $template = document.querySelector('#template-scenario-create').import;
-        window.template.scenario = $template.querySelector('template').cloneNode(true);
-    }
+if (!window.template.hasOwnProperty('scenario')) {
+    var $template = document.querySelector('#template-scenario-create').import;
+    window.template.scenario = $template.querySelector('template').cloneNode(true);
+}
 </script>
-

@@ -1,8 +1,11 @@
 <template>
 	<div class="col-md-12 margin-bottom-10">
-		<button class="btn btn-default btn-icon-text waves-effect" btn="eventSaveRuleFilters">
-			<i class="zmdi zmdi-check"></i> Save
-		</button>
+        <button class="btn btn-info btn-icon-text waves-effect" btn="eventSaveRuleFilters">
+            <i class="zmdi zmdi-check"></i> Save as Draft
+        </button>
+        <button class="btn btn-success btn-icon-text waves-effect margin-left-5" btn="">
+            <i class="zmdi zmdi-check"></i> Confirm &amp; Submit
+        </button>
 	</div>
     <div class="col-md-12">
         <div class='matrix-result-preview'></div>
@@ -92,77 +95,103 @@
             	this.rule.filterRef.push(this.filter);
             // Declare Scenario Info
             this.parent = $("[node='scenario-create-panel']");
-            this.saveChanges = this.parent.find("[btn='eventSaveRuleFilters']");
 
-            this.scenarioName = this.parent.find('input.scenario-name-new');
-            this.scenario.scenarioName = this.scenarioName.val();
-            this.scenarioDesc = this.parent.find('input.scenario-desc-new');
-            this.scenario.scenarioDesc = this.scenarioDesc.val();
-            this.scenario.author = "Xi, Jie";
-            this.scenario.lastEditUser = "Xi, Jie";
-            this.scenario.lastUpdateTime.$date = new Date().valueOf();
-
-            this.ruleRole = this.parent.find("[name='scenario-create-rule']");
-            this.parent.find("[name='scenario-create-rule'][value='create']").trigger('click');
-            this.ruleRoleChecked = this.parent.find("[name='scenario-create-rule']:checked").val();
-
-            // Declare Filter Info
-            this.filterRole = this.parent.find("[name='scenario-create-filter']:checked").val();
-            this.parent.find("[name='scenario-create-filter'][value='create']").trigger('click');
-            this.filterList = this.parent.find('table.b-matrix__table');
-
+            // Declare Preview Save Button
+            if (this.parent.find("[btn='eventSaveRuleFilters']").length) {
+                this.saveChanges = this.parent.find("[btn='eventSaveRuleFilters']");
+            }
+            
             this.set();
             this.binding();
             this.render();
         };
 
         o.set = function() {
-            /* 
-                Rule Category 
-             */
-            o.ruleNameSearch = o.parent.find('input#scenario-search-rule');
-            o.ruleName = o.parent.find('input.new-rule-name');
-                o.rule.ruleName = o.ruleName.val();
+            /*   Scenario   */
+            // Declare Scenario-Name
+            this.scenarioName = this.parent.find('input.scenario-name-new');
+                // Set Scenario-Name
+                this.scenario.scenarioName = this.scenarioName.val();
+            // Declare Scenario-Description
+            this.scenarioDesc = this.parent.find('input.scenario-desc-new');
+                // Set Scenario-Description
+                this.scenario.scenarioDesc = this.scenarioDesc.val();
+                // Set Scenario-Author
+                this.scenario.author = "Xi, Jie";
+                // Set Scenario-Last-Editor
+                this.scenario.lastEditUser = "Xi, Jie";
+                // Set Scenario-Last-Update-Time
+                this.scenario.lastUpdateTime.$date = new Date().valueOf();
 
-            o.ruleCategory = o.parent.find('select.create-rule-category');
-                o.rule.ruleCategory.display = o.ruleCategory.find("option:selected").text();
-                o.rule.ruleCategory.value = o.ruleCategory.find("option:selected").val();
-            
-            o.ruleType = o.parent.find('select.create-rule-type');
-                o.rule.ruleType.display = o.ruleType.find("option:selected").text();
-                o.rule.ruleType.value = o.ruleType.find("option:selected").val();
-            
-            o.ruleAction = o.parent.find('select.create-rule-action');
-                o.rule.action.display = o.ruleAction.find("option:selected").text();
-                o.rule.action.value = o.ruleAction.find("option:selected").val();
-            /* 
-                Filter Category 
-             */
-            o.filterName = o.parent.find('input.new-filter-name');
-                o.filter.filterName = o.filterName.val();
-                o.filter.lastUpdateTime.$date = new Date().valueOf();
-                o.filter.author = "Xi, Jie";
-                o.filter.lastEditUser = "Xi, Jie";
+            /*   Rule   */
+            // Declare Rule Radio-Button [Create] or [Search]
+            this.ruleRole = this.parent.find("[name='scenario-create-rule']");
+                // Radio-Button [Create] trigger Click
+                this.parent.find("[name='scenario-create-rule'][value='create']").trigger('click');
+                // Set Radio-Button Checked
+                this.ruleRoleChecked = this.parent.find("[name='scenario-create-rule']:checked").val();
+            // Declare Rule-Name Input
+            this.ruleName = this.parent.find('input.new-rule-name');
+                // Set Rule-Name
+                this.rule.ruleName = this.ruleName.val();
+            // Declare Search-Rule Input
+            this.ruleNameSearch = this.parent.find('input#scenario-search-rule');
+            // Declare Rule-Category
+            this.ruleCategory = this.parent.find('select.create-rule-category');
+                // Set Rule-Category display
+                this.rule.ruleCategory.display = this.ruleCategory.find("option:selected").text();
+                // Set Rule-Category value
+                this.rule.ruleCategory.value = this.ruleCategory.find("option:selected").val();
+            // Declare Rule-Type
+            this.ruleType = this.parent.find('select.create-rule-type');
+                // Set Rule-Type display
+                this.rule.ruleType.display = this.ruleType.find("option:selected").text();
+                // Set Rule-Type value
+                this.rule.ruleType.value = this.ruleType.find("option:selected").val();
+            // Declare Rule-Action
+            this.ruleAction = this.parent.find('select.create-rule-action');
+                // Set Rule-Action display
+                this.rule.action.display = this.ruleAction.find("option:selected").text();
+                // Set Rule-Action value
+                this.rule.action.value = this.ruleAction.find("option:selected").val();
+
+            /*   Filter Category   */
+            // Declare Filter Radio-Button [Create] or [Search]
+            this.filterRole = this.parent.find("[name='scenario-create-filter']:checked").val();
+                // Radio-Button [Create] trigger Click
+                this.parent.find("[name='scenario-create-filter'][value='create']").trigger('click');
+            // Declare Filter-Matrix-List
+            this.filterList = this.parent.find('table.b-matrix__table');
+            // Declare Filter-Name
+            this.filterName = this.parent.find('input.new-filter-name');
+                // Set Filter-Name
+                this.filter.filterName = this.filterName.val();
+                // Set Filter-Last-Update-Time
+                this.filter.lastUpdateTime.$date = new Date().valueOf();
+                // Set Filter-Author
+                this.filter.author = "Xi, Jie";
+                // Set Filter-Last-Editor
+                this.filter.lastEditUser = "Xi, Jie";
         };
 
         o.binding = function() {
             // [Scenario Name] - Binding
-            this.scenarioName.on('keyup paste blur', o.scenarioNameChange);
+            this.scenarioName.on('keyup paste blur', o.getScenarioName);
             // [Scenario Desc] - Binding
-            this.scenarioDesc.on('keyup paste blur', o.scenarioDescChange);
+            this.scenarioDesc.on('keyup paste blur', o.getScenarioDesc);
             // [Rule Role] - Binding
-            this.ruleRole.on('change', o.ruleRoleChange);
+            this.ruleRole.on('change', o.getRuleRadio);
             // [Rule Role - Create] - Initial
             if (this.ruleRoleChecked === 'create') {
-                o.ruleName.on('keyup paste blur', o.ruleNameChange);
-                o.ruleCategory.on('changed.bs.select', o.ruleCategoryChange);
-                o.ruleType.on('changed.bs.select', o.ruleTypeChange);
-                o.ruleAction.on('changed.bs.select', o.ruleActionChange);
+                o.ruleName.on('keyup paste blur', o.getRuleName);
+                o.ruleCategory.on('changed.bs.select', o.getRuleCategory);
+                o.ruleType.on('changed.bs.select', o.getRuleType);
+                o.ruleAction.on('changed.bs.select', o.getRuleAction);
             }
             // [Filter Name] - Binding
-            this.filterName.on('keyup paste blur', o.filterNameChange);
+            this.filterName.on('keyup paste blur', o.getFilterName);
             // [Filter Matrix Table] - Binding
-            this.filterList.on('paste', o.filterListChange).trigger('paste');;
+            this.filterList.on('paste', o.getMatrixResult).trigger('paste');
 
             this.saveChanges.on('click', function() {
             	swal({ 
@@ -206,19 +235,19 @@
             });
         };
 
-        o.scenarioNameChange = function() {
+        o.getScenarioName = function() {
             o.scenario.scenarioName = $(this).val();
             o.scenario.lastUpdateTime.$date = new Date().valueOf();
             o.scenarioInstance.refresh();
         };
 
-        o.scenarioDescChange = function() {
+        o.getScenarioDesc = function() {
             o.scenario.scenarioDesc = $(this).val();
             o.scenario.lastUpdateTime.$date = new Date().valueOf();
             o.scenarioInstance.refresh();
         };
 
-        o.ruleRoleChange = function() {
+        o.getRuleRadio = function() {
             if ($(this).val() === 'create') {
                 // Change Rule-Role-Checked status to {create}
                 o.ruleRoleChecked = 'create';
@@ -244,15 +273,15 @@
                     o.filter = o.instance.create.filters;
                 }
                 // Re-bind events to Rule-Name Input, then trigger {paste}
-                o.ruleName.on('keyup paste blur', o.ruleNameChange).trigger('paste');
+                o.ruleName.on('keyup paste blur', o.getRuleName).trigger('paste');
                 // Re-bind events to Rule-Category Dropdown, then trigger {changed.bs.select}
-                o.ruleCategory.on('changed.bs.select', o.ruleCategoryChange).trigger('changed.bs.select');
+                o.ruleCategory.on('changed.bs.select', o.getRuleCategory).trigger('changed.bs.select');
                 // Re-bind events to Rule-Type Dropdown, then trigger {changed.bs.select}
-                o.ruleType.on('changed.bs.select', o.ruleTypeChange).trigger('changed.bs.select');
+                o.ruleType.on('changed.bs.select', o.getRuleType).trigger('changed.bs.select');
                 // Re-bind events to Rule-Action Dropdown, then trigger {changed.bs.select}
-                o.ruleAction.on('changed.bs.select', o.ruleActionChange).trigger('changed.bs.select');
+                o.ruleAction.on('changed.bs.select', o.getRuleAction).trigger('changed.bs.select');
                 // Re-bind events to Filter-Name Input, then trigger {paste}
-                o.filterName.on('keyup paste blur', o.filterNameChange).trigger('paste');
+                o.filterName.on('keyup paste blur', o.getFilterName).trigger('paste');
             } else if ($(this).val() === 'search') {
                 // Change Rule-Role-Checked status to {search}
                 o.ruleRoleChecked = 'search';
@@ -282,39 +311,39 @@
                     o.scenario.rules[o.scenario.rules.length-1].filterRef = [o.oFilter];
                 }
                 // Re-bind events to Rule-Name-Search input
-                o.ruleNameSearch.on('keyup paste blur', o.ruleNameChange);
+                o.ruleNameSearch.on('keyup paste blur', o.getRuleName);
             }
         };
 
-        o.ruleNameChange = function() {
+        o.getRuleName = function() {
             o.rule.ruleName = $(this).val();
             o.scenarioInstance.refresh();
         };
 
-        o.ruleCategoryChange = function() {
+        o.getRuleCategory = function() {
             o.rule.ruleCategory.display = $(this).find("option:selected").text();
             o.rule.ruleCategory.value = $(this).find("option:selected").val();
             o.scenarioInstance.refresh();
         };
 
-        o.ruleTypeChange = function() {
+        o.getRuleType = function() {
             o.rule.ruleType.display = $(this).find("option:selected").text();
             o.rule.ruleType.value = $(this).find("option:selected").val();
             o.scenarioInstance.refresh();
         };
 
-        o.ruleActionChange = function() {
+        o.getRuleAction = function() {
             o.rule.action.display = $(this).find("option:selected").text();
             o.rule.action.value = $(this).find("option:selected").val();
             o.scenarioInstance.refresh();
         };
 
-        o.filterNameChange = function() {
+        o.getFilterName = function() {
             o.filter.filterName = $(this).val();
             o.scenarioInstance.refresh();
         };
 
-        o.filterListChange = function() {
+        o.getMatrixResult = function() {
             o.filter.objects = $(this).data('filters');
 
             if (o.ruleRoleChecked === 'create') {
@@ -332,7 +361,7 @@
             }
         };
 
-        o.filterListUpdate = function() {
+        o.updateMatrixResult = function() {
             var $reverseData = o.filterList.data('reverseData')[0];
             o.parent.find('.filter-create-matrix').empty().append(template.filterMatrix.content.cloneNode(true));
             o.filterList = o.parent.find('table.b-matrix__table');
@@ -343,10 +372,10 @@
             o.filter.filterName = o.filterName.val($reverseData.filterName);
             o.filter.filterName.trigger('paste');
             o.filterList.data('filters', o.filter.objects);
-            o.filterlistRepaint();
+            o.repaintMatrixResult();
         };
 
-        o.filterlistRepaint = function() {
+        o.repaintMatrixResult = function() {
             var $table = o.filterList,
                 $btn = $table.closest('.filter-create-matrix').find("[btn='eventAddFilter']");
 
@@ -360,7 +389,7 @@
                 }
             });
 
-            o.filterList.on('paste', o.filterListChange).trigger('paste');
+            o.filterList.on('paste', o.getMatrixResult).trigger('paste');
         }
 
         o.render = function() {
