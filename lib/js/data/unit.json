@@ -1,0 +1,147 @@
+[
+    {
+        "unit": "Accessory",
+        "categories": [
+            "ALL",
+            "Bag",
+            "Hair Accessory",
+            "Season Accessory",
+            "Suitcase",
+            "Travel Pouch / Accessory",
+            "Watch, Jewely, Glasses"
+        ]
+    },
+    {
+        "unit": "Baby Core",
+        "categories": [
+            "ALL",
+            "Diapering",
+            "Formula",
+            "Wipes"
+        ]
+    },
+    {
+        "unit": "Baby Non Core",
+        "categories": [
+            "ALL",
+            "Baby Fashion",
+            "Feeding",
+            "Gear",
+            "Strollers and Carseats"
+        ]
+    },
+    {
+        "unit": "Beauty",
+        "categories": [
+            "ALL",
+            "Fragrance",
+            "Makeup",
+            "Nailcare",
+            "Skin Care",
+            "Tools & Accessories"
+        ]
+    },
+    {
+        "unit": "Clothes",
+        "categories": [
+            "ALL",
+            "Casual Clothes",
+            "Men Clothes",
+            "Underwear & Homewear",
+            "Women Clothes"
+        ]
+    },
+    {
+        "unit": "Electronics",
+        "categories": [
+            "ALL",
+            "Computer",
+            "Digital",
+            "Electronics"
+        ]
+    },
+    {
+        "unit": "Food",
+        "categories": [
+            "ALL",
+            "Beverages",
+            "Coffee & tea",
+            "Cold & Frozen food",
+            "Fresh",
+            "Healthy food",
+            "Meal essentials",
+            "Snacks"
+        ]
+    },
+    {
+        "unit": "Home",
+        "categories": [
+            "ALL",
+            "Bath Acc. / Household Cleaning",
+            "Bedding / Handcraft / Curtain",
+            "Car Acc. / DIY",
+            "Furniture / Storage",
+            "Home Deco"
+        ]
+    },
+    {
+        "unit": "Household",
+        "categories": [
+            "ALL",
+            "Detergent",
+            "Tissue"
+        ]
+    },
+    {
+        "unit": "Kitchen",
+        "categories": [
+            "ALL",
+            "Cookware",
+            "Food Storage",
+            "Kitchen Accessories",
+            "Tableware",
+            "Tools & Gadgets"
+        ]
+    },
+    {
+        "unit": "Personal Care",
+        "categories": [
+            "ALL",
+            "Body Care",
+            "Hair Care",
+            "Health Care",
+            "Mom&Baby Care",
+            "Oral Care",
+            "Personal Care"
+        ]
+    },
+    {
+        "unit": "Pet",
+        "categories": [
+            "ALL",
+            "Cat",
+            "Dog",
+            "Small Animals"
+        ]
+    },
+    {
+        "unit": "Shoes",
+        "categories": [
+            "ALL",
+            "Fashion Shoes",
+            "Sports Accessory",
+            "Sports Clothes",
+            "Sports Shoes",
+            "Sports Supplies"
+        ]
+    },
+    {
+        "unit": "Toys",
+        "categories": [
+            "ALL",
+            "Books",
+            "Stationery",
+            "Toys"
+        ]
+    }
+]
