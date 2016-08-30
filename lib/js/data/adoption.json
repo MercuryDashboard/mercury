@@ -1,0 +1,149 @@
+[
+	{
+		"dimension": "ALL",
+		"unit": "",
+		"skuCount": 101000,
+		"currentINV": 840000,
+		"tipINV": 841000,
+		"rawRoq": 841000,
+		"roq": 1000,
+		"updRoq": null,
+		"currentDOC": 23.79,
+		"tipDOC": 22.18,
+		"roqDOC": 23.79,
+		"updDOC": null,
+		"Unit": [
+		    {
+		    	"dimension": " ",
+		    	"unit": "Baby Core",
+		    	"skuCount": 1436,
+		    	"currentINV": 528488,
+		    	"tipINV": 569797,
+		    	"rawRoq": 41319,
+		    	"roq": 41319,
+		    	"updRoq": null,
+		    	"currentDOC": 18.87,
+		    	"tipDOC": 14.46,
+		    	"roqDOC": 17.99,
+		    	"updDOC": null,
+		    	"Dimension": [
+		    		{
+			        	"dimension": "Manual Release",
+			        	"unit": "Baby Core",
+			        	"skuCount": 658,
+			        	"currentINV": 280657,
+			        	"tipINV": 294241,
+			        	"rawRoq": 13584,
+			        	"roq": 13584,
+			        	"updRoq": null,
+			        	"currentDOC": 0,
+			        	"tipDOC": 14.28,
+			        	"roqDOC": 15.11,
+			        	"updDOC": null
+		        	},
+		        	{
+		        		"dimension": "Auto Release",
+		        		"unit": "Baby Core",
+		        		"skuCount": 778,
+		        		"currentINV": 247831,
+		        		"tipINV": 275556,
+		        		"rawRoq": 27725,
+		        		"roq": 27725,
+		        		"updRoq": null,
+		        		"currentDOC": 12.55,
+		        		"tipDOC": 13.68,
+		        		"roqDOC": 15.34,
+		        		"updDOC": null
+		        	}
+		      	]
+		    },{
+		    	"dimension": " ",
+		    	"unit": "Baby Core",
+		    	"skuCount": 1436,
+		    	"currentINV": 528488,
+		    	"tipINV": 569797,
+		    	"rawRoq": 41319,
+		    	"roq": 41319,
+		    	"updRoq": null,
+		    	"currentDOC": 18.87,
+		    	"tipDOC": 14.46,
+		    	"roqDOC": 17.99,
+		    	"updDOC": null,
+		    	"Dimension": [
+		    		{
+			        	"dimension": "Manual Release",
+			        	"unit": "Baby Core",
+			        	"skuCount": 658,
+			        	"currentINV": 280657,
+			        	"tipINV": 294241,
+			        	"rawRoq": 13584,
+			        	"roq": 13584,
+			        	"updRoq": null,
+			        	"currentDOC": 0,
+			        	"tipDOC": 14.28,
+			        	"roqDOC": 15.11,
+			        	"updDOC": null
+		        	},
+		        	{
+		        		"dimension": "Auto Release",
+		        		"unit": "Baby Core",
+		        		"skuCount": 778,
+		        		"currentINV": 247831,
+		        		"tipINV": 275556,
+		        		"rawRoq": 27725,
+		        		"roq": 27725,
+		        		"updRoq": null,
+		        		"currentDOC": 12.55,
+		        		"tipDOC": 13.68,
+		        		"roqDOC": 15.34,
+		        		"updDOC": null
+		        	}
+		      	]
+		    },{
+		    	"dimension": " ",
+		    	"unit": "Baby Core",
+		    	"skuCount": 1436,
+		    	"currentINV": 528488,
+		    	"tipINV": 569797,
+		    	"rawRoq": 41319,
+		    	"roq": 41319,
+		    	"updRoq": null,
+		    	"currentDOC": 18.87,
+		    	"tipDOC": 14.46,
+		    	"roqDOC": 17.99,
+		    	"updDOC": null,
+		    	"Dimension": [
+		    		{
+			        	"dimension": "Manual Release",
+			        	"unit": "Baby Core",
+			        	"skuCount": 658,
+			        	"currentINV": 280657,
+			        	"tipINV": 294241,
+			        	"rawRoq": 13584,
+			        	"roq": 13584,
+			        	"updRoq": null,
+			        	"currentDOC": 0,
+			        	"tipDOC": 14.28,
+			        	"roqDOC": 15.11,
+			        	"updDOC": null
+		        	},
+		        	{
+		        		"dimension": "Auto Release",
+		        		"unit": "Baby Core",
+		        		"skuCount": 778,
+		        		"currentINV": 247831,
+		        		"tipINV": 275556,
+		        		"rawRoq": 27725,
+		        		"roq": 27725,
+		        		"updRoq": null,
+		        		"currentDOC": 12.55,
+		        		"tipDOC": 13.68,
+		        		"roqDOC": 15.34,
+		        		"updDOC": null
+		        	}
+		      	]
+		    }
+		]
+	}
+	
+]
