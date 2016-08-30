@@ -11,3 +11,198 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	(function() {
+
+		// function getAutomationData() {
+
+		// 	var URL = 'lib/js/data/automation.json';
+
+		// 	$.ajax({
+		// 		type : 'GET',
+		// 		url : URL,
+		// 		dataType : 'json',				
+		// 		success : function(response){
+		// 			console.log(response);
+		// 		},
+		// 		error : function(error){
+
+		// 		}
+		//     });
+		// };
+		
+
+		$(".automation-result-wrapper").dxDataGrid({
+	        dataSource: 'lib/js/data/automation.json',
+	        remoteOperations: false,
+	        headerFilter: {
+	            visible: true
+	        },
+	        filterRow: {
+	            visible: true,
+	            applyFilter: "auto"
+	        },
+	        columns: [{
+	            dataField: 'scenarioName',
+	            caption: "Scenario Name",
+	            allowResizing: true
+	        }, {
+	            dataField: 'author',
+	            caption: "Author",
+	            allowResizing: true,
+	            width: 150
+	        }, {
+	            dataField: 'last Update Time',
+	            allowResizing: true,
+	            allowGrouping: false,
+	            dataType: 'date',
+	            width: 200,
+	            cellTemplate: function(container, options){
+	                var oDate = new Date(Number(options.data.lastUpdateTime.$date));
+	                container.append((oDate.getMonth() + 1) +"/"+oDate.getDate()+ '/' + oDate.getFullYear());
+	            }
+	        }, {
+	            dataField: 'lastEditUser',
+	            caption: "Last Editer",
+	            allowResizing: true,
+	            width: 200
+	        }],
+	        masterDetail: {
+	            enabled: true,
+	            template: function(container, options) {
+	            	var oGrade = [{
+						"type": "grade",
+						"value": "grade"
+					},{
+						"type": "SubCategory",
+						"value": "SubCategory"
+					}];
+
+					var oGradeSelect = [{
+						"display": "A",
+						"value": "A"
+					},{
+						"display": "B",
+						"value": "B"
+					},{
+						"display": "C",
+						"value": "C"
+					},{
+						"display": "D",
+						"value": "D"
+					}];
+
+	               	var oAutomation = options.data.automationConfig;
+	               	container.addClass("internal-grid-container");
+
+					var eCardWrapper = $("<div>", {'class' : 'card'}),
+						eCardHeader = $("<div>", {'class' : 'card-header padding-bottom-0'}),
+						eCardbody = $("<div>", {'class' : 'card-body card-padding'});
+
+					eCardWrapper.append(eCardHeader).appendTo(container);
+
+					var oAutoColumns = {
+						"name" : "good"
+					};
+
+
+					eCardbody
+			            .dxDataGrid({
+			                dataSource: oAutomation,
+			                columnAutoWidth: true,
+			                showRowLines: true,
+			                allowColumnReordering: true,
+			                editing: {
+						        mode: "cell",
+						        allowUpdating: true
+						    },
+			                headerFilter: { 
+			                    visible: true 
+			                },
+			                filterRow: {
+			                    visible: true,
+			                    applyFilter: "auto"
+			                },
+			                pager: {
+			                    showPageSizeSelector: true,
+			                    allowedPageSizes: [5, 10, 15, 20],
+			                    showInfo: true
+			                },
+			                paging: {
+			                    pageSize: 10
+			                },
+			                columns: [{
+			                    dataField: "unit",
+			                    caption: 'Unit',
+			                    allowResizing: true
+			                }, {
+			                    dataField: "type",
+			                    caption: "Type",
+			                    allowResizing: true,
+			                    lookup: {
+			                    	dataSource: oGrade,
+			                    	displayExpr: "type",
+			                    	valueExpr: "value"
+			                    }
+			                }, {
+			                	dataField: "config",
+			                	caption: "Configuration",
+			                	alignment: "center",
+			                	columns: [{
+			                		dataField: "config.auto[0].value",
+			                		alignment: "center",
+			                		caption: "Auto",
+			                		allowFiltering: false
+			                	}, {
+			                		dataField: "config.auto[1].value",
+			                		alignment: "center",
+			                		caption: "Auto",
+			                		allowFiltering: false
+			                	},{
+			                		dataField: "config.manual[0].value",
+			                		alignment: "center",
+			                		caption: "Manual",
+			                		allowFiltering: false
+			                	}, {
+			                		dataField: "config.manual[1].value",
+			                		alignment: "center",
+			                		caption: "Manual",
+			                		allowFiltering: false
+			                	}]
+			                }]
+			                
+			            }).appendTo(eCardWrapper);
+	            }
+	        },
+	        columnChooser: {
+	            enabled: true
+	        },
+	        allowColumnReordering: true,
+	        sorting: { 
+	            mode: 'multiple' 
+	        },
+	        groupPanel: { 
+	            visible: true, 
+	            emptyPanelText: '' 
+	        },
+	        pager: {
+	            showPageSizeSelector: true,
+	            allowedPageSizes: [5, 10, 15, 20],
+	            showInfo: true
+	        },
+	        showRowLines: true,
+	        paging: {
+	            pageSize: 15
+	        },
+	        searchPanel: { 
+	            visible: true 
+	        },
+	        groupPanel: {
+	            visible: true
+	        }
+	    });
+
+
+	})()
+</script>

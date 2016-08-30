@@ -211,28 +211,32 @@
         "unit": "Baby Core",
         "type": "grade",
         "config": {
-          "auto": [
-            "C",
-            "D"
-          ],
-          "manual": [
-            "A",
-            "B"
-          ]
+          "auto": [{
+            "value": "C"
+          },{
+            "value": "D"
+          }],
+          "manual": [{
+            "value": "A"
+          },{
+            "value": "B"
+          }]
         }
       },
       {
         "unit": "Food",
         "type": "SubCategory",
         "config": {
-          "auto": [
-            "Beverages",
-            "Healthy food"
-          ],
-          "manual": [
-            "Snacks",
-            "Fresh"
-          ]
+          "auto": [{
+            "value": "Beverages"
+          },{
+            "value": "Healthy food"
+          }],
+          "manual": [{
+            "value": "Snacks"
+          },{
+            "value": "Fresh"
+          }]
         }
       }
     ]
